@@ -51,8 +51,13 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/blog">
-                        Blog
+                      <Link className="nav-link" to="/vente">
+                        Vente
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/location">
+                        location
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -60,7 +65,7 @@ const Header = () => {
                         About
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                       <Link className="nav-link" to="#">
                         Category <i className="fas fa-chevron-down"></i>
                       </Link>
@@ -75,7 +80,7 @@ const Header = () => {
                           <Link to="#">item</Link>
                         </li>
                       </ul>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/contact">
                         Contact

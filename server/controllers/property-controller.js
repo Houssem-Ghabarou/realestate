@@ -10,7 +10,7 @@ const addProperty = async (req, res) => {
     description,
     chambres,
     sallesDeBains,
-    surface,   
+    surface,
     parking,
     characteristics,
   } = req.body;
@@ -154,11 +154,30 @@ const getAllProperties = async (req, res) => {
   }
 };
 
-
+const getVenteProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp.find({ category: "vente" });
+    return res.status(200).json({ properties: properties });
+  } catch (err) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+const getLocationProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp.find({ category: "location" });
+    return res.status(200).json({ properties: properties });
+  } catch (err) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
 
 module.exports = {
   addProperty,
   getAllProperties,
   editProperty,
   deleteProperty,
+  getVenteProperties,
+  getLocationProperties,
 };
