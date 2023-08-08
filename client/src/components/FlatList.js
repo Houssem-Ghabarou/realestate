@@ -4,7 +4,7 @@ import FlatItem from "./FlatItem"
 
 const FlatList = () => {
     const title = {
-        text: "Lorem Ipsum",
+        text: "vente",
         description: "Lorem ipsum dolor sit ame"
     }
     return (

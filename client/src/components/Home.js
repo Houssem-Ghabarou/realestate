@@ -9,10 +9,10 @@ import BestFlatList from "./BestFlatList"
 const Home=()=>{
     return (
         <React.Fragment>
-            <Banner/>
+            {/* <Banner/> */}
             <FlatList/>
             <BestFlatList/>
-            <Subscribe/>
+            {/* <Subscribe/> */}
             <TeamList/>
             <References/>
         </React.Fragment>
