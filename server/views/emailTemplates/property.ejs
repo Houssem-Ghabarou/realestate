@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nouvelle demande immobilière</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .property-info {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .property-info img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .no-image {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Nouvelle demande immobilière</h1>
+    <div class="property-info">
+        <p><strong>Propriété:</strong>
+            <%= reference ? reference : "Non spécifié" %>
+        </p>
+        <p><strong>Nom et prénom:</strong>
+            <%= namesurname %>
+        </p>
+        <p><strong>Téléphone:</strong>
+            <%= phone %>
+        </p>
+        <p><strong>Email:</strong>
+            <%= email %>
+        </p>
+        <p><strong>Description:</strong>
+            <%= description %>
+        </p>
+
+        <% if (Array.isArray(images) && images.length> 0) { %>
+            <h2>Images de la propriété:</h2>
+            <ul>
+                <% images.forEach(image=> { %>
+                    <li><img src="<%= image.url %>" alt="<%= image.alt %>"></li>
+                    <% }) %>
+            </ul>
+            <% } else { %>
+                <p class="no-image">Aucune image disponible pour cette propriété.</p>
+                <% } %>
+    </div>
+</body>
+
+</html>
