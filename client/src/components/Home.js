@@ -11,9 +11,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const allProperties = useSelector((state) => state.property.properties);
-  const vente = useSelector((state) => state.property.vente);
-  const location = useSelector((state) => state.property.location);
+  
 
   useEffect(() => {
     const getAllProps = async () => {
@@ -27,7 +25,7 @@ const Home = () => {
   return (
     <React.Fragment>
       <Banner/>
-      <FlatList />
+      <FlatList type={0} />
       <BestFlatList />
       {/* <Subscribe/> */}
       <TeamList />
