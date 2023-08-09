@@ -6,21 +6,19 @@ import References from "./References";
 import Subscribe from "./Subscribe";
 import BestFlatList from "./BestFlatList";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProperties } from "../redux/slices/propertySlice";
-import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
   
 
-  useEffect(() => {
-    const getAllProps = async () => {
-      await dispatch(getAllProperties());
-    };
-    getAllProps();
-  }, []);
+  // useEffect(() => {
+  //   const getAllProps = async () => {
+  //     await dispatch(getAllProperties());
+  //   };
+  //   getAllProps();
+  // }, []);
 
-  console.log(allProperties, "alllllllllllll properties");
+  // console.log(allProperties, "alllllllllllll properties");
 
   return (
     <React.Fragment>

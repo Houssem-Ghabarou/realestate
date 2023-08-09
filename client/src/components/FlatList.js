@@ -1,23 +1,39 @@
 import Title from "./Title";
 import FlatItem from "./FlatItem";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProperties,
+  getAllvente,
+  getAlllocation,
+} from "../redux/slices/propertySlice";
+import { useEffect } from "react";
 
 const FlatList = ({ type }) => {
+  const dispatch = useDispatch();
+  const properties = useSelector((state) => {
+    if (type === 0) return state.property.properties;
+    if (type === 1) return state.property.vente;
+    if (type === 2) return state.property.location;
+    return [];
+  });
+
   const title = {
-    text: "vente",
+    text: type === 1 ? "vente" : type === 2 ? "location" : "Home",
+
     description: "Lorem ipsum dolor sit ame",
   };
 
-//   let properties;
-//   if (type === 0) {
-//     properties = useSelector((state) => state.property.properties);
-//   } else if (type === 1) {
-//     properties = "vente";
-//   } else {
-//     properties = "location";
-//   }
+  useEffect(() => {
+    if (type === 0) {
+      dispatch(getAllProperties());
+    } else if (type === 1) {
+      dispatch(getAllvente());
+    } else if (type === 2) {
+      dispatch(getAlllocation());
+    }
+  }, [type, dispatch]);
 
-  console.log(properties,"propppppppppppp");
+  console.log(properties, type, "propertiessssssssss");
 
   return (
     <section className="section-all-re">
