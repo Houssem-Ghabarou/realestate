@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import propertyService from "../services/property";
 
 const initialState = {
-  properties: null,
-  vente: null,
-  location: null,
+  properties: [],
+  vente: [],
+  location: [],
   loading: false,
   error: null,
   message: "",

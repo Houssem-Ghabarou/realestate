@@ -147,7 +147,7 @@ const editProperty = async (req, res) => {
 const getAllProperties = async (req, res) => {
   try {
     const properties = await realEstateProp.find();
-    return res.status(200).json({ properties: properties });
+    return res.status(200).json(properties);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to get properties." });
@@ -157,18 +157,18 @@ const getAllProperties = async (req, res) => {
 const getVenteProperties = async (req, res) => {
   try {
     const properties = await realEstateProp.find({ category: "vente" });
-    return res.status(200).json({ properties: properties });
+    return res.status(200).json(properties);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     res.status(500).json({ error: "Failed to get properties." });
   }
 };
 const getLocationProperties = async (req, res) => {
   try {
     const properties = await realEstateProp.find({ category: "location" });
-    return res.status(200).json({ properties: properties });
+    return res.status(200).json(properties);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     res.status(500).json({ error: "Failed to get properties." });
   }
 };

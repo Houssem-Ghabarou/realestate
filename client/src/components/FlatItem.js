@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const FlatItem = ({ slug }) => {
+const FlatItem = ({ id }) => {
   return (
     <div className="text-center col-lg-4 col-12 col-md-6 ">
       <div className="item">
@@ -22,7 +22,7 @@ const FlatItem = ({ slug }) => {
             <div>
               <i className="fas fa-check-circle"></i> <span> Lorem </span>
             </div>
-            <Link to={`/flat/${slug}`} className="item-title">
+            <Link to={`/flat/${id}`} className="item-title">
               <button className="btn btn-detail">View</button>
             </Link>
           </div>

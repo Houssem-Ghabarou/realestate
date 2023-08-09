@@ -17,6 +17,8 @@ const FlatList = ({ type }) => {
     return [];
   });
 
+  const loading = useSelector((state) => state.property.loading);
+
   const title = {
     text: type === 1 ? "vente" : type === 2 ? "location" : "Home",
 
@@ -32,20 +34,20 @@ const FlatList = ({ type }) => {
       dispatch(getAlllocation());
     }
   }, [type, dispatch]);
+  if (loading) {
+    return <div>Loading...</div>; // Show loading indicator if data is being fetched
+  }
 
-  console.log(properties, type, "propertiessssssssss");
+  console.log(properties, title.text, "propertiessssssssss");
 
   return (
     <section className="section-all-re">
       <div className="container">
         <Title title={title.text} description={title.description} />
         <div className="row">
-          <FlatItem slug="lorem-ipsum-1" />
-          <FlatItem slug="lorem-ipsum-2" />
-          <FlatItem slug="lorem-ipsum-3" />
-          <FlatItem slug="lorem-ipsum-4" />
-          <FlatItem slug="lorem-ipsum-5" />
-          <FlatItem slug="lorem-ipsum-6" />
+          {properties?.map((property) => (
+            <FlatItem key={property._id} id={property._id} />
+          ))}
         </div>
       </div>
     </section>
