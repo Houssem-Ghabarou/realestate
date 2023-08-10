@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const FlatItem = ({ id }) => {
+const FlatItem = ({ property }) => {
   return (
     <div className="text-center col-lg-4 col-12 col-md-6 ">
       <div className="item">
@@ -9,20 +9,23 @@ const FlatItem = ({ id }) => {
         </div>
         <div className="item-description">
           <div className="d-flex justify-content-between mb-3">
-            <span className="item-title">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit
-            </span>
-            <span className="item-price">$1000</span>
+            <span className="item-title">{property.name}</span>
+            <span className="item-price">{property.price} TND </span>
           </div>
           <div className="item-icon d-flex alig-items-center justify-content-between">
             <div>
               <i className="fas fa-check-circle"></i>{" "}
-              <span>Lorem ipsum dolor</span>
+              <span>{property?.surface}</span>
             </div>
             <div>
-              <i className="fas fa-check-circle"></i> <span> Lorem </span>
+              <i className="fas fa-check-circle"></i>{" "}
+              <span> {property?.chambres}</span>
             </div>
-            <Link to={`/flat/${id}`} className="item-title">
+            <div>
+              <i className="fas fa-check-circle"></i>{" "}
+              <span> {property?.sallesDeBains}</span>
+            </div>
+            <Link to={`/flat/${property._id}`} className="item-title">
               <button className="btn btn-detail">View</button>
             </Link>
           </div>

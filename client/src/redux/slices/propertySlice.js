@@ -5,6 +5,8 @@ const initialState = {
   properties: [],
   vente: [],
   location: [],
+  propertyDetails: [],
+  wishlist:[],
   loading: false,
   error: null,
   message: "",
@@ -61,6 +63,23 @@ export const getAlllocation = createAsyncThunk(
   }
 );
 
+export const getPropertyDetails = createAsyncThunk(
+  "property/getPropertyDetails",
+  async (propId, thunkAPI) => {
+    try {
+      return await propertyService.getPropertyDetails(propId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const propertySlice = createSlice({
   name: "property", // Changed "proeprty" to "property"
   initialState: initialState, // Corrected the property name
@@ -103,6 +122,19 @@ export const propertySlice = createSlice({
         state.vente = action.payload;
       })
       .addCase(getAllvente.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.message = action.payload;
+      })
+      .addCase(getPropertyDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPropertyDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.propertyDetails = action.payload;
+      })
+      .addCase(getPropertyDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.message = action.payload;

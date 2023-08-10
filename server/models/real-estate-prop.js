@@ -30,6 +30,10 @@ const realEstatePropertySchema = new mongoose.Schema({
     ],
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,

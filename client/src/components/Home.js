@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Banner/>
+      {/* <Banner/> */}
       <FlatList type={0} />
       <BestFlatList />
       {/* <Subscribe/> */}

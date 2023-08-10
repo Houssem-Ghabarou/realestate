@@ -6,6 +6,7 @@ const addProperty = async (req, res) => {
     category,
     type,
     price,
+    name,
     location,
     description,
     chambres,
@@ -16,7 +17,15 @@ const addProperty = async (req, res) => {
   } = req.body;
 
   // Check for required fields
-  if (!category || !type || !price || !location || !description || !surface) {
+  if (
+    !category ||
+    !type ||
+    !price ||
+    !location ||
+    !description ||
+    !surface ||
+    !name
+  ) {
     return res
       .status(400)
       .json({ message: "All required fields must be provided." });
@@ -37,6 +46,7 @@ const addProperty = async (req, res) => {
       category,
       type,
       price,
+      name,
       location,
       description,
       chambres,
@@ -104,6 +114,7 @@ const editProperty = async (req, res) => {
       category,
       type,
       price,
+      name,
       location,
       description,
       chambres,
@@ -118,6 +129,7 @@ const editProperty = async (req, res) => {
     if (category) property.category = category;
     if (type) property.type = type;
     if (price) property.price = price;
+    if (name) property.name = name;
     if (location) property.location = location;
     if (description) property.description = description;
     if (chambres) property.chambres = chambres;
@@ -154,6 +166,17 @@ const getAllProperties = async (req, res) => {
   }
 };
 
+const getPropertyDetails = async (req, res) => {
+  const propId = req.params.id;
+  try {
+    const property = await realEstateProp.findById(propId);
+    return res.status(200).json(property);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to get property details." });
+  }
+};
+
 const getVenteProperties = async (req, res) => {
   try {
     const properties = await realEstateProp.find({ category: "vente" });
@@ -180,4 +203,5 @@ module.exports = {
   deleteProperty,
   getVenteProperties,
   getLocationProperties,
+  getPropertyDetails,
 };

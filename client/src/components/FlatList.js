@@ -33,12 +33,12 @@ const FlatList = ({ type }) => {
     } else if (type === 2) {
       dispatch(getAlllocation());
     }
-  }, [type, dispatch]);
+  }, [type]);
   if (loading) {
     return <div>Loading...</div>; // Show loading indicator if data is being fetched
   }
 
-  console.log(properties, title.text, "propertiessssssssss");
+  // console.log(properties, title.text, "propertiessssssssss");
 
   return (
     <section className="section-all-re">
@@ -46,7 +46,7 @@ const FlatList = ({ type }) => {
         <Title title={title.text} description={title.description} />
         <div className="row">
           {properties?.map((property) => (
-            <FlatItem key={property._id} id={property._id} />
+            <FlatItem key={property._id} property={property} />
           ))}
         </div>
       </div>

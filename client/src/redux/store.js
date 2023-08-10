@@ -5,10 +5,10 @@ import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import propertyReducer from "./slices/propertySlice";
 
-
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["property.wishlist"],
 };
 const rootReducer = combineReducers({
   property: propertyReducer,
