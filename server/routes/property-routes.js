@@ -8,9 +8,13 @@ const {
   deleteProperty,
   getVenteProperties,
   getLocationProperties,
+  getPropertyDetails,
+  getLastSixLocationProperties,
+  getLastSixVenteProperties,
 } = require("../controllers/property-controller");
 const passport = require("../middlware/passport");
 const upload = require("../middlware/upload");
+const sharp = require("sharp");
 
 const jwtAdmin = passport.authenticate("ADMIN", {
   session: false,
@@ -18,6 +22,11 @@ const jwtAdmin = passport.authenticate("ADMIN", {
 
 router.post("/", upload.array("images[]"), jwtAdmin, addProperty); //single for just 1 image
 router.get("/", getAllProperties);
+router.get("/lastsixprop", getLastSixLocationProperties);
+router.get("/lastsixventeprop", getLastSixVenteProperties);
+router.get("/lastsixlocationprop", getLastSixLocationProperties);
+
+router.get("/singleproperty/:id", getPropertyDetails);
 router.get("/vente", getVenteProperties);
 router.get("/location", getLocationProperties);
 

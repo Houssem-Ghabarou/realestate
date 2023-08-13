@@ -1,29 +1,20 @@
 import FlatList from "./FlatList";
-import Banner from "./Banner";
+// import Banner from "./Banner";
 import React from "react";
 import TeamList from "./TeamList";
 import References from "./References";
-import Subscribe from "./Subscribe";
+// import Subscribe from "./Subscribe";
 import BestFlatList from "./BestFlatList";
-import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  
 
-  // useEffect(() => {
-  //   const getAllProps = async () => {
-  //     await dispatch(getAllProperties());
-  //   };
-  //   getAllProps();
-  // }, []);
-
-  // console.log(allProperties, "alllllllllllll properties");
 
   return (
     <React.Fragment>
-      <Banner/>
+      {/* <Banner/> */}
       <FlatList type={0} />
+      <FlatList type={3} />
+      <FlatList type={4} />
       <BestFlatList />
       {/* <Subscribe/> */}
       <TeamList />

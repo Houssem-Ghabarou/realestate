@@ -5,9 +5,10 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
 import About from "./components/About";
-import Blog from "./components/Blog";
-import BlogDetail from "./components/BlogDetail";
+// import Blog from "./components/Blog";
+// import BlogDetail from "./components/BlogDetail";
 import FlatList from "./components/FlatList";
+import Banner from "./components/Banner";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -16,6 +17,11 @@ function App() {
     <Router>
       <div className="App">
         <Header />
+
+        <Route path={["/", "/vente", "/location"]} exact>
+          <Banner />
+        </Route>
+
         <Route path="/" exact component={Home}></Route>
         <Route path="/contact" component={Contact}></Route>
         <Route path="/about" component={About}></Route>
@@ -24,7 +30,8 @@ function App() {
 
         {/* <Route path="/blog" exact component={Blog}></Route> */}
         {/* <Route path="/blog/:id" component={BlogDetail}></Route> */}
-        <Route path="/flat/:slug" component={FlatDetail}></Route>
+        <Route path="/detailbiens/:id" component={FlatDetail}></Route>
+
         <Footer />
       </div>
     </Router>
