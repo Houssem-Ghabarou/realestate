@@ -1,0 +1,9 @@
+{
+    "header":{
+        "home":"Acceuil",
+        "rent":"Louer",
+        "sale":"Vente",
+        "about":"À propos",
+        "contact":"Contact"
+    }
+}

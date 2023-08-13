@@ -25,7 +25,7 @@ var upload = multer({
       callback(null, true);
     } else {
       console.log("Only images (JPEG, PNG, HEIF, HEIC) are supported.");
-      callback(null, false);
+      return callback(new Error("Unsupported image type"));
     }
   },
 });

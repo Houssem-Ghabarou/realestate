@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageGallery from "react-image-gallery";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"; // Import useParams
 import { getPropertyDetails } from "../redux/slices/propertySlice";
 import { MdOutlineBedroomParent } from "react-icons/md";
-
+import "react-image-gallery/styles/css/image-gallery.css"; // Import the ImageGallery CSS
+// import Modal from "react-responsive-modal";
+// import "react-responsive-modal/styles.css"; // Import the Modal CSS
+import ClipLoader from "react-spinners/ClipLoader";
 
 const FlatDetail = () => {
+  const loading = useSelector((state) => state.property.loading);
+  const [imagesLoaded, setImagesLoaded] = useState(false); // Track images loading state
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -20,24 +26,43 @@ const FlatDetail = () => {
       await dispatch(getPropertyDetails(id));
     };
     getPropDetails(id);
+    // eslint-disable-next-line
   }, [id]);
 
-  console.log(propertyDetails, "propertyDetailssssssssssssss");
+  useEffect(() => {
+    // Simulate a short delay for the images to appear
+    const timer = setTimeout(() => {
+      setImagesLoaded(true);
+    }, 1000); // Adjust the delay time as needed
 
-  const images = [
-    {
-      original: "/img/product1.jpeg",
-      thumbnail: "/img/product1.jpeg",
-    },
-    {
-      original: "/img/banner.jpg",
-      thumbnail: "/img/banner.jpg",
-    },
-    {
-      original: "/img/product1.jpeg",
-      thumbnail: "/img/product1.jpeg",
-    },
-  ];
+    // Clean up the timer when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+  // console.log(propertyDetails, "propertyDetailssssssssssssss");
+
+  // Construct image URLs from filenames and backend base URL
+  const backendBaseUrl = process.env.REACT_APP_SERVER_KEY; // Replace with your actual backend URL
+  const imageFilenames = propertyDetails?.images
+    ? propertyDetails.images.split(",")
+    : [];
+  const imageUrls = imageFilenames.map((filename) => ({
+    original: `${backendBaseUrl}/${filename.replace(/\\/g, "/")}`, // Replace backslashes with forward slashes
+    thumbnail: `${backendBaseUrl}/${filename.replace(/\\/g, "/")}`, // Replace backslashes with forward slashes
+  }));
+
+  if (loading) {
+    return (
+      <div className="loader">
+        <ClipLoader
+          color={"#333"}
+          loading={loading}
+          size={100}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    ); // Show loading indicator if data is being fetched
+  }
 
   return (
     <div className="flat-detail">
@@ -67,14 +92,26 @@ const FlatDetail = () => {
                 <span className="fd-price">{propertyDetails?.price} TND</span>
               </div>
             </div>
-            <ImageGallery
-              flickThreshold={0.5}
-              slideDuration={0}
-              items={images}
-              showNav={false}
-              showFullscreenButton={false}
-              showPlayButton={false}
-            />
+            {loading || !imagesLoaded ? (
+              <div className="loader">
+                <ClipLoader
+                  color={"#333"}
+                  loading={loading || !imagesLoaded}
+                  size={100}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <ImageGallery
+                flickThreshold={0.5}
+                slideDuration={0}
+                items={imageUrls}
+                showNav={false}
+                showFullscreenButton={false}
+                showPlayButton={false}
+              />
+            )}
             <div className="row">
               <div className="col-lg-8">
                 <div className="fd-item fd-property-detail">
@@ -125,7 +162,7 @@ const FlatDetail = () => {
                 </div>
                 <div className="fd-item">
                   <h4>Description</h4>
-                  <p>{propertyDetails.description}</p>
+                  <p>{propertyDetails?.description}</p>
                 </div>
                 <div className="fd-item fd-features">
                   <h4>Features</h4>

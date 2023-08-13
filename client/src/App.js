@@ -30,7 +30,7 @@ function App() {
 
         {/* <Route path="/blog" exact component={Blog}></Route> */}
         {/* <Route path="/blog/:id" component={BlogDetail}></Route> */}
-        <Route path="/flat/:id" component={FlatDetail}></Route>
+        <Route path="/detailbiens/:id" component={FlatDetail}></Route>
 
         <Footer />
       </div>

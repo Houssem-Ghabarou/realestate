@@ -9,7 +9,7 @@ const realEstatePropertySchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["vente", "location"],
+    enum: ["vente", "location", "locationsais"],
     required: true,
   },
   // status: {
@@ -24,9 +24,10 @@ const realEstatePropertySchema = new mongoose.Schema({
       "Villa",
       "Appartement",
       "Terrain",
+      "local",
       "Immeuble",
       "Commercial",
-      "Bureau et local",
+      "Bureau",
     ],
     required: true,
   },
@@ -49,13 +50,13 @@ const realEstatePropertySchema = new mongoose.Schema({
   chambres: {
     type: Number,
     required: function () {
-      return !["Terrain", "Commercial", "Bureau et local"].includes(this.type);
+      return !["Terrain", "Commercial", "Bureau", "local"].includes(this.type);
     },
   },
   sallesDeBains: {
     type: Number,
     required: function () {
-      return !["Terrain", "Commercial", "Bureau et local"].includes(this.type);
+      return !["Terrain", "Commercial", "Bureau", "local"].includes(this.type);
     },
   },
   surface: {
