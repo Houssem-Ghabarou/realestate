@@ -1,9 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
+import promovilla from "../assets/promovilla.jpg";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  const onChangeLanguage = (e) => {
+    const newLanguage = e.target.value;
+    i18n.changeLanguage(newLanguage);
+    document.body.dir = newLanguage === "ar" ? "rtl" : "ltr";
+  };
+
+  useEffect(() => {
+    for (
+      let index = 0;
+      index < document.getElementsByClassName("lang").length;
+      index++
+    ) {
+      const element = document.getElementsByClassName("lang")[index];
+      if (element.value === i18n.language) {
+        console.log(element.value);
+        if (element.value === "ar") {
+          document.body.dir = "rtl";
+        }
+        element.setAttribute("selected", true);
+      }
+    }
+    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
+
+  // useEffect(() => {
+  //   const language = document.getElementsByClassName("lang").selected;
+  //   console.log(language);
+  // }, []);
 
   const checkWindowWidth = () => {
     setIsMobile(window.innerWidth <= 768); // Set breakpoint according to your needs (e.g., 768 for tablets and phones)
@@ -24,8 +56,13 @@ const Header = () => {
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               <div className="d-flex align-items-center">
-                <i className="fas fa-home"></i>
-                <span className="ms-2">MB</span>
+                {/* <i className="fas fa-home"></i> */}
+                {/* <span className="ms-2"></span> */}
+                <img
+                  src={promovilla}
+                  className="promovilla"
+                  alt="promovillalogo"
+                />
               </div>
             </Link>
             {isMobile ? (
@@ -47,22 +84,75 @@ const Header = () => {
                   <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
                       <Link className="nav-link" to="/">
-                        Home
+                        {t("header.home")}
                       </Link>
                     </li>
+                    {/* <li>{t("title")}</li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/vente">
+<<<<<<< HEAD
                         Vente
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/location">
                         location
+=======
+                        {t("header.sale")}
+>>>>>>> dev
                       </Link>
+                      <ul className="sub-ul">
+                        <li>
+                          <Link to="#">Maison</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Villa</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Appartement</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Immeuble</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Bureaux</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Commercial</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Terrain</Link>
+                        </li>
+                      </ul>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/location">
+                        {t("header.rent")}
+                      </Link>
+                      <ul className="sub-ul">
+                        <li>
+                          <Link to="#">Maison</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Villa</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Appartement</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Immeuble</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Bureaux</Link>
+                        </li>
+                        <li>
+                          <Link to="#">Commercial</Link>
+                        </li>
+                      </ul>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/about">
-                        About
+                        {t("header.about")}
                       </Link>
                     </li>
                     {/* <li className="nav-item">
@@ -83,9 +173,26 @@ const Header = () => {
                     </li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/contact">
-                        Contact
+                        {t("header.contact")}
                       </Link>
                     </li>
+                    <div className="nav-item">
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        onChange={onChangeLanguage}
+                      >
+                        <option value="fr" className="lang">
+                          FR
+                        </option>
+                        <option value="en" className="lang">
+                          EN
+                        </option>
+                        <option value="ar" className="lang">
+                          AR
+                        </option>
+                      </select>
+                    </div>
                   </ul>
                 </div>
               </>

@@ -1,4 +1,5 @@
 const realEstateProp = require("../models/real-estate-prop");
+const sharp = require("sharp");
 
 const addProperty = async (req, res) => {
   // Extract data from the request body
@@ -6,17 +7,26 @@ const addProperty = async (req, res) => {
     category,
     type,
     price,
+    name,
     location,
     description,
     chambres,
     sallesDeBains,
-    surface,   
+    surface,
     parking,
     characteristics,
   } = req.body;
 
   // Check for required fields
-  if (!category || !type || !price || !location || !description || !surface) {
+  if (
+    !category ||
+    !type ||
+    !price ||
+    !location ||
+    !description ||
+    !surface ||
+    !name
+  ) {
     return res
       .status(400)
       .json({ message: "All required fields must be provided." });
@@ -37,6 +47,7 @@ const addProperty = async (req, res) => {
       category,
       type,
       price,
+      name,
       location,
       description,
       chambres,
@@ -52,9 +63,20 @@ const addProperty = async (req, res) => {
     } else {
       // Process and store image paths
       let path = "";
-      req.files.forEach(function (file) {
+      for (const file of req.files) {
+        // Use sharp to compress the image
+        // const compressedImageBuffer = await sharp(file.path)
+        //   .resize(800) // You can adjust the size as needed
+        //   .toBuffer();
+        const compressedImageBuffer = await sharp(file.path)
+          .jpeg({ quality: 80 }) // You can adjust the quality as needed
+          .toBuffer();
+
+        // Save the compressed image back to the uploads folder
+        await sharp(compressedImageBuffer).toFile(file.path);
+
         path += file.path + ",";
-      });
+      }
       path = path.substring(0, path.lastIndexOf(","));
       newProp.images = path;
     }
@@ -104,6 +126,7 @@ const editProperty = async (req, res) => {
       category,
       type,
       price,
+      name,
       location,
       description,
       chambres,
@@ -118,6 +141,7 @@ const editProperty = async (req, res) => {
     if (category) property.category = category;
     if (type) property.type = type;
     if (price) property.price = price;
+    if (name) property.name = name;
     if (location) property.location = location;
     if (description) property.description = description;
     if (chambres) property.chambres = chambres;
@@ -146,19 +170,96 @@ const editProperty = async (req, res) => {
 
 const getAllProperties = async (req, res) => {
   try {
-    const properties = await realEstateProp.find();
-    return res.status(200).json({ properties: properties });
+    const properties = await realEstateProp.find().sort({ timestamp: -1 });
+    return res.status(200).json(properties);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to get properties." });
   }
 };
 
+const getLastSixVenteProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp
+      .find({ category: "vente" })
+      .sort({ timestamp: -1 })
+      .limit(6);
+    return res.status(200).json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+const getLastSixLocationProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp
+      .find({ category: "location" })
+      .sort({ timestamp: -1 })
+      .limit(6);
+    return res.status(200).json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
 
+const getLastSixProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp
+      .find()
+      .sort({ timestamp: -1 })
+      .limit(6);
+    return res.status(200).json(properties);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+
+const getPropertyDetails = async (req, res) => {
+  const propId = req.params.id;
+  try {
+    const property = await realEstateProp.findById(propId);
+    return res.status(200).json(property);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to get property details." });
+  }
+};
+
+const getVenteProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp
+      .find({ category: "vente" })
+      .sort({ timestamp: -1 });
+    return res.status(200).json(properties);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+const getLocationProperties = async (req, res) => {
+  try {
+    const properties = await realEstateProp
+      .find({ category: "location" })
+      .sort({ timestamp: -1 });
+    return res.status(200).json(properties);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
 
 module.exports = {
   addProperty,
   getAllProperties,
   editProperty,
   deleteProperty,
+  getVenteProperties,
+  getLocationProperties,
+  getPropertyDetails,
+  getLastSixProperties,
+  getLastSixLocationProperties,
+  getLastSixVenteProperties
 };
+
