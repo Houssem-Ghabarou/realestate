@@ -52,6 +52,8 @@ const getPropertyDetails = async (propId) => {
     console.log(err);
   }
 };
+
+
 const proeprtyService = {
   getLastSixProperties,
   getAllvente,

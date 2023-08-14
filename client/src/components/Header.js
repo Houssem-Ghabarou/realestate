@@ -22,7 +22,6 @@ const Header = () => {
     ) {
       const element = document.getElementsByClassName("lang")[index];
       if (element.value === i18n.language) {
-        console.log(element.value);
         if (element.value === "ar") {
           document.body.dir = "rtl";
         }

@@ -250,6 +250,8 @@ const getLocationProperties = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   addProperty,
   getAllProperties,
@@ -260,6 +262,5 @@ module.exports = {
   getPropertyDetails,
   getLastSixProperties,
   getLastSixLocationProperties,
-  getLastSixVenteProperties
+  getLastSixVenteProperties,
 };
-
