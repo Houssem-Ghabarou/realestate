@@ -9,6 +9,7 @@ const passport = require("passport");
 
 const { connectToMongoDB } = require("./services/mongodb");
 
+const errorHandler = require("./middlware/errorMiddlware");
 const userRoutes = require("./routes/user-routes");
 const propertyRoutes = require("./routes/property-routes");
 const messageRoutes = require("./routes/email-routes");
@@ -32,9 +33,8 @@ app.use("/admin", userRoutes);
 app.use("/property", propertyRoutes);
 app.use("/email", messageRoutes);
 
-app.use("/", (req, res) => {
-  res.send("HELLO WORLD")
-})
+//error middlwares
+app.use(errorHandler);
 
 //server
 const server = http.createServer(app);
