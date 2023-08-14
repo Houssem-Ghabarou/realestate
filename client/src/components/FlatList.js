@@ -14,12 +14,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const ITEMS_PER_PAGE = 12; // Number of properties to display per page
 
-<<<<<<< HEAD
-const FlatList = () => {
-    const title = {
-        text: "vente",
-        description: "Lorem ipsum dolor sit ame"
-=======
 const FlatList = ({ type }) => {
   const dispatch = useDispatch();
   // Initialize the current page state
@@ -69,7 +63,6 @@ const FlatList = ({ type }) => {
       dispatch(getLastSixVenteProperties());
     } else if (type === 4) {
       dispatch(getLastSixLocationProperties());
->>>>>>> dev
     }
     // eslint-disable-next-line
   }, [type]);

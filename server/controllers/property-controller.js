@@ -249,6 +249,133 @@ const getLocationProperties = async (req, res) => {
     res.status(500).json({ error: "Failed to get properties." });
   }
 };
+const getVenteMaison = async (req, res) => {
+  try {
+    const maison = await realEstateProp.find({ category: "vente", type: "Maison" });
+    return res.status(200).json(maison);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Maison." });
+  }
+};
+const getVenteVilla = async (req, res) => {
+  try {
+    const villa = await realEstateProp.find({ category: "vente", type: "Villa" });
+    return res.status(200).json(villa);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Villa." });
+  }
+};
+const getVenteAppartement = async (req, res) => {
+  try {
+    const appartement = await realEstateProp.find({ category: "vente", type: "Appartement" });
+    return res.status(200).json(appartement);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Appartement." });
+  }
+};
+const getVenteImmeuble = async (req, res) => {
+  try {
+    const immeuble = await realEstateProp.find({ category: "vente", type: "Immeuble" });
+    return res.status(200).json(immeuble);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Immeuble." });
+  }
+};
+const getVenteTerrain = async (req, res) => {
+  try {
+    const terrain = await realEstateProp.find({ category: "vente", type: "Terrain" });
+    return res.status(200).json(terrain);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Terrain." });
+  }
+};
+const getVenteBureau = async (req, res) => {
+  try {
+    const bureau = await realEstateProp.find({ category: "vente", type: "Bureau" });
+    return res.status(200).json(bureau);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get Bureau." });
+  }
+};
+const getVenteCommercial = async (req, res) => {
+  try {
+    const commercial = await realEstateProp.find({ category: "vente", type: "Commercial" });
+    return res.status(200).json(commercial);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get commercial." });
+  }
+};
+const getLocationMaison = async (req, res) => {
+  try {
+    const lmaison = await realEstateProp.find({ category: "location", type: "Maison" });
+    return res.status(200).json(lmaison);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get maison." });
+  }
+};
+const getLocationTerrain = async (req, res) => {
+  try {
+    const lterrain = await realEstateProp.find({ category: "location", type: "Terrain" });
+    return res.status(200).json(lterrain);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get terrain." });
+  }
+};
+const getLocationCommercial = async (req, res) => {
+  try {
+    const lcommercial = await realEstateProp.find({ category: "location", type: "Commercial" });
+    return res.status(200).json(lcommercial);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get commercial." });
+  }
+};
+const getLocationAppartement = async (req, res) => {
+  try {
+    const lappartement = await realEstateProp.find({ category: "location", type: "Appartement" });
+    return res.status(200).json(lappartement);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get appartement." });
+  }
+};
+
+const getLocationVilla = async (req, res) => {
+  try {
+    const lvilla = await realEstateProp.find({ category: "location", type: "Villa" });
+    return res.status(200).json(lvilla);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get villa." });
+  }
+};
+const getLocationBureau = async (req, res) => {
+  try {
+    const lbureau = await realEstateProp.find({ category: "location", type: "Bureau" });
+    return res.status(200).json(lbureau);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get bureau." });
+  }
+};
+const getLocationImmeuble = async (req, res) => {
+  try {
+    const limmeuble = await realEstateProp.find({ category: "location", type: "Immeuble" });
+    return res.status(200).json(limmeuble);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get immeuble." });
+  }
+};
 
 module.exports = {
   addProperty,
@@ -260,6 +387,21 @@ module.exports = {
   getPropertyDetails,
   getLastSixProperties,
   getLastSixLocationProperties,
-  getLastSixVenteProperties
+  getLastSixVenteProperties,
+  getVenteMaison,
+  getVenteVilla,
+  getVenteAppartement,
+  getVenteImmeuble,
+  getVenteTerrain,
+  getVenteBureau,
+  getVenteCommercial,
+  getLocationMaison,
+  getLocationAppartement,
+  getLocationBureau,
+  getLocationCommercial,
+  getLocationImmeuble,
+  getLocationVilla,
+  getLocationTerrain
+
 };
 

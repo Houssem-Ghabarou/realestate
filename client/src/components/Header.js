@@ -22,7 +22,6 @@ const Header = () => {
     ) {
       const element = document.getElementsByClassName("lang")[index];
       if (element.value === i18n.language) {
-        console.log(element.value);
         if (element.value === "ar") {
           document.body.dir = "rtl";
         }
@@ -90,16 +89,7 @@ const Header = () => {
                     {/* <li>{t("title")}</li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/vente">
-<<<<<<< HEAD
-                        Vente
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/location">
-                        location
-=======
                         {t("header.sale")}
->>>>>>> dev
                       </Link>
                       <ul className="sub-ul">
                         <li>

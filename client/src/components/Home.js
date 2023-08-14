@@ -6,22 +6,7 @@ import References from "./References";
 // import Subscribe from "./Subscribe";
 import BestFlatList from "./BestFlatList";
 
-<<<<<<< HEAD
-const Home=()=>{
-    return (
-        <React.Fragment>
-            {/* <Banner/> */}
-            <FlatList/>
-            <BestFlatList/>
-            {/* <Subscribe/> */}
-            <TeamList/>
-            <References/>
-        </React.Fragment>
-    )
-}
-=======
 const Home = () => {
->>>>>>> dev
 
 
   return (

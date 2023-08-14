@@ -52,6 +52,111 @@ const getPropertyDetails = async (propId) => {
     console.log(err);
   }
 };
+
+const getVenteMaison = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "ventemaison/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVenteAppartement = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "venteappartement/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVenteImmeuble = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "venteimmeuble/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVenteTerrain = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "venteterrain/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVenteBureau = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "ventebueau/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getVenteCommercial = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "ventecommercial/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationMaison = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationmaison/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationAppartement = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationappartement/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationBureau = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationbureau/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationCommercial = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationcommercial/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationImmeuble = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationimmeuble/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationVilla = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationVilla/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getLocationTerrain = async (propId) => {
+  try {
+    const response = await axios.get(API_URL + "locationterrain/" + propId);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 const proeprtyService = {
   getLastSixProperties,
   getAllvente,
@@ -59,6 +164,19 @@ const proeprtyService = {
   getPropertyDetails,
   getLastSixVenteProperties,
   getLastSixLocationProperties,
+  getVenteMaison,
+  getVenteAppartement,
+  getVenteImmeuble,
+  getVenteTerrain,
+  getVenteBureau,
+  getVenteCommercial,
+  getLocationMaison,
+  getLocationAppartement,
+  getLocationBureau,
+  getLocationCommercial,
+  getLocationImmeuble,
+  getLocationVilla,
+  getLocationTerrain
 };
 
 export default proeprtyService;
