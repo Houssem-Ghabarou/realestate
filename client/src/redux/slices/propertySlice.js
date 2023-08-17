@@ -5,12 +5,14 @@ const initialState = {
   lastSixProperties: [],
   lastSixVenteProperties: [],
   lastSixLocationProperties: [],
+  propByCategoryType: [],
   vente: [],
   location: [],
   propertyDetails: [],
   wishlist: [],
   loading: false,
   error: null,
+  success: false,
   message: "",
 };
 
@@ -63,7 +65,6 @@ export const getLastSixLocationProperties = createAsyncThunk(
   }
 );
 
-
 export const getAllvente = createAsyncThunk(
   "property/getAllvente",
   async (_, thunkAPI) => {
@@ -103,6 +104,22 @@ export const getPropertyDetails = createAsyncThunk(
   async (propId, thunkAPI) => {
     try {
       return await propertyService.getPropertyDetails(propId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+export const getPropByCategoryType = createAsyncThunk(
+  "property/getPropByCategoryType",
+  async (category, type, thunkAPI) => {
+    try {
+      return await propertyService.getPropByCategoryType(category, type);
     } catch (error) {
       const message =
         (error.response &&
@@ -196,6 +213,19 @@ export const propertySlice = createSlice({
         state.lastSixLocationProperties = action.payload;
       })
       .addCase(getLastSixLocationProperties.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.message = action.payload;
+      })
+      .addCase(getPropByCategoryType.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPropByCategoryType.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.propByCategoryType = action.payload;
+      })
+      .addCase(getPropByCategoryType.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
         state.message = action.payload;

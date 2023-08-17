@@ -6,16 +6,21 @@ import {
   getAlllocation,
   getLastSixLocationProperties,
   getLastSixVenteProperties,
+  getPropByCategoryType,
 } from "../redux/slices/propertySlice";
 import ReactPaginate from "react-paginate";
 import Title from "./Title";
 import FlatItem from "./FlatItem";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useParams } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 12; // Number of properties to display per page
 
 const FlatList = ({ type }) => {
+  const { category, proptype } = useParams();
+  console.log(category, proptype, "cateeeeeeeeegory typppppppppppppppe");
   const dispatch = useDispatch();
+// console.log(type,"ttttyyyppppppppppppppe")
   // Initialize the current page state
   const [currentPage, setCurrentPage] = useState(0);
   const startIndex = currentPage * ITEMS_PER_PAGE;
@@ -27,10 +32,11 @@ const FlatList = ({ type }) => {
     if (type === 2) return state.property.location;
     if (type === 3) return state.property.lastSixVenteProperties;
     if (type === 4) return state.property.lastSixLocationProperties;
-
+    if (type === 5) return state.property.propByCategoryType;
     return [];
   });
 
+  // console.log(properties, "propertiesssssssssssssss");
   // Calculate the total number of pages based on properties length and items per page
   const pageCount = Math.ceil(properties?.length / ITEMS_PER_PAGE);
 
@@ -63,9 +69,11 @@ const FlatList = ({ type }) => {
       dispatch(getLastSixVenteProperties());
     } else if (type === 4) {
       dispatch(getLastSixLocationProperties());
+    } else if (type === 5) {
+      dispatch(getPropByCategoryType(category, proptype));
     }
     // eslint-disable-next-line
-  }, [type]);
+  }, [type, category, proptype]);
 
   if (loading) {
     return (

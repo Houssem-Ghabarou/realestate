@@ -14,6 +14,7 @@ const userRoutes = require("./routes/user-routes");
 const propertyRoutes = require("./routes/property-routes");
 const messageRoutes = require("./routes/email-routes");
 
+
 // Connections
 connectToMongoDB();
 

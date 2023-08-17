@@ -27,6 +27,10 @@ function App() {
         <Route path="/about" component={About}></Route>
         <Route path="/vente" render={() => <FlatList type={1} />} />
         <Route path="/location" render={() => <FlatList type={2} />} />
+        <Route
+          path="/:category/:proptype"
+          render={() => <FlatList type={5} />}
+        />
 
         {/* <Route path="/blog" exact component={Blog}></Route> */}
         {/* <Route path="/blog/:id" component={BlogDetail}></Route> */}

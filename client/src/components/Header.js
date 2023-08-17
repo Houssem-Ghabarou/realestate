@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
 import promovilla from "../assets/promovilla.jpg";
 import { useTranslation } from "react-i18next";
-
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -30,11 +29,6 @@ const Header = () => {
     }
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
   }, [i18n.language]);
-
-  // useEffect(() => {
-  //   const language = document.getElementsByClassName("lang").selected;
-  //   console.log(language);
-  // }, []);
 
   const checkWindowWidth = () => {
     setIsMobile(window.innerWidth <= 768); // Set breakpoint according to your needs (e.g., 768 for tablets and phones)
@@ -93,25 +87,25 @@ const Header = () => {
                       </Link>
                       <ul className="sub-ul">
                         <li>
-                          <Link to="#">Maison</Link>
+                          <Link to="/vente/maison">Maison</Link>
                         </li>
                         <li>
-                          <Link to="#">Villa</Link>
+                          <Link to="/vente/villa">Villa</Link>
                         </li>
                         <li>
-                          <Link to="#">Appartement</Link>
+                          <Link to="/vente/appartement">Appartement</Link>
                         </li>
                         <li>
-                          <Link to="#">Immeuble</Link>
+                          <Link to="/vente/immeuble">Immeuble</Link>
                         </li>
                         <li>
-                          <Link to="#">Bureaux</Link>
+                          <Link to="/vente/bureau">Bureaux</Link>
                         </li>
                         <li>
-                          <Link to="#">Commercial</Link>
+                          <Link to="/vente/commercial">Commercial</Link>
                         </li>
                         <li>
-                          <Link to="#">Terrain</Link>
+                          <Link to="/vente/terrain">Terrain</Link>
                         </li>
                       </ul>
                     </li>
@@ -121,22 +115,22 @@ const Header = () => {
                       </Link>
                       <ul className="sub-ul">
                         <li>
-                          <Link to="#">Maison</Link>
+                          <Link to="/location/maison">Maison</Link>
                         </li>
                         <li>
-                          <Link to="#">Villa</Link>
+                          <Link to="/location/villa">Villa</Link>
                         </li>
                         <li>
-                          <Link to="#">Appartement</Link>
+                          <Link to="/location/appartement">Appartement</Link>
                         </li>
                         <li>
-                          <Link to="#">Immeuble</Link>
+                          <Link to="/location/immeuble">Immeuble</Link>
                         </li>
                         <li>
-                          <Link to="#">Bureaux</Link>
+                          <Link to="/location/bureau">Bureaux</Link>
                         </li>
                         <li>
-                          <Link to="#">Commercial</Link>
+                          <Link to="/location/commercial">Commercial</Link>
                         </li>
                       </ul>
                     </li>
