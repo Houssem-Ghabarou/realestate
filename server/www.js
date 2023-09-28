@@ -14,7 +14,6 @@ const userRoutes = require("./routes/user-routes");
 const propertyRoutes = require("./routes/property-routes");
 const messageRoutes = require("./routes/email-routes");
 
-
 // Connections
 connectToMongoDB();
 
@@ -41,5 +40,5 @@ app.use(errorHandler);
 const server = http.createServer(app);
 
 server.listen(process.env.PORT_SERVER || 3000, () => {
-  console.log("server listneing on port 3001");
+  console.log("server listneing on port ");
 });

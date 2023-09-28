@@ -17,10 +17,11 @@ import { useParams } from "react-router-dom";
 const ITEMS_PER_PAGE = 12; // Number of properties to display per page
 
 const FlatList = ({ type }) => {
+  console.log(type);
   const { category, proptype } = useParams();
   console.log(category, proptype, "cateeeeeeeeegory typppppppppppppppe");
   const dispatch = useDispatch();
-// console.log(type,"ttttyyyppppppppppppppe")
+  // console.log(type,"ttttyyyppppppppppppppe")
   // Initialize the current page state
   const [currentPage, setCurrentPage] = useState(0);
   const startIndex = currentPage * ITEMS_PER_PAGE;
@@ -32,7 +33,7 @@ const FlatList = ({ type }) => {
     if (type === 2) return state.property.location;
     if (type === 3) return state.property.lastSixVenteProperties;
     if (type === 4) return state.property.lastSixLocationProperties;
-    if (type === 5) return state.property.propByCategoryType;
+    // if (type === 5) return state.property.propByCategoryType;
     return [];
   });
 
@@ -73,7 +74,7 @@ const FlatList = ({ type }) => {
       dispatch(getPropByCategoryType(category, proptype));
     }
     // eslint-disable-next-line
-  }, [type, category, proptype]);
+  }, [type]);
 
   if (loading) {
     return (
