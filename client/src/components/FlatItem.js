@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-
 const FlatItem = ({ property }) => {
   const image = property?.images?.split(",")[0];
   const backendBaseUrl = process.env.REACT_APP_SERVER_KEY;
@@ -38,10 +37,7 @@ const FlatItem = ({ property }) => {
               <i className="fas fa-check-circle"></i>{" "}
               <span> {property?.sallesDeBains}</span>
             </div>
-            <Link
-              to={`/detailbiens/${property._id}`}
-              className="item-title"
-            >
+            <Link to={`/detailbiens/${property._id}`} className="item-title">
               <button className="btn btn-detail">View</button>
             </Link>
           </div>

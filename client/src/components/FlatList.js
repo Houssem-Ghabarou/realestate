@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getLastSixProperties,
-  getAllvente,
-  getAlllocation,
-  getLastSixLocationProperties,
-  getLastSixVenteProperties,
-  getPropByCategoryType,
-} from "../redux/slices/propertySlice";
+
+import propertyService from "../redux/services/propertyService";
+
 import ReactPaginate from "react-paginate";
 import Title from "./Title";
 import FlatItem from "./FlatItem";
@@ -17,25 +12,22 @@ import { useParams } from "react-router-dom";
 const ITEMS_PER_PAGE = 12; // Number of properties to display per page
 
 const FlatList = ({ type }) => {
-  console.log(type);
+  const {
+    getLastSixProperties,
+    getAllvente,
+    getAlllocation,
+    getLastSixLocationProperties,
+    getLastSixVenteProperties,
+    getPropByCategoryType,
+  } = propertyService;
+  const [prop, setProp] = useState([]);
   const { category, proptype } = useParams();
-  console.log(category, proptype, "cateeeeeeeeegory typppppppppppppppe");
-  const dispatch = useDispatch();
-  // console.log(type,"ttttyyyppppppppppppppe")
   // Initialize the current page state
   const [currentPage, setCurrentPage] = useState(0);
   const startIndex = currentPage * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
-  const properties = useSelector((state) => {
-    if (type === 0) return state.property.lastSixProperties;
-    if (type === 1) return state.property.vente;
-    if (type === 2) return state.property.location;
-    if (type === 3) return state.property.lastSixVenteProperties;
-    if (type === 4) return state.property.lastSixLocationProperties;
-    // if (type === 5) return state.property.propByCategoryType;
-    return [];
-  });
+  const properties = prop;
 
   // console.log(properties, "propertiesssssssssssssss");
   // Calculate the total number of pages based on properties length and items per page
@@ -54,27 +46,59 @@ const FlatList = ({ type }) => {
         : type === 0
         ? "Biens récemment mis en ligne"
         : type === 3
-        ? "Parcourez nos biens mis en vente"
-        : "Parcourez nos biens mis en locations",
+        ? "Biens récemment mis en vente"
+        : type === 4
+        ? "Biens récemment mis en location"
+        : "property",
+
     description: "Lorem ipsum dolor sit ame",
   };
 
-  useEffect(() => {
-    if (type === 0) {
-      dispatch(getLastSixProperties());
-    } else if (type === 1) {
-      dispatch(getAllvente());
-    } else if (type === 2) {
-      dispatch(getAlllocation());
-    } else if (type === 3) {
-      dispatch(getLastSixVenteProperties());
-    } else if (type === 4) {
-      dispatch(getLastSixLocationProperties());
-    } else if (type === 5) {
-      dispatch(getPropByCategoryType(category, proptype));
+  const fetchData = async (type) => {
+    try {
+      let data = null;
+      switch (type) {
+        case 0:
+          data = await getLastSixProperties();
+          break;
+        case 1:
+          data = await getAllvente();
+          break;
+        case 2:
+          data = await getAlllocation();
+          break;
+        case 3:
+          data = await getLastSixVenteProperties();
+          break;
+        case 4:
+          data = await getLastSixLocationProperties();
+          break;
+        case 5:
+          data = await getPropByCategoryType(category, proptype);
+          break;
+        default:
+          // Handle other cases if needed
+          break;
+      }
+
+      return data;
+    } catch (error) {
+      console.error(error);
+      return null; // Handle the error and return null or an error object
     }
-    // eslint-disable-next-line
-  }, [type]);
+  };
+
+  useEffect(() => {
+    const fetchDataAndSetData = async () => {
+      const data = await fetchData(type);
+      if (data !== null) {
+        // Only set the data if it's not null
+        setProp(data);
+      }
+    };
+
+    fetchDataAndSetData();
+  }, [type, category, proptype]);
 
   if (loading) {
     return (
@@ -93,7 +117,7 @@ const FlatList = ({ type }) => {
   return (
     <section className="section-all-re">
       <div className="container">
-        <Title title={title.text} description={title.description} />
+        <Title title={title?.text} description={title?.description} />
         <div className="row">
           {visibleProperties?.map((property) => (
             <FlatItem key={property._id} property={property} />
