@@ -1,43 +1,69 @@
+import { useTranslation } from "react-i18next";
+import promvilla from "../assets/promovilla.png";
+import house2 from "../assets/house2.jpg";
+import { FaCheck } from "react-icons/fa";
+import L from "leaflet";
 const About = () => {
-    return (
-        <section className="about">
-            <div className="page-top">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h1 className="page-title">About</h1>
-                            <h2 className="page-description">About</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="page-content">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <img src="/img/product1.jpeg" alt="product" className="w-100" />
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="about-item">
-                                <div className="title">
-                                    Lorem ipsum dolor sit amet
-                            </div>
-                                <div className="about-text">
-                                    Lorem ipsum is simply free text dolor sit am adipi we help you ensure everyone is in the right jobs sicing elit, sed do consulting firms Et leggings across the nation tempor.
-                            </div>
-                                <div className="about-features">
-                                    <p className="about-feature"><i className="fas fa-long-arrow-alt-right"></i> Lorem ipsum is simply</p>
-                                    <p className="about-feature" ><i className="fas fa-long-arrow-alt-right"></i> Lorem ipsum is simply</p>
-                                    <p className="about-feature"><i className="fas fa-long-arrow-alt-right"></i> Lorem ipsum is simply</p>
+  const { t } = useTranslation();
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
+  const style = {
+    color: "#e1ab24",
+  };
 
-export default About
+  return (
+    <section className="about">
+      <div className="page-content">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6">
+              <img src={house2} alt="product" className="about-us" />
+            </div>
+            <div className="col-lg-6">
+              <div className="about-item">
+                <div
+                  className="title"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <img
+                    src={promvilla}
+                    alt="promo-villa"
+                    className="promo-villa"
+                  />
+                  {t("search.name")}
+                </div>
+                <div className="about-text">{t("footer.def")}</div>
+                <div className="about-features">
+                  <p className="about-feature">
+                    <FaCheck style={style} /> {t("aboutUs.experience")}
+                  </p>
+                  <p className="about-feature">
+                    <FaCheck style={style} />
+                    {t("aboutUs.clientFocus")}
+                  </p>
+                  <p className="about-feature">
+                    <FaCheck style={style} />
+                    {t("aboutUs.propertyPortfolio")}
+                  </p>
+                  <p className="about-feature">
+                    <FaCheck style={style} />
+                    {t("aboutUs.transparencyEthics")}
+                  </p>
+                  <p className="about-feature">
+                    <FaCheck style={style} />
+                    {t("aboutUs.innovationTech")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+let DefaultIcon = L.icon({
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+export default About;

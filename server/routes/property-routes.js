@@ -13,6 +13,8 @@ const {
   getLastSixVenteProperties,
   getLastSixProperties,
   getPropertyCategoryType,
+  searchProperty,
+  getLocation,
 } = require("../controllers/property-controller");
 const passport = require("../middlware/passport");
 const upload = require("../middlware/upload");
@@ -30,8 +32,9 @@ router.get("/singleproperty/:id", getPropertyDetails);
 router.get("/vente", getVenteProperties);
 router.get("/location", getLocationProperties);
 router.get("/:category/categorytype/:propertyType", getPropertyCategoryType);
-
+router.get("/searchproperty", searchProperty);
 router.put("/:id", upload.array("images[]"), jwtAdmin, editProperty);
 router.delete("/:id", jwtAdmin, deleteProperty);
+router.get("/localisation", getLocation);
 
 module.exports = router;

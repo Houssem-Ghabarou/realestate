@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState, useContext } from "react";
 
 import propertyService from "../redux/services/propertyService";
-
 import ReactPaginate from "react-paginate";
 import Title from "./Title";
 import FlatItem from "./FlatItem";
-import ClipLoader from "react-spinners/ClipLoader";
+// import ClipLoader from "react-spinners/ClipLoader";
 import { useParams } from "react-router-dom";
+import { SearchResultContext } from "../context/SearchContext";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useTranslation } from "react-i18next";
+import NotAvailbale from "./NotAvailbale";
 
 const ITEMS_PER_PAGE = 12; // Number of properties to display per page
 
 const FlatList = ({ type }) => {
+  const history = useHistory();
+  const currentPath = history.location.pathname;
+  const { t } = useTranslation();
+
+  // Extract the id from the path, assuming it's a route like "/detailbiens/:id"
+  const match = currentPath.match(/\/detailbiens\/(.+)/);
+  const isDetailBiensRoute = match !== null;
+  const { isSearching, searchResults } = useContext(SearchResultContext);
+
   const {
     getLastSixProperties,
     getAllvente,
@@ -20,6 +31,7 @@ const FlatList = ({ type }) => {
     getLastSixVenteProperties,
     getPropByCategoryType,
   } = propertyService;
+  let text = "";
   const [prop, setProp] = useState([]);
   const { category, proptype } = useParams();
   // Initialize the current page state
@@ -29,29 +41,59 @@ const FlatList = ({ type }) => {
 
   const properties = prop;
 
-  // console.log(properties, "propertiesssssssssssssss");
-  // Calculate the total number of pages based on properties length and items per page
   const pageCount = Math.ceil(properties?.length / ITEMS_PER_PAGE);
 
   const visibleProperties = properties?.slice(startIndex, endIndex);
 
-  const loading = useSelector((state) => state.property.loading);
+  switch (type) {
+    case 1:
+      if (!isSearching) {
+        text = t("flatlist.bienEnVente");
+      } else {
+        text = t("flatlist.resultatRecherche");
+      }
+      break;
+    case 2:
+      if (!isSearching) {
+        text = t("flatlist.bienEnLocation");
+      } else {
+        text = t("flatlist.resultatRecherche");
+      }
+      break;
+    case 0:
+      text = t("flatlist.recement");
+      break;
+    case 3:
+      text = t("flatlist.recementVente");
+      break;
+    case 4:
+      text = t("flatlist.recementLocation");
+      break;
+    case 5:
+      if (!isSearching) {
+        text = t("message", {
+          category: t(`categories.${category}`),
+          proptype: t(`type.${proptype}`),
+        });
+      }
+
+      if (isSearching) {
+        text = t("flatlist.resultatRecherche");
+      }
+
+      break;
+    case 6:
+      if (isSearching) {
+        text = t("flatlist.resultatRecherche");
+      }
+      break;
+
+    default:
+      break;
+  }
 
   const title = {
-    text:
-      type === 1
-        ? "vente"
-        : type === 2
-        ? "location"
-        : type === 0
-        ? "Biens récemment mis en ligne"
-        : type === 3
-        ? "Biens récemment mis en vente"
-        : type === 4
-        ? "Biens récemment mis en location"
-        : "property",
-
-    description: "Lorem ipsum dolor sit ame",
+    text,
   };
 
   const fetchData = async (type) => {
@@ -62,10 +104,18 @@ const FlatList = ({ type }) => {
           data = await getLastSixProperties();
           break;
         case 1:
-          data = await getAllvente();
+          if (!isSearching) {
+            data = await getAllvente();
+          } else {
+            data = searchResults;
+          }
           break;
         case 2:
-          data = await getAlllocation();
+          if (!isSearching) {
+            data = await getAlllocation();
+          } else {
+            data = searchResults;
+          }
           break;
         case 3:
           data = await getLastSixVenteProperties();
@@ -74,7 +124,14 @@ const FlatList = ({ type }) => {
           data = await getLastSixLocationProperties();
           break;
         case 5:
-          data = await getPropByCategoryType(category, proptype);
+          if (!isSearching) {
+            data = await getPropByCategoryType(category, proptype);
+          } else {
+            data = searchResults;
+          }
+          break;
+        case 6:
+          data = searchResults;
           break;
         default:
           // Handle other cases if needed
@@ -91,33 +148,53 @@ const FlatList = ({ type }) => {
   useEffect(() => {
     const fetchDataAndSetData = async () => {
       const data = await fetchData(type);
+
       if (data !== null) {
-        // Only set the data if it's not null
         setProp(data);
       }
     };
 
     fetchDataAndSetData();
-  }, [type, category, proptype]);
+  }, [type, category, proptype, searchResults, isSearching]);
 
-  if (loading) {
-    return (
-      <div className="loader">
-        <ClipLoader
-          color={"#333"}
-          loading={loading}
-          size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
-    ); // Show loading indicator if data is being fetched
+  // if (loading) {
+  //   return (
+  //     <div className="loader">
+  //       <ClipLoader
+  //         color={"#333"}
+  //         loading={loading}
+  //         size={100}
+  //         aria-label="Loading Spinner"
+  //         data-testid="loader"
+  //       />
+  //     </div>
+  //   ); // Show loading indicator if data is being fetched
+  // }
+
+  const scrollTo = () => {
+    window.scrollTo(0, 5);
+  };
+
+  if (properties?.length === 0) {
+    return <NotAvailbale />;
   }
-
   return (
     <section className="section-all-re">
       <div className="container">
-        <Title title={title?.text} description={title?.description} />
+        {(type === 0 ||
+          type === 3 ||
+          type === 4 ||
+          (type === 5 && !isDetailBiensRoute) ||
+          type === 6 ||
+          type === 1 ||
+          type === 2) &&
+          properties?.length > 0 && (
+            <Title
+              title={title?.text}
+              propertiesLength={properties?.length}
+              type={type}
+            />
+          )}
         <div className="row">
           {visibleProperties?.map((property) => (
             <FlatItem key={property._id} property={property} />
@@ -125,9 +202,10 @@ const FlatList = ({ type }) => {
         </div>
         {type !== 0 && type !== 3 && type !== 4 && properties?.length > 0 && (
           <ReactPaginate
+            onClick={scrollTo}
             breakLabel="..."
-            previousLabel="< previous"
-            nextLabel="next >"
+            previousLabel="<"
+            nextLabel=">"
             pageCount={pageCount}
             pageRangeDisplayed={3}
             renderOnZeroPageCount={null}
@@ -136,6 +214,7 @@ const FlatList = ({ type }) => {
             pageLinkClassName="page-num"
             previousLinkClassName="page-num"
             nextLinkClassName="page-num"
+            activeLinkClassName="active-link"
             activeClassName="active"
           />
         )}

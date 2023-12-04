@@ -20,7 +20,7 @@ const getLastSixVenteProperties = async () => {
 };
 const getLastSixLocationProperties = async () => {
   try {
-    const response = await axios.get(API_URL + "lastsixventeprop");
+    const response = await axios.get(API_URL + "lastsixlocationprop");
     return response.data;
   } catch (err) {
     console.log(err);
@@ -51,6 +51,14 @@ const getPropertyDetails = async (propId) => {
     console.log(err);
   }
 };
+const getLocalisation = async () => {
+  try {
+    const response = await axios.get(API_URL + "localisation");
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const getPropByCategoryType = async (category, type) => {
   try {
@@ -62,6 +70,36 @@ const getPropByCategoryType = async (category, type) => {
     console.log(err);
   }
 };
+const searchProperty = async (
+  category,
+  propertyRef,
+
+  propertyType,
+  minPrice,
+  maxPrice,
+  minSurface,
+  maxSurface
+) => {
+  try {
+    const response = await axios.get(API_URL + "searchproperty/", {
+      params: {
+        category,
+        propertyRef,
+
+        propertyType,
+        minPrice,
+        maxPrice,
+        minSurface,
+        maxSurface,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
 
 const proeprtyService = {
   getLastSixProperties,
@@ -71,6 +109,8 @@ const proeprtyService = {
   getLastSixVenteProperties,
   getLastSixLocationProperties,
   getPropByCategoryType,
+  searchProperty,
+  getLocalisation,
 };
 
 export default proeprtyService;

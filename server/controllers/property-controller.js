@@ -15,6 +15,7 @@ const addProperty = async (req, res) => {
     surface,
     parking,
     characteristics,
+    ammeublement,
   } = req.body;
 
   // Check for required fields
@@ -34,21 +35,23 @@ const addProperty = async (req, res) => {
 
   // Validate specific fields for certain types
   if (["maison", "villa", "appartement", "immeuble"].includes(type)) {
-    if (!chambres || !sallesDeBains) {
+    if (!chambres || !sallesDeBains || !ammeublement) {
       return res.status(400).json({
         message:
-          "Nombre de chambres et de salles de bains est nécessaire pour le type sélectionné.",
+          "Nombre de chambres et de salles de bains et ammeublement est nécessaire pour le type sélectionné.",
       });
     }
   }
 
+  const lowerName = name.toLowerCase();
+  const locationLower = location.toLowerCase();
   try {
     const newProp = new realEstateProp({
       category,
       type,
       price,
-      name,
-      location,
+      name: lowerName,
+      location: locationLower,
       description,
       chambres,
       sallesDeBains,
@@ -81,6 +84,11 @@ const addProperty = async (req, res) => {
       newProp.images = path;
     }
 
+    if (type === "terrain") {
+      newProp.chambres = null;
+      newProp.sallesDeBains = null;
+      newProp.parking = null;
+    }
     // Save the property
     const savedProperty = await newProp.save();
     res.status(201).json(savedProperty);
@@ -267,6 +275,104 @@ const getPropertyCategoryType = async (req, res, next) => {
   }
 };
 
+const searchProperty = async (req, res) => {
+  const {
+    category,
+    propertyRef,
+    // propertyName,
+    propertyType,
+    // minPrice,
+    maxPrice,
+    minSurface,
+    maxSurface,
+  } = req.query;
+  try {
+    // if (
+    //   !category &&
+    //   !propertyRef &&
+    //   !propertyType &&
+    //   !minPrice &&
+    //   !maxPrice &&
+    //   !minSurface &&
+    //   !maxSurface
+    // ) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "Please provide at least one query parameter." });
+    // }
+    const conditions = {};
+
+    if (category) {
+      conditions.category = category;
+    }
+
+    if (propertyType) {
+      conditions.type = propertyType;
+    }
+
+    if (propertyRef) {
+      // Use $or operator to check for either reference or name
+      conditions.$or = [
+        { reference: propertyRef },
+        { name: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
+        // The 'i' flag in the regex makes the match case-insensitive
+      ];
+    }
+
+    // if (propertyName) {
+    //   conditions.name = propertyName;
+    // }
+
+    // if (minPrice !== undefined || maxPrice !== undefined) {
+    //   conditions.price = {};
+    //   if (minPrice !== undefined) {
+    //     conditions.price.$gte = minPrice;
+    //   }
+    //   if (maxPrice !== undefined) {
+    //     conditions.price.$lte = maxPrice;
+    //   }
+    // }
+    if (maxPrice !== undefined) {
+      conditions.price = {};
+
+      if (maxPrice !== undefined) {
+        conditions.price.$lte = maxPrice;
+      }
+    }
+
+    if (minSurface !== undefined || maxSurface !== undefined) {
+      conditions.surface = {};
+      if (minSurface !== undefined) {
+        conditions.surface.$gte = minSurface;
+      }
+      if (maxSurface !== undefined) {
+        conditions.surface.$lte = maxSurface;
+      }
+    }
+
+    const properties = await realEstateProp.find(conditions);
+    res.status(200).json(properties);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+const getLocation = async (req, res) => {
+  try {
+    const locations = await realEstateProp.distinct("location");
+
+    if (locations && locations.length > 0) {
+      return res.status(200).json(locations);
+    } else {
+      return res
+        .status(404)
+        .json({ message: "No locations found in the database." });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 module.exports = {
   addProperty,
   getAllProperties,
@@ -279,4 +385,6 @@ module.exports = {
   getLastSixLocationProperties,
   getLastSixVenteProperties,
   getPropertyCategoryType,
+  searchProperty,
+  getLocation,
 };

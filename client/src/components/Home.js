@@ -1,24 +1,28 @@
 import FlatList from "./FlatList";
-// import Banner from "./Banner";
-import React from "react";
-import TeamList from "./TeamList";
-import References from "./References";
-// import Subscribe from "./Subscribe";
-import BestFlatList from "./BestFlatList";
+import React, { useContext, useEffect } from "react";
 
+// import BestFlatList from "./BestFlatList";
+import { SearchResultContext } from "../context/SearchContext";
 const Home = () => {
-
+  const { isSearching, finishedSearch } = useContext(SearchResultContext);
+  useEffect(() => {
+    finishedSearch();
+    return () => {
+      finishedSearch();
+    };
+  }, []);
 
   return (
     <React.Fragment>
-      {/* <Banner/> */}
-      <FlatList type={0} />
-      <FlatList type={3} />
-      <FlatList type={4} />
-      <BestFlatList />
-      {/* <Subscribe/> */}
-      <TeamList />
-      <References />
+      {isSearching ? (
+        <FlatList type={6} />
+      ) : (
+        <>
+          <FlatList type={0} />
+          <FlatList type={3} />
+          <FlatList type={4} />
+        </>
+      )}
     </React.Fragment>
   );
 };

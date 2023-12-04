@@ -2,9 +2,6 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { Provider } from "react-redux";
-import { persistor, store } from "./redux/store";
-import { PersistGate } from "redux-persist/integration/react";
 // eslint-disable-next-line
 import i18n from "./i18n"; //lazm menha
 import ClipLoader from "react-spinners/ClipLoader";
@@ -23,11 +20,7 @@ const loading = (
 ReactDOM.render(
   <Suspense fallback={loading}>
     <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
-      </Provider>
+      <App />
     </React.StrictMode>
   </Suspense>,
   document.getElementById("root")

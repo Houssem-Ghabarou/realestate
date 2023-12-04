@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
-import promovilla from "../assets/promovilla.jpg";
+import promovilla from "../assets/promovilla.png";
 import { useTranslation } from "react-i18next";
-const Header = () => {
+import { SearchResultContext } from "../context/SearchContext";
+
+const Header = ({ type }) => {
+  const { finishedSearch } = useContext(SearchResultContext);
   const [isMobile, setIsMobile] = useState(false);
 
   const { t, i18n } = useTranslation();
@@ -43,14 +46,19 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="header">
-      <div className="container">
+    <div className={type === 0 ? "header-no-home" : "header"}>
+      {/* className="container" */}
+      <div>
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container-fluid">
+          <div
+            className="container-fluid"
+            style={{ margin: 0, paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
+          >
             <Link className="navbar-brand" to="/">
-              <div className="d-flex align-items-center">
-                {/* <i className="fas fa-home"></i> */}
-                {/* <span className="ms-2"></span> */}
+              <div
+                className="d-flex align-items-center"
+                onClick={() => finishedSearch()}
+              >
                 <img
                   src={promovilla}
                   className="promovilla"
@@ -73,39 +81,49 @@ const Header = () => {
                 >
                   <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                  <ul className="navbar-nav ms-auto">
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarNav"
+                  style={{ width: "unset" }}
+                >
+                  <ul
+                    className="navbar-nav ms-auto"
+                    style={{ alignItems: "center" }}
+                  >
                     <li className="nav-item">
                       <Link className="nav-link" to="/">
                         {t("header.home")}
                       </Link>
                     </li>
-                    {/* <li>{t("title")}</li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/vente">
                         {t("header.sale")}
                       </Link>
-                      <ul className="sub-ul">
+                      <ul className="sub-ul" onClick={() => finishedSearch()}>
                         <li>
-                          <Link to="/vente/maison">Maison</Link>
+                          <Link to="/vente/maison">{t("type.maison")}</Link>
                         </li>
                         <li>
-                          <Link to="/vente/villa">Villa</Link>
+                          <Link to="/vente/villa">{t("type.villa")}</Link>
                         </li>
                         <li>
-                          <Link to="/vente/appartement">Appartement</Link>
+                          <Link to="/vente/appartement">
+                            {t("type.appartement")}
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/vente/immeuble">Immeuble</Link>
+                          <Link to="/vente/immeuble">{t("type.immeuble")}</Link>
                         </li>
                         <li>
-                          <Link to="/vente/bureau">Bureaux</Link>
+                          <Link to="/vente/bureau">{t("type.bureau")}</Link>
                         </li>
                         <li>
-                          <Link to="/vente/commercial">Commercial</Link>
+                          <Link to="/vente/commercial">
+                            {t("type.commercial")}
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/vente/terrain">Terrain</Link>
+                          <Link to="/vente/terrain">{t("type.terrain")}</Link>
                         </li>
                       </ul>
                     </li>
@@ -113,24 +131,30 @@ const Header = () => {
                       <Link className="nav-link" to="/location">
                         {t("header.rent")}
                       </Link>
-                      <ul className="sub-ul">
+                      <ul className="sub-ul" onClick={() => finishedSearch()}>
                         <li>
-                          <Link to="/location/maison">Maison</Link>
+                          <Link to="/location/maison">{t("type.maison")}</Link>
                         </li>
                         <li>
-                          <Link to="/location/villa">Villa</Link>
+                          <Link to="/location/villa">{t("type.villa")}</Link>
                         </li>
                         <li>
-                          <Link to="/location/appartement">Appartement</Link>
+                          <Link to="/location/appartement">
+                            {t("type.appartement")}
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/location/immeuble">Immeuble</Link>
+                          <Link to="/location/immeuble">
+                            {t("type.immeuble")}
+                          </Link>
                         </li>
                         <li>
-                          <Link to="/location/bureau">Bureaux</Link>
+                          <Link to="/location/bureau">{t("type.bureau")}</Link>
                         </li>
                         <li>
-                          <Link to="/location/commercial">Commercial</Link>
+                          <Link to="/location/commercial">
+                            {t("type.commercial")}
+                          </Link>
                         </li>
                       </ul>
                     </li>
@@ -139,27 +163,45 @@ const Header = () => {
                         {t("header.about")}
                       </Link>
                     </li>
-                    {/* <li className="nav-item">
-                      <Link className="nav-link" to="#">
-                        Category <i className="fas fa-chevron-down"></i>
-                      </Link>
-                      <ul className="sub-ul">
-                        <li>
-                          <Link to="#">item</Link>
-                        </li>
-                        <li>
-                          <Link to="#">item</Link>
-                        </li>
-                        <li>
-                          <Link to="#">item</Link>
-                        </li>
-                      </ul>
-                    </li> */}
                     <li className="nav-item">
                       <Link className="nav-link" to="/contact">
                         {t("header.contact")}
                       </Link>
                     </li>
+                  </ul>
+                </div>
+                <div>
+                  <ul className="navbar-nav ms-auto">
+                    {/* <li className="nav-item">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          // backgroundColor: "#607d7d",
+                          backgroundColor: "#DAA520",
+                          borderRadius: "1.4rem",
+                          // padding: "0.3rem",
+                          // marginLeft: "3rem",
+                          paddingLeft: "0.5rem",
+                          paddingRight: "0.5rem",
+                          color: "white !important",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <FaPhone style={{ color: "white" }} />
+                          <Link className="nav-link special-link" to="/contact">
+                            {t("header.contact")}
+                          </Link>
+                        </div>
+                      </div>
+                    </li> */}
                     <div className="nav-item">
                       <select
                         className="form-select"

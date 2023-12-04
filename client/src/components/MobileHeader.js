@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import {
   FiMenu,
   FiX,
@@ -13,6 +15,8 @@ import {
 } from "react-icons/fi";
 
 const MobileHeader = () => {
+  const { t } = useTranslation();
+
   const [showOverlay, setShowOverlay] = useState(false);
 
   const toggleOverlay = () => {
@@ -34,20 +38,21 @@ const MobileHeader = () => {
       </button>
       {showOverlay && (
         <div className="overlay">
+          <FiMenu className="menu-icon" />
           <ul className="links">
             <li>
               <Link to="/" onClick={handleMenuItemClick}>
-                <FiHome className="icon" /> Home
+                {t("header.home")}
               </Link>
             </li>
             <li>
-              <Link to="/blog" onClick={handleMenuItemClick}>
-                <FiBook className="icon" /> Blog
+              <Link to="/vente" onClick={handleMenuItemClick}>
+                {t("header.sale")}
               </Link>
             </li>
             <li>
-              <Link to="/about" onClick={handleMenuItemClick}>
-                <FiInfo className="icon" /> About
+              <Link to="/location" onClick={handleMenuItemClick}>
+                {t("header.rent")}
               </Link>
             </li>
             <li>
@@ -70,7 +75,7 @@ const MobileHeader = () => {
             </li>
             <li>
               <Link to="/contact" onClick={handleMenuItemClick}>
-                <FiMail className="icon" /> Contact
+                Contact
               </Link>
             </li>
           </ul>

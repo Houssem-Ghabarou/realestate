@@ -9,36 +9,58 @@ import About from "./components/About";
 // import BlogDetail from "./components/BlogDetail";
 import FlatList from "./components/FlatList";
 import Banner from "./components/Banner";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import Search from "./components/Search";
+import { SearchResultProvider } from "./context/SearchContext";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Vente from "./components/Vente";
+import Location from "./components/Location";
+import PropByCatType from "./components/PropByCatType";
+import NotFound from "./components/NotFound";
+import backgroundVilla from "./assets/backgroundvilla.jpg";
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
+    <SearchResultProvider>
+      <Router>
+        <div className="App">
+          <Route
+            path={[
+              "/vente/:anything*",
+              "/location/:anything*",
+              "/about",
+              "/contact",
+              ,
+              "/detailbiens/*",
+            ]}
+          >
+            <Header type={0} />
+          </Route>
+          <Route path="/" exact>
+            <Banner />
+          </Route>
 
-        <Route path={["/", "/vente", "/location"]} exact>
-          <Banner />
-        </Route>
+          <Route path={["/vente/:anything*", "/location/:anything*"]} exact>
+            <Search type={0} />
+          </Route>
+          <Switch>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/contact" component={Contact}></Route>
+            <Route path="/about" component={About}></Route>
+            <Route exact path="/vente" component={Vente} />
+            <Route exact path="/location" component={Location} />
+            <Route exact path="/detailbiens/:id" component={FlatDetail}></Route>
+            <Route
+              exact
+              path="/:category/:proptype"
+              component={PropByCatType}
+            />
 
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/contact" component={Contact}></Route>
-        <Route path="/about" component={About}></Route>
-        <Route exact path="/vente" render={() => <FlatList type={1} />} />
-        <Route exact path="/location" render={() => <FlatList type={2} />} />
-        <Route
-          path="/:category/:proptype"
-          render={() => <FlatList type={5} />}
-        />
+            <Route component={NotFound}></Route>
+          </Switch>
 
-        {/* <Route path="/blog" exact component={Blog}></Route> */}
-        {/* <Route path="/blog/:id" component={BlogDetail}></Route> */}
-        <Route path="/detailbiens/:id" component={FlatDetail}></Route>
-
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </SearchResultProvider>
   );
 }
 

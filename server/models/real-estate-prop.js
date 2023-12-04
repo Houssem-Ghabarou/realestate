@@ -17,6 +17,11 @@ const realEstatePropertySchema = new mongoose.Schema({
   //   enum: ["vendu", "loué"],
   //   default: null,
   // },
+  ammeublement: {
+    type: String,
+    enum: ["meublé", "non meublé", "partiellement meublé"],
+  },
+
   type: {
     type: String,
     enum: [
@@ -50,13 +55,13 @@ const realEstatePropertySchema = new mongoose.Schema({
   chambres: {
     type: Number,
     required: function () {
-      return !["Terrain", "Commercial", "Bureau", "local"].includes(this.type);
+      return !["terrain", "commercial", "bureau", "local"].includes(this.type);
     },
   },
   sallesDeBains: {
     type: Number,
     required: function () {
-      return !["Terrain", "Commercial", "Bureau", "local"].includes(this.type);
+      return !["terrain", "commercial", "bureau", "local"].includes(this.type);
     },
   },
   surface: {
@@ -68,21 +73,20 @@ const realEstatePropertySchema = new mongoose.Schema({
     required: false,
   },
   characteristics: {
-    type: {
-      General: [{ type: String }],
-      optional: {
-        type: {
-          approximite: [String],
-          cuisine: [String],
-          climatisation: [String],
-          chauffage: [String],
-          parking: [String],
-          espaceexterieur: [String],
-          vue: [String],
-        },
-      },
-    },
-    required: false,
+    type: String,
+    enum: [
+      "Balcon/Terrasse",
+      "Stationnement",
+      "Piscine",
+      "Neuf",
+      "Jardin",
+      "Ascenseur",
+      "Proche des écoles",
+      "Proche des commerces",
+      "Cuisine ouverte",
+      "Vue sur la mer",
+      "Vue sur la montagne",
+    ],
   },
   images: {
     type: String,
