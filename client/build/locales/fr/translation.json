@@ -1,0 +1,126 @@
+{
+"header":{
+        "home":"Acceuil",
+        "rent":"Louer",
+        "sale":"Vente",
+        "about":"Notre agence",
+        "contact":"Contact"
+    },
+    "search": {
+    "name": "Promo Villa Immobilier",
+    "quote": "Recherchez votre propriété idéale",
+    "acheter": "À Vendre",
+    "louer": "À Louer",
+    "reference": "Référence / Nom",
+    "typedebien": "Type de Bien",
+    "toustype": "Tous les Types",
+    "trouver": "Rechercher",
+    "prixMin": "Prix Minimum",
+    "prixMax": "Prix Maximum",
+    "surfaceMin": "Surface Minimum",
+    "surfaceMax": "Surface Maximum",
+    "maison": "Maisons",
+    "villa": "Villas",
+    "appartement": "Appartements",
+    "terrain": "Terrains",
+    "local": "Locaux",
+    "bureau": "Bureaux",
+    "immeuble": "Immeubles",
+    "commercial": "Commercial"
+},
+"flatlist": {
+    "recement": "Biens récemment mis en ligne",
+    "recementVente": "Biens récemment mis en vente",
+    "recementLocation": "Biens récemment mis en location",
+    "bienEnVente": "Biens en vente",
+    "bienEnLocation": "Biens en location",
+    "resultatRecherche": "Résultats de la recherche"
+}
+,
+"footer":{
+    "def":"Promo Villa, votre allié immobilier exclusif à Hammamet. Nichée le long de l'Avenue du Koweït, notre agence se dédie à l'achat, la vente et la location de biens d'exception, de villas de prestige à des espaces commerciaux modernes. Que vous soyez particulier ou professionnel, découvrez une expérience immobilière sur mesure. Explorez Hammamet avec Promo Villa - où chaque propriété raconte une histoire unique et chaque transaction devient une réalité excitante."
+    },
+
+  "type": {
+    "maison": "Maisons",
+    "villa": "Villas",
+    "appartement": "Appartements",
+    "terrain": "Terrains",
+    "local": "Locaux commerciaux",
+    "bureau": "Bureaux",
+    "immeuble": "Immeubles",
+    "commercial": "Commercial"
+  },
+  "categories": {
+    
+    "categories": "Catégories",
+    "vente": "Vente",
+    "location": "Location"
+  },
+  "message": "Propriétés disponibles pour {{category}}, {{proptype}} :",
+  "location":"avenue kuweit Nabeul, Hammamet",
+  "address":"Address",
+  "phone":"Téléphone",
+"email":"Email",
+"namesurname":"Nom et Prénom",
+"subject":"Sujet",
+"messageContact":"Message",
+"sendMessage":"Envoyer",
+"numTel1":"+216 20 532 181",
+"numTel2":"+216 22 307 549",
+
+  "aboutUs": {
+    "experience": "Professionnels expérimentés avec une connaissance approfondie du marché immobilier local.",
+    "clientFocus": "Approche centrée sur le client avec un service personnalisé adapté à chaque client.",
+    "propertyPortfolio": "Portefeuille immobilier diversifié, offrant une large gamme de propriétés exclusives.",
+    "transparencyEthics": "Transactions transparentes, honnêtes et respectueuses des normes éthiques.",
+    "innovationTech": "Utilisation de techniques marketing innovantes et de la technologie pour une expérience immobilière moderne."
+  
+},
+"propertiesDetails":{
+  "details":"Détails de la propriété",
+  "reference":"Référence",
+  "type":"Type",
+  "surface":"Surface m²",
+  "chambre":"Chambres",
+  "salledebains":"Salles de bains",
+  "parking":"Parking"
+},
+"description":"Description",
+"caractéristiques":"Caractéristiques",
+"contactezNous":"Contactez Nous",
+"menu":"Menu",
+  "m²":"m²",
+"forSale":"À Vendre",
+"forRent":"À Louer",
+"propNotFound":"Ce bien n'existe pas",
+  "pageNotFound":"Oups ! Page non trouvée.",
+  "noProperties":"Aucune propriété  disponible actuellement. Revenez plus tard ou explorez d'autres annonces.",
+  "localisation":"Localisation",
+  "ammeublement":"Ammeublement",
+  "ammeubl":{
+    "Meublé":"Meublé",
+    "Non meublé":"Non Meublé",
+    "Partiellement meublé":"Partiellement Meublé",
+    "-":"-"
+},
+    "chambreMin":"Chambre Min",
+    "salledebainsMin":"Salle de bains Min",
+     "features": {
+    "Balcon/Terrasse": "Balcon/Terrasse",
+    "Stationnement": "Stationnement",
+    "Piscine": "Piscine",
+    "Neuf": "Neuf",
+    "Jardin": "Jardin",
+    "Ascenseur": "Ascenseur",
+    "Proche des écoles": "Proche des écoles",
+    "Proche des commerces": "Proche des commerces",
+    "Cuisine ouverte": "Cuisine ouverte",
+    "Vue sur la mer": "Vue sur la mer",
+    "Vue sur la montagne": "Vue sur la montagne"
+  }
+
+
+}
+
+
