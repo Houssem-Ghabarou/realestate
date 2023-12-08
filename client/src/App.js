@@ -1,22 +1,22 @@
 import "./App.css";
-import FlatDetail from "./components/FlatDetail";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Contact from "./components/Contact";
-import About from "./components/About";
-// import Blog from "./components/Blog";
-// import BlogDetail from "./components/BlogDetail";
-import FlatList from "./components/FlatList";
-import Banner from "./components/Banner";
-import Search from "./components/Search";
-import { SearchResultProvider } from "./context/SearchContext";
+import React, { lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Vente from "./components/Vente";
-import Location from "./components/Location";
-import PropByCatType from "./components/PropByCatType";
-import NotFound from "./components/NotFound";
-import backgroundVilla from "./assets/backgroundvilla.jpg";
+import { SearchResultProvider } from "./context/SearchContext";
+
+// Lazy load components
+const Header = lazy(() => import("./components/Header"));
+const Footer = lazy(() => import("./components/Footer"));
+const Banner = lazy(() => import("./components/Banner"));
+const Search = lazy(() => import("./components/Search"));
+const Home = lazy(() => import("./components/Home"));
+const Contact = lazy(() => import("./components/Contact"));
+const About = lazy(() => import("./components/About"));
+const Vente = lazy(() => import("./components/Vente"));
+const Location = lazy(() => import("./components/Location"));
+const FlatDetail = lazy(() => import("./components/FlatDetail"));
+const PropByCatType = lazy(() => import("./components/PropByCatType"));
+const NotFound = lazy(() => import("./components/NotFound"));
+
 function App() {
   return (
     <SearchResultProvider>
@@ -28,7 +28,6 @@ function App() {
               "/location/:anything*",
               "/about",
               "/contact",
-              ,
               "/detailbiens/*",
             ]}
           >
