@@ -52,6 +52,8 @@
     "commercial": "Commercial"
   },
   "categories": {
+    
+    "categories": "Catégories",
     "vente": "Vente",
     "location": "Location"
   },

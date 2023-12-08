@@ -36,6 +36,27 @@ const realEstatePropertySchema = new mongoose.Schema({
     ],
     required: true,
   },
+
+  characteristics: {
+    type: [
+      {
+        type: String,
+        enum: [
+          "Balcon/Terrasse",
+          "Stationnement",
+          "Piscine",
+          "Neuf",
+          "Jardin",
+          "Ascenseur",
+          "Proche des écoles",
+          "Proche des commerces",
+          "Cuisine ouverte",
+          "Vue sur la mer",
+          "Vue sur la montagne",
+        ],
+      },
+    ],
+  },
   name: {
     type: String,
     required: true,
@@ -72,22 +93,7 @@ const realEstatePropertySchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  characteristics: {
-    type: String,
-    enum: [
-      "Balcon/Terrasse",
-      "Stationnement",
-      "Piscine",
-      "Neuf",
-      "Jardin",
-      "Ascenseur",
-      "Proche des écoles",
-      "Proche des commerces",
-      "Cuisine ouverte",
-      "Vue sur la mer",
-      "Vue sur la montagne",
-    ],
-  },
+
   images: {
     type: String,
     required: true,

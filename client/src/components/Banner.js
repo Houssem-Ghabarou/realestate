@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import banner from "../banner.jpg";
 import backgroundVilla from "../assets/bg.webp";
 import Search from "./Search";
 import Header from "./Header";
 const Banner = () => {
   return (
     <div
-      className="banner d-flex align-items-center"
-      style={{ backgroundImage: `url(${backgroundVilla})` }}
+      className="banner d-flex align-items-center background-image"
+      style={{
+        backgroundImage: `url(${backgroundVilla})`,
+        // clipPath: "inset(0 0 0 0 round 0% 0% 20% 20%)",
+      }}
     >
       <div className="bg-custom">
         <Header />

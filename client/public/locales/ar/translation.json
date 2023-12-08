@@ -52,7 +52,9 @@
     "immeuble": "المباني",
     "commercial": "تجاري"
   },
+  
   "categories": {
+"categories":"التصنيفات",
     "vente": "بيع",
     "location": "تأجير"
   },

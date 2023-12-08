@@ -18,7 +18,6 @@ const addProperty = async (req, res) => {
     ammeublement,
   } = req.body;
 
-  // Check for required fields
   if (
     !category ||
     !type ||
@@ -61,22 +60,22 @@ const addProperty = async (req, res) => {
     });
 
     // Check if images are provided
-    if (req.files.length === 0) {
+    if (req?.files?.length === 0 || !req?.files) {
       return res.status(400).json({ message: "Images are necessary" });
     } else {
       // Process and store image paths
       let path = "";
-      for (const file of req.files) {
+      for (const file of req?.files) {
         // Use sharp to compress the image
         // const compressedImageBuffer = await sharp(file.path)
         //   .resize(800) // You can adjust the size as needed
         //   .toBuffer();
-        const compressedImageBuffer = await sharp(file.path)
-          .jpeg({ quality: 80 }) // You can adjust the quality as needed
+        const compressedImageBuffer = await sharp(file?.path)
+          .jpeg({ quality: 70 }) // You can adjust the quality as needed
           .toBuffer();
 
         // Save the compressed image back to the uploads folder
-        await sharp(compressedImageBuffer).toFile(file.path);
+        await sharp(compressedImageBuffer).toFile(file?.path);
 
         path += file.path + ",";
       }
@@ -279,35 +278,28 @@ const searchProperty = async (req, res) => {
   const {
     category,
     propertyRef,
-    // propertyName,
     propertyType,
-    // minPrice,
+    location,
     maxPrice,
     minSurface,
-    maxSurface,
+    chambreMin,
+    sallesDeBains,
+    ammeublement,
+    selectedFeatures,
   } = req.query;
+
   try {
-    // if (
-    //   !category &&
-    //   !propertyRef &&
-    //   !propertyType &&
-    //   !minPrice &&
-    //   !maxPrice &&
-    //   !minSurface &&
-    //   !maxSurface
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ error: "Please provide at least one query parameter." });
-    // }
     const conditions = {};
 
     if (category) {
       conditions.category = category;
     }
 
+    if (location) {
+      conditions.location = { $in: location };
+    }
     if (propertyType) {
-      conditions.type = propertyType;
+      conditions.type = { $in: propertyType };
     }
 
     if (propertyRef) {
@@ -318,20 +310,21 @@ const searchProperty = async (req, res) => {
         // The 'i' flag in the regex makes the match case-insensitive
       ];
     }
-
-    // if (propertyName) {
-    //   conditions.name = propertyName;
-    // }
-
-    // if (minPrice !== undefined || maxPrice !== undefined) {
-    //   conditions.price = {};
-    //   if (minPrice !== undefined) {
-    //     conditions.price.$gte = minPrice;
-    //   }
-    //   if (maxPrice !== undefined) {
-    //     conditions.price.$lte = maxPrice;
-    //   }
-    // }
+    if (ammeublement) {
+      conditions.ammeublement = ammeublement;
+    }
+    if (chambreMin !== undefined) {
+      conditions.chambres = {};
+      if (chambreMin !== undefined) {
+        conditions.chambres.$gte = chambreMin;
+      }
+    }
+    if (sallesDeBains !== undefined) {
+      conditions.sallesDeBains = {};
+      if (sallesDeBains !== undefined) {
+        conditions.sallesDeBains.$gte = sallesDeBains;
+      }
+    }
     if (maxPrice !== undefined) {
       conditions.price = {};
 
@@ -340,15 +333,18 @@ const searchProperty = async (req, res) => {
       }
     }
 
-    if (minSurface !== undefined || maxSurface !== undefined) {
+    if (minSurface !== undefined) {
       conditions.surface = {};
       if (minSurface !== undefined) {
         conditions.surface.$gte = minSurface;
       }
-      if (maxSurface !== undefined) {
-        conditions.surface.$lte = maxSurface;
-      }
     }
+
+    if (selectedFeatures) {
+      conditions.characteristics = { $in: selectedFeatures };
+    }
+
+    console.log(conditions, "conditions");
 
     const properties = await realEstateProp.find(conditions);
     res.status(200).json(properties);

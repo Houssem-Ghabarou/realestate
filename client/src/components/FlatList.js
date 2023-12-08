@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import propertyService from "../redux/services/propertyService";
 import ReactPaginate from "react-paginate";
 import Title from "./Title";
 import FlatItem from "./FlatItem";
-// import ClipLoader from "react-spinners/ClipLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 import { useParams } from "react-router-dom";
 import { SearchResultContext } from "../context/SearchContext";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -17,7 +16,8 @@ const FlatList = ({ type }) => {
   const history = useHistory();
   const currentPath = history.location.pathname;
   const { t } = useTranslation();
-
+  const [loading, setloading] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
   // Extract the id from the path, assuming it's a route like "/detailbiens/:id"
   const match = currentPath.match(/\/detailbiens\/(.+)/);
   const isDetailBiensRoute = match !== null;
@@ -97,6 +97,9 @@ const FlatList = ({ type }) => {
   };
 
   const fetchData = async (type) => {
+    setloading(true);
+    setDataFetched(false); // Reset dataFetched when starting a new API call
+
     try {
       let data = null;
       switch (type) {
@@ -137,10 +140,13 @@ const FlatList = ({ type }) => {
           // Handle other cases if needed
           break;
       }
-
+      setloading(false);
+      setDataFetched(true); // Set dataFetched to true when the API call is completed
       return data;
     } catch (error) {
       console.error(error);
+      setloading(false);
+      setDataFetched(true); // Set dataFetched to true even in case of an error
       return null; // Handle the error and return null or an error object
     }
   };
@@ -157,27 +163,27 @@ const FlatList = ({ type }) => {
     fetchDataAndSetData();
   }, [type, category, proptype, searchResults, isSearching]);
 
-  // if (loading) {
-  //   return (
-  //     <div className="loader">
-  //       <ClipLoader
-  //         color={"#333"}
-  //         loading={loading}
-  //         size={100}
-  //         aria-label="Loading Spinner"
-  //         data-testid="loader"
-  //       />
-  //     </div>
-  //   ); // Show loading indicator if data is being fetched
-  // }
-
   const scrollTo = () => {
     window.scrollTo(0, 5);
   };
 
-  if (properties?.length === 0) {
+  if (loading) {
+    return (
+      <div className="loader">
+        <ClipLoader
+          color={"#333"}
+          loading={loading}
+          size={100}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
+  if (dataFetched && properties?.length === 0) {
     return <NotAvailbale />;
   }
+
   return (
     <section className="section-all-re">
       <div className="container">

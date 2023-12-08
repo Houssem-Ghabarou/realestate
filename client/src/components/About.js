@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import promvilla from "../assets/promovilla.png";
 import house2 from "../assets/house2.jpg";
 import { FaCheck } from "react-icons/fa";
-import L from "leaflet";
+import { Link } from "react-router-dom/";
 const About = () => {
   const { t } = useTranslation();
 
@@ -16,7 +16,11 @@ const About = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
-              <img src={house2} alt="product" className="about-us" />
+              <img
+                src={house2}
+                alt="immobilier-hammamet-about-us"
+                className="about-us"
+              />
             </div>
             <div className="col-lg-6">
               <div className="about-item">
@@ -26,7 +30,7 @@ const About = () => {
                 >
                   <img
                     src={promvilla}
-                    alt="promo-villa"
+                    alt="promo-villa-hammamet-immobilier"
                     className="promo-villa"
                   />
                   {t("search.name")}
@@ -53,6 +57,9 @@ const About = () => {
                     {t("aboutUs.innovationTech")}
                   </p>
                 </div>
+                <Link to="/contact" style={{ textDecoration: "none" }}>
+                  <button className="btn-search m-2">Contactez nous</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -61,9 +68,5 @@ const About = () => {
     </section>
   );
 };
-let DefaultIcon = L.icon({
-  iconUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon.png",
-});
-L.Marker.prototype.options.icon = DefaultIcon;
+
 export default About;

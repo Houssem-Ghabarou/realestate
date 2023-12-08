@@ -51,6 +51,7 @@
     "commercial": "Commercial"
   },
   "categories": {
+    "categories": "Categories",
     "vente": "Sale",
     "location": "Rent"
   },

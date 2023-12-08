@@ -3,7 +3,7 @@ import promovilla from "../assets/promovilla.jpg";
 import { useTranslation } from "react-i18next";
 
 const ContactDetails = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div

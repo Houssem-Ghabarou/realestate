@@ -70,27 +70,33 @@ const getPropByCategoryType = async (category, type) => {
     console.log(err);
   }
 };
-const searchProperty = async (
-  category,
-  propertyRef,
+const searchProperty = async (searchData) => {
+  const {
+    category,
+    propertyRef,
+    propertyType,
+    location,
+    maxPrice,
+    minSurface,
+    minChambre,
+    minBathroom,
+    ammeublement,
+    selectedFeatures,
+  } = searchData;
 
-  propertyType,
-  minPrice,
-  maxPrice,
-  minSurface,
-  maxSurface
-) => {
   try {
     const response = await axios.get(API_URL + "searchproperty/", {
       params: {
         category,
         propertyRef,
-
         propertyType,
-        minPrice,
+        location,
         maxPrice,
         minSurface,
-        maxSurface,
+        minChambre,
+        minBathroom,
+        ammeublement,
+        selectedFeatures,
       },
     });
 

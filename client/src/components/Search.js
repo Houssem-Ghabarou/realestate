@@ -1,39 +1,26 @@
 import React, { useState, useContext, useEffect } from "react";
-import acheter from "../assets/acheter.svg";
-import louer from "../assets/louer.svg";
 import { SearchResultContext } from "../context/SearchContext";
 import proeprtyService from "../redux/services/propertyService";
-import house from "../assets/backgroundvilla.jpg";
 import { useTranslation } from "react-i18next";
 import Select from "react-select";
-import { options, defaultOption } from "../data/propertyType";
+import { options } from "../data/propertyType";
 import { ammeublementOptions } from "../data/ameublementData";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { features } from "../data/features";
+import { singleStyle } from "./stylesForSingleSelect";
+import { styles } from "./stylesForMultipleSelect";
+import {
+  categoryOptions,
+  defaultCategoryOption,
+} from "../data/categoryOptions";
 const { searchProperty, getLocalisation } = proeprtyService;
 
 const Search = ({ type }) => {
+  const { t } = useTranslation();
+
   const [localisation, setLocalisation] = useState(["Locations"]);
   const [selectedFeatures, setSelectedFeatures] = useState([]);
-
-  const handleCheckboxChange = (feature) => {
-    // Check if the feature is already selected
-    if (selectedFeatures.includes(feature)) {
-      // If selected, remove it from the list
-      setSelectedFeatures((prevSelected) =>
-        prevSelected.filter((item) => item !== feature)
-      );
-    } else {
-      // If not selected, add it to the list
-      setSelectedFeatures((prevSelected) => [...prevSelected, feature]);
-    }
-  };
-  const localisationOptions = localisation.map((loc) => ({
-    value: loc,
-    label: capitalizeFirstLetter(loc),
-  }));
-
   const [propertyRef, setPropertyRef] = useState("");
   const [focusedPropertyRef, setFocusedPropertyRef] = useState(false);
 
@@ -46,15 +33,64 @@ const Search = ({ type }) => {
   const [minChambre, setMinChambre] = useState(null);
   const [focusedMinChambre, setFocusedMinChambre] = useState(false);
 
-  const [minBathroom, setMinBathromm] = useState(null);
-  const [focusedMinBathroom, setFocusedMinBathromm] = useState(false);
+  const [minBathroom, setMinBathroom] = useState(null);
+  const [focusedMinBathroom, setFocusedMinBathroom] = useState(false);
 
   const [filterOpen, setFilterOpen] = useState(false);
-  const [category, setCategory] = useState("");
+
+  const [category, setCategory] = useState(defaultCategoryOption);
+
+  const handleCategoryChange = (selectedOption) => {
+    setCategory(selectedOption);
+  };
+  const [propertyType, setPropertyType] = useState([]);
+  const handlePropertyChange = (selectedOption) => {
+    setPropertyType(selectedOption);
+  };
+  const [location, setLocation] = useState([]);
+  const handleLocationChange = (selectedOption) => {
+    setLocation(selectedOption);
+  };
+
+  const [ammeublement, setAmmeublement] = useState([]);
+  const handleAmmeublementChange = (selectedOption) => {
+    setAmmeublement(selectedOption);
+  };
+
+  const propType = propertyType?.map((type) => type?.value);
+  const locationFormated = location?.map((loc) => loc.value);
+  const categoryFormated = category?.value;
+  const ammeublementFormated = ammeublement?.value;
+
+  const searchData = {
+    category: category?.[0]?.value || categoryFormated,
+    propertyRef,
+    propertyType: propType,
+    location: locationFormated,
+    maxPrice,
+    minSurface,
+    minChambre,
+    minBathroom,
+    ammeublement: ammeublementFormated,
+    selectedFeatures,
+  };
 
   const { updateSearchResults } = useContext(SearchResultContext);
-  const { t } = useTranslation();
+  const handleCheckboxChange = (feature) => {
+    if (selectedFeatures.includes(feature)) {
+      setSelectedFeatures((prevSelected) =>
+        prevSelected.filter((item) => item !== feature)
+      );
+    } else {
+      setSelectedFeatures((prevSelected) => [...prevSelected, feature]);
+    }
+  };
+  const localisationOptions = localisation?.map((loc) => ({
+    value: loc,
+    label: capitalizeFirstLetter(loc),
+  }));
 
+  //get localisation of properties
   useEffect(() => {
     const localisation = async () => {
       const data = await getLocalisation();
@@ -64,6 +100,7 @@ const Search = ({ type }) => {
     localisation();
   }, []);
 
+  //cleaning states when component unmounts
   useEffect(() => {
     return () => {
       setMaxPrice(null);
@@ -72,86 +109,21 @@ const Search = ({ type }) => {
     };
   }, []);
 
-  const setCategoryType = (type) => {
-    setCategory(type);
-  };
-
+  //change filter state
   const changeFilter = () => {
     setFilterOpen(!filterOpen);
   };
 
+  //search properties
   const searchProp = async (e) => {
-    const propertyType = "villa";
-    // setFilterOpen(false);
     e.preventDefault();
-    const data = await searchProperty(
-      category,
-      propertyRef,
-      propertyType, // Set propertyType to "vente"
-      maxPrice,
-      minSurface
-    );
+    console.log(searchData);
+    const data = await searchProperty(searchData);
     updateSearchResults(data);
     window.scrollTo(0, window.innerHeight * 0.5);
   };
 
-  const styles = {
-    control: (styles) => ({ ...styles, backgroundColor: "white" }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        display: "block",
-        padding: "10px 15px",
-        fontSize: "1.2rem",
-        textDecoration: "none",
-        color: "#607d7d",
-        transition:
-          "color 0.3s ease 0s, padding-left 0.3s ease 0s, background-color 0.3s ease 0s",
-        borderBottom: "1px solid rgba(96, 125, 125, 0.8)",
-        // backgroundColor: isSelected ? "#DAA520" : "transparent", // Set red background for selected option
-      };
-    },
-
-    multiValue: (styles, { data }) => {
-      return {
-        ...styles,
-        backgroundColor: "#DAA520",
-        color: "#607d7d",
-      };
-    },
-    multiValueLabel: (styles, { data }) => {
-      return {
-        ...styles,
-        color: "#fff",
-      };
-    },
-    multiValueRemove: (styles, { data }) => {
-      return {
-        ...styles,
-        color: "#fff",
-        cursor: "pointer",
-        ":hover": {
-          color: "#607d7d",
-        },
-      };
-    },
-  };
-  const singleStyle = {
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        display: "block",
-        padding: "10px 15px",
-        fontSize: "1.2rem",
-        textDecoration: "none",
-        color: "#607d7d",
-        transition:
-          "color 0.3s ease 0s, padding-left 0.3s ease 0s, background-color 0.3s ease 0s",
-        borderBottom: "1px solid rgba(96, 125, 125, 0.8)",
-        backgroundColor: isSelected ? "#DAA520" : "transparent", // Set red background for selected option
-      };
-    },
-  };
+  // Format option label
   const formatOptionLabel = ({ label }) => {
     if (filterOpen) {
       return t(`ammeubl.${label}`);
@@ -161,28 +133,22 @@ const Search = ({ type }) => {
   const formatOptionTypeLabel = ({ value }) => {
     return t(`type.${value}`);
   };
+  const formatOptionCategoryLabel = ({ value }) => {
+    return t(`categories.${value}`);
+  };
 
   return (
-    <div
-      style={
-        type === 0
-          ? {
-              width: "100%",
-              background: "rgb(29 34 43 / 40%)",
-              backgroundImage: `url(${house})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              paddingBottom: "3rem",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }
-          : {}
-      }
-    >
-      <div className="container">
+    <div className={` ${type === 0 ? "search-no-home" : ""}`}>
+      <div
+        className={` ${type === 0 ? "container" : ""}`}
+        style={
+          filterOpen
+            ? {
+                paddingBottom: "0.2rem",
+              }
+            : {}
+        }
+      >
         <div className="col-lg-6 mx-auto">
           <div className="banner-area text-center pt-4 pb-4">
             {type !== 0 && (
@@ -197,38 +163,21 @@ const Search = ({ type }) => {
                 <h5>{t("search.quote")}</h5>
               </div>
             )}
-            <div className="flex-container">
-              <div
-                className="flex-option"
-                onClick={() => setCategoryType("vente")}
-              >
-                <div
-                  className={`option-img-container${
-                    category === "vente" ? " checked" : ""
-                  }`}
-                >
-                  <img className="option-img" src={acheter} alt="acheter" />
-                </div>
-                <h5 className="option-text">{t("search.acheter")}</h5>
-              </div>
-              <div
-                className="flex-option"
-                onClick={() => setCategoryType("location")}
-              >
-                <div
-                  className={`option-img-container${
-                    category === "location" ? " checked" : ""
-                  }`}
-                >
-                  <img className="option-img" src={louer} alt="louer" />
-                </div>
-                <h5 className="option-text">{t("search.louer")}</h5>
-              </div>
-            </div>
           </div>
         </div>
         <form onSubmit={searchProp} className="form-search">
           <div className="search-area">
+            <div className="search-area-child">
+              <Select
+                styles={singleStyle}
+                formatOptionLabel={formatOptionCategoryLabel}
+                options={categoryOptions}
+                value={category}
+                onChange={handleCategoryChange}
+                placeholder={t("search.typedebien")}
+                isSearchable={false}
+              />
+            </div>
             <div
               className={`search-area-child ${
                 focusedPropertyRef ? "focused" : ""
@@ -249,7 +198,9 @@ const Search = ({ type }) => {
                 styles={styles}
                 isMulti
                 formatOptionLabel={formatOptionTypeLabel}
-                defaultValue={defaultOption}
+                // defaultValue={defaultOption}
+                value={propertyType}
+                onChange={handlePropertyChange}
                 options={options}
                 placeholder={t("search.typedebien")}
               />
@@ -257,6 +208,8 @@ const Search = ({ type }) => {
             <div className="search-area-child">
               <Select
                 styles={styles}
+                value={location}
+                onChange={handleLocationChange}
                 isMulti
                 placeholder={t("localisation")}
                 options={localisationOptions}
@@ -271,7 +224,7 @@ const Search = ({ type }) => {
                 className="inp-search search-area-child"
                 placeholder={t("search.prixMax")}
                 type="number"
-                value={maxPrice}
+                value={maxPrice || ""} // Ensure that the value is not null
                 onChange={(e) =>
                   setMaxPrice(
                     e.target.value === "" ? null : parseFloat(e.target.value)
@@ -281,21 +234,28 @@ const Search = ({ type }) => {
                 onBlur={() => setFocusedMaxPrice(false)}
               />
             </div>
-            <div
-              className={`search-area-child ${
-                focusedMinSurface ? "focused" : ""
-              }`}
-            >
-              <input
-                className="inp-search search-area-child"
-                placeholder={t("search.surfaceMin")}
-                type="number"
-                value={minSurface}
-                onChange={(e) => setMinSurface(e.target.value)}
-                onFocus={() => setFocusedMinSurface(true)}
-                onBlur={() => setFocusedMinSurface(false)}
-              />
-            </div>
+            {filterOpen && (
+              <div
+                className={`search-area-child ${
+                  focusedMinSurface ? "focused" : ""
+                }`}
+              >
+                <input
+                  className="inp-search search-area-child"
+                  placeholder={t("search.surfaceMin")}
+                  type="number"
+                  value={minSurface || ""}
+                  onChange={(e) =>
+                    setMinSurface(
+                      e.target.value === "" ? null : parseFloat(e.target.value)
+                    )
+                  }
+                  onFocus={() => setFocusedMinSurface(true)}
+                  onBlur={() => setFocusedMinSurface(false)}
+                />
+              </div>
+            )}
+
             {filterOpen && (
               <div
                 className={`search-area-child ${
@@ -306,8 +266,12 @@ const Search = ({ type }) => {
                   className="inp-search search-area-child"
                   placeholder={t("chambreMin")}
                   type="number"
-                  value={minChambre}
-                  onChange={(e) => setMinChambre(e.target.value)}
+                  value={minChambre || ""}
+                  onChange={(e) =>
+                    setMinChambre(
+                      e.target.value === "" ? null : parseFloat(e.target.value)
+                    )
+                  }
                   onFocus={() => setFocusedMinChambre(true)}
                   onBlur={() => setFocusedMinChambre(false)}
                 />
@@ -323,20 +287,25 @@ const Search = ({ type }) => {
                   className="inp-search search-area-child"
                   placeholder={t("salledebainsMin")}
                   type="number"
-                  value={minBathroom}
-                  onChange={(e) => setMinBathromm(e.target.value)}
-                  onFocus={() => setFocusedMinBathromm(true)}
-                  onBlur={() => setFocusedMinBathromm(false)}
+                  value={minBathroom || ""}
+                  onChange={(e) =>
+                    setMinBathroom(
+                      e.target.value === "" ? null : parseFloat(e.target.value)
+                    )
+                  }
+                  onFocus={() => setFocusedMinBathroom(true)}
+                  onBlur={() => setFocusedMinBathroom(false)}
                 />
               </div>
             )}
 
-            {/* trouver button */}
             {filterOpen && (
               <div className="search-area-child">
                 <Select
                   styles={singleStyle}
                   formatOptionLabel={formatOptionLabel}
+                  value={ammeublement}
+                  onChange={handleAmmeublementChange}
                   options={ammeublementOptions}
                   placeholder={t("ammeublement")}
                 />
@@ -344,7 +313,7 @@ const Search = ({ type }) => {
             )}
             {filterOpen && (
               <ul className="unstyled centered">
-                {features.map((feature, index) => (
+                {features?.map((feature, index) => (
                   <li key={index}>
                     <input
                       className="styled-checkbox"

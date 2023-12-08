@@ -17,12 +17,9 @@ const Header = ({ type }) => {
   };
 
   useEffect(() => {
-    for (
-      let index = 0;
-      index < document.getElementsByClassName("lang").length;
-      index++
-    ) {
-      const element = document.getElementsByClassName("lang")[index];
+    const langElements = document.getElementsByClassName("lang");
+
+    for (const element of langElements) {
       if (element.value === i18n.language) {
         if (element.value === "ar") {
           document.body.dir = "rtl";
@@ -30,11 +27,12 @@ const Header = ({ type }) => {
         element.setAttribute("selected", true);
       }
     }
+
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
   }, [i18n.language]);
 
   const checkWindowWidth = () => {
-    setIsMobile(window.innerWidth <= 768); // Set breakpoint according to your needs (e.g., 768 for tablets and phones)
+    setIsMobile(window.innerWidth <= 990); // Set breakpoint according to your needs (e.g., 768 for tablets and phones)
   };
 
   useEffect(() => {
@@ -127,6 +125,7 @@ const Header = ({ type }) => {
                         </li>
                       </ul>
                     </li>
+
                     <li className="nav-item">
                       <Link className="nav-link" to="/location">
                         {t("header.rent")}

@@ -4,15 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import {
-  FiMenu,
-  FiX,
-  FiHome,
-  FiBook,
-  FiInfo,
-  FiChevronDown,
-  FiMail,
-} from "react-icons/fi";
+import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 
 const MobileHeader = () => {
   const { t } = useTranslation();

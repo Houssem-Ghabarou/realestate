@@ -14,7 +14,7 @@ const FlatItem = ({ property }) => {
 
   const image = property?.images?.split(",")[0];
   const backendBaseUrl = process.env.REACT_APP_SERVER_KEY;
-  const imageUrl = `${backendBaseUrl}/${image.replace(/\\/g, "/")}`;
+  const imageUrl = `${backendBaseUrl}/${image?.replace(/\\/g, "/")}`;
 
   const name = capitalizeFirstLetter(property?.name);
   const category = capitalizeFirstLetter(property?.category);
@@ -38,6 +38,7 @@ const FlatItem = ({ property }) => {
                 alt="flat"
               />
               <div className="type-property">{type}</div>{" "}
+              <div className="reference-property">{property?.reference}</div>
               <div
                 className={`best-estate-state ${
                   property?.category === "location" ? "bg-green" : "bg-red"
@@ -103,7 +104,8 @@ FlatItem.propTypes = {
   property: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.array.isRequired,
+    reference: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,
     surface: PropTypes.number.isRequired,

@@ -1,8 +1,7 @@
 import FlatList from "./FlatList";
 import React, { useContext, useEffect } from "react";
-
-// import BestFlatList from "./BestFlatList";
 import { SearchResultContext } from "../context/SearchContext";
+
 const Home = () => {
   const { isSearching, finishedSearch } = useContext(SearchResultContext);
   useEffect(() => {
@@ -10,6 +9,7 @@ const Home = () => {
     return () => {
       finishedSearch();
     };
+    // eslint-disable-next-line
   }, []);
 
   return (

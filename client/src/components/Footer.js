@@ -2,16 +2,16 @@ import React from "react";
 import promovilla from "../assets/promovilla.png";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
+import {
+  FaWhatsappSquare,
+  FaInstagramSquare,
+  FaFacebook,
+} from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
-import { GrSchedule } from "react-icons/gr";
-import { GrUserManager } from "react-icons/gr";
-
+import { GrUserManager, GrSchedule } from "react-icons/gr";
 import { FaPhoneFlip } from "react-icons/fa6";
 const Footer = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const returnTop = () => {
     window.scrollTo(0, 0);

@@ -45,7 +45,7 @@ const FlatDetail = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setImagesLoaded(true);
-    }, 1000);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, []);
