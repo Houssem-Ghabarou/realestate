@@ -185,7 +185,7 @@ const FlatList = ({ type }) => {
   }
 
   return (
-    <section className="section-all-re">
+    <section className="section-all-re bakcground-section-color">
       <div className="container">
         {(type === 0 ||
           type === 3 ||

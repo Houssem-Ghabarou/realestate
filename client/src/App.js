@@ -2,7 +2,7 @@ import "./App.css";
 import React, { lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { SearchResultProvider } from "./context/SearchContext";
-
+import { CurrencyProvider } from "./context/currencyContext";
 // Lazy load components
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/Footer"));
@@ -20,45 +20,52 @@ const NotFound = lazy(() => import("./components/NotFound"));
 function App() {
   return (
     <SearchResultProvider>
-      <Router>
-        <div className="App">
-          <Route
-            path={[
-              "/vente/:anything*",
-              "/location/:anything*",
-              "/about",
-              "/contact",
-              "/detailbiens/*",
-            ]}
-          >
-            <Header type={0} />
-          </Route>
-          <Route path="/" exact>
-            <Banner />
-          </Route>
-
-          <Route path={["/vente/:anything*", "/location/:anything*"]} exact>
-            <Search type={0} />
-          </Route>
-          <Switch>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/contact" component={Contact}></Route>
-            <Route path="/about" component={About}></Route>
-            <Route exact path="/vente" component={Vente} />
-            <Route exact path="/location" component={Location} />
-            <Route exact path="/detailbiens/:id" component={FlatDetail}></Route>
+      <CurrencyProvider>
+        {" "}
+        <Router>
+          <div className="App">
             <Route
-              exact
-              path="/:category/:proptype"
-              component={PropByCatType}
-            />
+              path={[
+                "/vente/:anything*",
+                "/location/:anything*",
+                "/about",
+                "/contact",
+                "/detailbiens/*",
+              ]}
+            >
+              <Header type={0} />
+            </Route>
+            <Route path="/" exact>
+              <Banner />
+            </Route>
 
-            <Route component={NotFound}></Route>
-          </Switch>
+            <Route path={["/vente/:anything*", "/location/:anything*"]} exact>
+              <Search type={0} />
+            </Route>
+            <Switch>
+              <Route path="/" exact component={Home}></Route>
+              <Route path="/contact" component={Contact}></Route>
+              <Route path="/about" component={About}></Route>
+              <Route exact path="/vente" component={Vente} />
+              <Route exact path="/location" component={Location} />
+              <Route
+                exact
+                path="/detailbiens/:id"
+                component={FlatDetail}
+              ></Route>
+              <Route
+                exact
+                path="/:category/:proptype"
+                component={PropByCatType}
+              />
 
-          <Footer />
-        </div>
-      </Router>
+              <Route component={NotFound}></Route>
+            </Switch>
+
+            <Footer />
+          </div>
+        </Router>
+      </CurrencyProvider>
     </SearchResultProvider>
   );
 }

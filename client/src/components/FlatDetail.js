@@ -59,20 +59,6 @@ const FlatDetail = () => {
     thumbnail: `${backendBaseUrl}/${filename.replace(/\\/g, "/")}`,
   }));
 
-  // if (loading) {
-  //   return (
-  //     <div className="loader">
-  //       <ClipLoader
-  //         color={"#333"}
-  //         loading={loading}
-  //         size={100}
-  //         aria-label="Loading Spinner"
-  //         data-testid="loader"
-  //       />
-  //     </div>
-  //   ); // Show loading indicator if data is being fetched
-  // }
-
   const propertyDetailsData = [
     { key: "reference", label: t("propertiesDetails.reference"), icon: ref },
     { key: "type", label: t("propertiesDetails.type"), icon: ref },
@@ -100,7 +86,6 @@ const FlatDetail = () => {
                       {capitalizeFirstLetter(propertyDetails?.name)}
                     </h3>
                     <p className="fd-address">
-                      {" "}
                       <IoLocationSharp />
                       {propertyDetails?.location}
                     </p>
@@ -160,46 +145,14 @@ const FlatDetail = () => {
                     <div className="fd-item fd-features">
                       <h4>{t("caractéristiques")}</h4>
                       <div className="row">
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
-                        <div className="col-lg-4">
-                          <FaCheck style={style} />
-                          <span>Lorem Ipsum</span>
-                        </div>
+                        {propertyDetails?.characteristics?.map(
+                          (characteristic) => (
+                            <div className="col-lg-4">
+                              <FaCheck style={style} />
+                              <span>{characteristic}</span>
+                            </div>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>

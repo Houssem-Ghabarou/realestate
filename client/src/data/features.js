@@ -11,3 +11,5 @@ export const features = [
   "Vue sur la mer",
   "Vue sur la montagne",
 ];
+
+export const applicableFeatures = ["maison", "villa", "appartement"];

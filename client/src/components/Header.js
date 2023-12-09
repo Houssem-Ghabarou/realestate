@@ -1,19 +1,104 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, lazy } from "react";
 import { Link } from "react-router-dom";
-import MobileHeader from "./MobileHeader";
 import promovilla from "../assets/promovilla.png";
 import { useTranslation } from "react-i18next";
 import { SearchResultContext } from "../context/SearchContext";
+import { CurrencyContext } from "../context/currencyContext";
+import ReactFlagsSelect from "react-flags-select";
 
+const MobileHeader = lazy(() => import("./MobileHeader"));
 const Header = ({ type }) => {
   const { finishedSearch } = useContext(SearchResultContext);
+  const { updateCurrency, currency } = useContext(CurrencyContext);
   const [isMobile, setIsMobile] = useState(false);
-
   const { t, i18n } = useTranslation();
-  const onChangeLanguage = (e) => {
-    const newLanguage = e.target.value;
+
+  const [selected, setSelected] = useState(
+    languageToCountryCode(i18n.language)
+  );
+  const [setselectedCurrency, setSetselectedCurrency] = useState(
+    currencyToCountryCode(currency)
+  );
+
+  //language to country code
+  function languageToCountryCode(language) {
+    switch (language) {
+      case "en":
+        return "US";
+      case "ar":
+        return "SA";
+      case "fr":
+        return "FR";
+      default:
+        return "FR";
+    }
+  }
+
+  //language to currency code
+  const languageToCurrencyCode = (country) => {
+    switch (country) {
+      case "US":
+        return "USD";
+      case "TN":
+        return "TND";
+      case "FR":
+        return "EUR";
+      default:
+        return "TND";
+    }
+  };
+
+  //currency to country code
+  function currencyToCountryCode(currency) {
+    switch (currency) {
+      case "USD":
+        return "US";
+      case "TND":
+        return "TN";
+      case "EUR":
+        return "FR";
+      default:
+        return "FR";
+    }
+  }
+  // useEffect(() => {
+  //   const countryCode = languageToCountryCode(i18n.language);
+  //   setSelected(countryCode);
+  // }, [i18n.language]);
+
+  // useEffect(() => {
+  //   console.log(currency);
+  //   const currencyCode = currencyToCountryCode(currency);
+  //   console.log(currencyCode);
+  //   setSetselectedCurrency(currencyCode);
+  // }, [currency]);
+
+  const onChangeLanguage = (code) => {
+    let newLanguage;
+    // Use `code` directly instead of `selected`
+    if (code === "US") {
+      newLanguage = "en";
+    } else if (code === "SA") {
+      newLanguage = "ar";
+    } else if (code === "FR") {
+      // Make sure to provide the option for "FR" if you want to support French;
+      newLanguage = "fr";
+    } else {
+      newLanguage = "en"; // or some default value
+    }
+
     i18n.changeLanguage(newLanguage);
+    setSelected(code);
+
     document.body.dir = newLanguage === "ar" ? "rtl" : "ltr";
+  };
+
+  const onChangeCurrency = (code) => {
+    const newCurrency = languageToCurrencyCode(code);
+    // const newCurrency = e.target.value;
+    updateCurrency(newCurrency);
+
+    setSetselectedCurrency(code);
   };
 
   useEffect(() => {
@@ -49,7 +134,7 @@ const Header = ({ type }) => {
       <div>
         <nav className="navbar navbar-expand-lg navbar-light">
           <div
-            className="container-fluid"
+            className={!isMobile ? "container-fluid" : "container-mobile"}
             style={{ margin: 0, paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
           >
             <Link className="navbar-brand" to="/">
@@ -169,40 +254,10 @@ const Header = ({ type }) => {
                     </li>
                   </ul>
                 </div>
-                <div>
+                <div style={{ display: "flex" }}>
                   <ul className="navbar-nav ms-auto">
-                    {/* <li className="nav-item">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          // backgroundColor: "#607d7d",
-                          backgroundColor: "#DAA520",
-                          borderRadius: "1.4rem",
-                          // padding: "0.3rem",
-                          // marginLeft: "3rem",
-                          paddingLeft: "0.5rem",
-                          paddingRight: "0.5rem",
-                          color: "white !important",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <FaPhone style={{ color: "white" }} />
-                          <Link className="nav-link special-link" to="/contact">
-                            {t("header.contact")}
-                          </Link>
-                        </div>
-                      </div>
-                    </li> */}
                     <div className="nav-item">
-                      <select
+                      {/* <select
                         className="form-select"
                         aria-label="Default select example"
                         onChange={onChangeLanguage}
@@ -216,7 +271,47 @@ const Header = ({ type }) => {
                         <option value="ar" className="lang">
                           AR
                         </option>
-                      </select>
+                      </select> */}
+                      <ReactFlagsSelect
+                        countries={["FR", "US", "SA"]}
+                        selected={selected}
+                        className="menu-flags"
+                        // onChange={onChangeLanguage}
+                        onSelect={onChangeLanguage}
+                      />
+                    </div>
+                  </ul>
+                  <ul className="navbar-nav ms-auto">
+                    <div className="nav-item">
+                      {/* <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        onChange={onChangeCurrency}
+                        value={currency}
+                      >
+                        <option value="TND" className="lang">
+                          TND
+                        </option>
+                        <option value="EUR" className="lang">
+                          EUR
+                        </option>
+                        <option value="USD" className="lang">
+                          USD
+                        </option>
+                      </select> */}
+                      <ReactFlagsSelect
+                        countries={["TN", "US", , "FR"]}
+                        customLabels={{
+                          US: "USD",
+                          FR: "EUR",
+                          TN: "TND",
+                        }}
+                        selected={setselectedCurrency}
+                        className="menu-flags"
+                        // onChange={onChangeLanguage}
+                        // onSelect={(code) => setSetselectedCurrency(code)}
+                        onSelect={onChangeCurrency}
+                      />
                     </div>
                   </ul>
                 </div>
