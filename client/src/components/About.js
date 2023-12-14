@@ -3,7 +3,12 @@ import promvilla from "../assets/promovilla.png";
 import house2 from "../assets/house2.jpg";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom/";
-const About = () => {
+import useProgressBar from "./useProgressBar";
+import { Helmet } from "react-helmet";
+import { aboutMetadata } from "../data/metadata";
+const About = ({ setProgress }) => {
+  useProgressBar(setProgress);
+
   const { t } = useTranslation();
 
   const style = {
@@ -12,6 +17,11 @@ const About = () => {
 
   return (
     <section className="about">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{aboutMetadata?.title}</title>
+        <link rel="canonical" href={aboutMetadata?.canonicalLink} />
+      </Helmet>
       <div className="page-content">
         <div className="container">
           <div className="row">

@@ -16,7 +16,7 @@ import {
 } from "../data/categoryOptions";
 const { searchProperty, getLocalisation } = proeprtyService;
 
-const Search = ({ type }) => {
+const Search = ({ type, setProgress }) => {
   const { t } = useTranslation();
 
   const [localisation, setLocalisation] = useState(["Locations"]);
@@ -117,19 +117,26 @@ const Search = ({ type }) => {
 
   //search properties
   const searchProp = async (e) => {
+    setProgress(40);
+    setTimeout(() => {
+      setProgress(100);
+    }, 400);
     e.preventDefault();
-    console.log(searchData);
     const data = await searchProperty(searchData);
     updateSearchResults(data);
-    window.scrollTo(0, window.innerHeight * 0.5);
+    if (filterOpen && window.innerWidth < 768) {
+      window.scrollTo(0, window.innerHeight * 1.5);
+    } else {
+      window.scrollTo(0, window.innerHeight * 0.5);
+    }
   };
 
   // Format option label
-  const formatOptionLabel = ({ label }) => {
+  const formatOptionLabel = ({ value }) => {
     if (filterOpen) {
-      return t(`ammeubl.${label}`);
+      return t(`ammeubl.${value}`);
     }
-    return label;
+    return value;
   };
   const formatOptionTypeLabel = ({ value }) => {
     return t(`type.${value}`);

@@ -3,6 +3,10 @@ const shortid = require("shortid");
 // const currency = require("mongoose-currency");
 
 const realEstatePropertySchema = new mongoose.Schema({
+  propIdName: {
+    type: String,
+    unique: true,
+  },
   reference: {
     type: String,
     unique: true,

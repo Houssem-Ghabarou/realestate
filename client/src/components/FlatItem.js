@@ -23,7 +23,7 @@ const FlatItem = ({ property }) => {
       <div className="item">
         <Link
           to={{
-            pathname: `/detailbiens/${property?._id}`,
+            pathname: `/bien/details/${property?.propIdName}`,
             state: { propertyData: property },
           }}
           className="item-title"
@@ -84,7 +84,7 @@ const FlatItem = ({ property }) => {
             )}
             <Link
               to={{
-                pathname: `/detailbiens/${property._id}`,
+                pathname: `/bien/details/${property?.propIdName}`,
                 state: { propertyData: property },
               }}
               className="item-title"
@@ -106,6 +106,7 @@ FlatItem.propTypes = {
   property: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    propIdName: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     reference: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

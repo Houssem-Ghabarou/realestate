@@ -6,23 +6,21 @@ export const SearchResultProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  const updateSearchResults = (newResults) => {
-    setIsSearching(true);
-    setSearchResults(newResults);
-  };
-
-  const finishedSearch = () => {
-    setIsSearching(false);
-  };
-
   const contextValue = useMemo(() => {
+    const updateSearchResults = (newResults) => {
+      setIsSearching(true);
+      setSearchResults(newResults);
+    };
+    const finishedSearch = () => {
+      setIsSearching(false);
+    };
     return {
       searchResults,
       updateSearchResults,
       isSearching,
       finishedSearch,
     };
-  }, [searchResults, updateSearchResults, isSearching, finishedSearch]);
+  }, [searchResults, isSearching]);
 
   return (
     <SearchResultContext.Provider value={contextValue}>

@@ -14,8 +14,16 @@ module.exports = function validateMessage(message) {
     ? message.description
     : "";
 
-  // Validation for Name and Surname
+  if (
+    validator.isEmpty(message.namesurname) &&
+    validator.isEmpty(message.email) &&
+    validator.isEmpty(message.phone) &&
+    validator.isEmpty(message.description)
+  ) {
+    errors.allFields = "Tous les champs sont nécessaires.";
+  }
   if (validator.isEmpty(message.namesurname)) {
+    // Validation for Name and Surname
     errors.namesurname = "Nom et prénom sont nécessaires.";
   }
 

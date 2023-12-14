@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import promovilla from "../assets/promovilla.jpg";
 import { useTranslation } from "react-i18next";
-
-const ContactDetails = () => {
+import ContactButton from "./ContactButton";
+const ContactDetails = ({ propertyId }) => {
   const { t } = useTranslation();
 
+  const [namesurname, setNameSurname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+
+  const emailData = {
+    property: propertyId,
+    namesurname: namesurname,
+    email: email,
+    phone: phone,
+    description: message,
+  };
   return (
     <div
       className="fd-sidebar-item"
@@ -12,7 +24,7 @@ const ContactDetails = () => {
     >
       <h4>{t("contactezNous")}</h4>
 
-      <div className="d-flex">
+      <div className="d-flex mb-1">
         <img
           src={promovilla}
           alt="promovilla Logo"
@@ -39,10 +51,13 @@ const ContactDetails = () => {
         </div>
       </div>
 
-      <form className="form-contact">
+      <form className="contact">
         <div className="form-group">
           <input
+            className="inp-contact"
             type="text"
+            value={namesurname}
+            onChange={(e) => setNameSurname(e.target.value)}
             id="name"
             name="name"
             required
@@ -50,36 +65,43 @@ const ContactDetails = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="contact">
           <input
+            className="inp-contact"
             type="email"
             id="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder={t("email")}
             required
           />
         </div>
 
-        <div className="form-group">
+        <div className="contact">
           <input
+            className="inp-contact"
             type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             id="phone"
             name="phone"
             placeholder={t("phone")}
             required
           />
         </div>
-        <div className="form-group-description">
-          <input
+        <div>
+          <textarea
             type="text"
-            id="description"
-            name="description"
+            className="ta-contact"
+            rows="4"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder={t("description")}
-            required
-          />
+          ></textarea>
         </div>
 
-        <button type="submit">{t("sendMessage")}</button>
+        <ContactButton emailData={emailData} />
       </form>
     </div>
   );

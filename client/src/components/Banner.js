@@ -1,9 +1,9 @@
 import backgroundVilla from "../assets/bg.webp";
 import Search from "./Search";
 import Header from "./Header";
-const Banner = () => {
+const Banner = ({ setProgress }) => {
   return (
-    <div
+    <section
       className="banner d-flex align-items-center background-image"
       style={{
         backgroundImage: `url(${backgroundVilla})`,
@@ -11,15 +11,15 @@ const Banner = () => {
       }}
     >
       <div className="bg-custom">
-        <Header />
+        <Header setProgress={setProgress} />
 
         <div className="container">
           <div className="row">
-            <Search />
+            <Search setProgress={setProgress} />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

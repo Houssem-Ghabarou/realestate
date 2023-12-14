@@ -1,65 +1,150 @@
 import "./App.css";
-import React, { lazy } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { SearchResultProvider } from "./context/SearchContext";
 import { CurrencyProvider } from "./context/currencyContext";
-// Lazy load components
-const Header = lazy(() => import("./components/Header"));
-const Footer = lazy(() => import("./components/Footer"));
-const Banner = lazy(() => import("./components/Banner"));
-const Search = lazy(() => import("./components/Search"));
-const Home = lazy(() => import("./components/Home"));
-const Contact = lazy(() => import("./components/Contact"));
-const About = lazy(() => import("./components/About"));
-const Vente = lazy(() => import("./components/Vente"));
-const Location = lazy(() => import("./components/Location"));
-const FlatDetail = lazy(() => import("./components/FlatDetail"));
-const PropByCatType = lazy(() => import("./components/PropByCatType"));
-const NotFound = lazy(() => import("./components/NotFound"));
-
+import { Redirect } from "react-router-dom/";
+import LoadingBar from "react-top-loading-bar";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Banner from "./components/Banner";
+import Search from "./components/Search";
+import Home from "./components/Home";
+import Contact from "./components/Contact";
+import About from "./components/About";
+import Vente from "./components/Vente";
+import Location from "./components/Location";
+import FlatDetail from "./components/FlatDetail";
+import PropByCatType from "./components/PropByCatType";
+import NotFound from "./components/NotFound";
+import WhatsApp from "./components/WhatsApp";
+import { Toaster } from "react-hot-toast";
 function App() {
+  const [progress, setProgress] = useState(0);
+
   return (
     <SearchResultProvider>
       <CurrencyProvider>
-        {" "}
         <Router>
+          <Toaster
+            position="bottom-center"
+            reverseOrder={false}
+            toastOptions={{
+              // Define default options
+              // className: "",
+              // duration: 5000,
+              style: {
+                background: "#4c4c4d",
+                color: "#fff",
+              },
+
+              success: {
+                duration: 6000,
+                theme: {
+                  primary: "#DAA520",
+                  // secondary: "black",
+                },
+              },
+            }}
+          />
+          <LoadingBar
+            color="#DAA520"
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
+            height={4}
+            waitingTime={300}
+          />
           <div className="App">
+            <WhatsApp />
             <Route
               path={[
                 "/vente/:anything*",
                 "/location/:anything*",
                 "/about",
                 "/contact",
-                "/detailbiens/*",
+                "/bien/details/*",
+                "/404",
               ]}
-            >
-              <Header type={0} />
-            </Route>
-            <Route path="/" exact>
-              <Banner />
-            </Route>
+              render={(props) => (
+                <Header {...props} type={0} setProgress={setProgress} />
+              )}
+            />
 
-            <Route path={["/vente/:anything*", "/location/:anything*"]} exact>
-              <Search type={0} />
-            </Route>
+            <Route
+              path="/"
+              exact
+              render={(props) => (
+                <Banner {...props} setProgress={setProgress} />
+              )}
+            />
+
+            <Route
+              path={["/vente/:anything*", "/location/:anything*"]}
+              exact
+              render={(props) => (
+                <Search {...props} type={0} setProgress={setProgress} />
+              )}
+            />
+
             <Switch>
-              <Route path="/" exact component={Home}></Route>
-              <Route path="/contact" component={Contact}></Route>
-              <Route path="/about" component={About}></Route>
-              <Route exact path="/vente" component={Vente} />
-              <Route exact path="/location" component={Location} />
               <Route
+                path="/"
                 exact
-                path="/detailbiens/:id"
-                component={FlatDetail}
+                render={(props) => (
+                  <Home {...props} setProgress={setProgress} />
+                )}
               ></Route>
               <Route
                 exact
+                path="/contact"
+                render={(props) => (
+                  <Contact {...props} setProgress={setProgress} />
+                )}
+              ></Route>
+              <Route
+                exact
+                path="/about"
+                render={(props) => (
+                  <About {...props} setProgress={setProgress} />
+                )}
+              ></Route>
+              <Route
+                exact
+                path="/vente"
+                render={(props) => (
+                  <Vente {...props} setProgress={setProgress} />
+                )}
+              />
+              <Route
+                exact
+                path="/location"
+                render={(props) => (
+                  <Location {...props} setProgress={setProgress} />
+                )}
+              />
+              <Route
+                exact
+                path="/bien/details/:propIdName"
+                render={(props) => (
+                  <FlatDetail {...props} setProgress={setProgress} />
+                )}
+              />
+              <Route
+                exact
                 path="/:category/:proptype"
-                component={PropByCatType}
+                render={(props) => (
+                  <PropByCatType
+                    {...props}
+                    setProgress={setProgress}
+                    progress={progress}
+                  />
+                )}
               />
 
-              <Route component={NotFound}></Route>
+              <Route path="/404" component={NotFound}></Route>
+              <Route>
+                <Redirect to="/404" />
+              </Route>
             </Switch>
 
             <Footer />

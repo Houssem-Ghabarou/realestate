@@ -1,14 +1,15 @@
-// MobileHeader.js
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
-
 import { FiMenu, FiChevronDown } from "react-icons/fi";
-
-const MobileHeader = () => {
+import useLanguageCurrency from "./useLanguageCurrency";
+import LanguageCurrencySelector from "./LanguageCurrencySelector";
+import { typeOptionsSale, typeOptionsRent } from "../data/types";
+const MobileHeader = ({ type, setProgress }) => {
   const { t } = useTranslation();
+  const { selected, onChangeLanguage, setselectedCurrency, onChangeCurrency } =
+    useLanguageCurrency();
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [showSubMenuRent, setShowSubMenuRent] = useState(false);
@@ -30,12 +31,28 @@ const MobileHeader = () => {
   };
 
   return (
-    <div>
+    <aside>
       {!showOverlay && <FiMenu className="menu-icon" onClick={toggleOverlay} />}
       {showOverlay && (
         <div className="overlay">
           <div className="order">
-            <IoMdClose className="close-menu" onClick={toggleOverlay} />
+            <div className="mobile-language-close">
+              <LanguageCurrencySelector
+                setProgress={setProgress}
+                type={type}
+                selectedLanguage={selected}
+                onChangeLanguage={onChangeLanguage}
+                selectedCurrency={setselectedCurrency}
+                onChangeCurrency={onChangeCurrency}
+              />
+
+              <IoMdClose
+                className={
+                  type === "mobile" ? "close-menu-mobile" : "close-menu"
+                }
+                onClick={toggleOverlay}
+              />
+            </div>
 
             <ul className="links">
               <li>
@@ -43,7 +60,7 @@ const MobileHeader = () => {
                   {t("header.home")}
                 </Link>
               </li>
-              <div>
+              <>
                 <div className="parent-sub-menu">
                   <li>
                     <Link to="/vente" onClick={handleMenuItemClick}>
@@ -58,20 +75,21 @@ const MobileHeader = () => {
 
                 {showSubMenu && (
                   <ul className="sub-menu">
-                    <li>
-                      <Link to="/vente/villa" onClick={handleMenuItemClick}>
-                        {t("type.villa")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/vente/terrain" onClick={handleMenuItemClick}>
-                        {t("type.terrain")}
-                      </Link>
-                    </li>
+                    {typeOptionsSale.map((type) => (
+                      <li key={type}>
+                        <Link
+                          to={`/vente/${type}`}
+                          onClick={handleMenuItemClick}
+                        >
+                          {" "}
+                          {t(`type.${type}`)}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 )}
-              </div>
-              <div>
+              </>
+              <>
                 <div className="parent-sub-menu">
                   <li>
                     <Link to="/location" onClick={handleMenuItemClick}>
@@ -86,19 +104,20 @@ const MobileHeader = () => {
 
                 {showSubMenuRent && (
                   <ul className="sub-menu">
-                    <li>
-                      <Link to="/location/villa" onClick={handleMenuItemClick}>
-                        {t("type.villa")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/location/maison" onClick={handleMenuItemClick}>
-                        {t("type.maison")}
-                      </Link>
-                    </li>
+                    {typeOptionsRent.map((type) => (
+                      <li key={type}>
+                        <Link
+                          to={`/location/${type}`}
+                          onClick={handleMenuItemClick}
+                        >
+                          {" "}
+                          {t(`type.${type}`)}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 )}
-              </div>
+              </>
               <li>
                 <Link to="/contact" onClick={handleMenuItemClick}>
                   {t("contactezNous")}
@@ -108,7 +127,7 @@ const MobileHeader = () => {
           </div>
         </div>
       )}
-    </div>
+    </aside>
   );
 };
 

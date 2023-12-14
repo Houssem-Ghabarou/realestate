@@ -1,12 +1,21 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useLayoutEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import FlatList from "./FlatList";
 import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
-
-const PropByCatType = ({ match }) => {
+import { Helmet } from "react-helmet";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+const PropByCatType = ({ match, setProgress, progress }) => {
   const category = match?.params?.category;
   const proptype = match?.params?.proptype;
+
+  useLayoutEffect(() => {
+    setProgress(40);
+    // setProgress(60);
+    setTimeout(() => {
+      setProgress(100);
+    }, 400);
+  }, [category, proptype]);
 
   const validCategories = ["vente", "location"];
   const validPropTypes = [
@@ -23,17 +32,30 @@ const PropByCatType = ({ match }) => {
 
   useEffect(() => {
     finishedSearch();
+
     return () => {
       finishedSearch();
     };
-    // eslint-disable-next-line
-  }, []);
+  }, [match]);
 
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
-    return <FlatList type={5} />;
+    return (
+      <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{`${capitalizeFirstLetter(category)} - ${capitalizeFirstLetter(
+            proptype
+          )} - PromoVilla - Hammamet - Tunisie - Immobilier`}</title>
+          <link
+            rel="canonical"
+            href={`${process.env.REACT_APP_URL}${category}/${proptype}`}
+          />
+        </Helmet>
+        <FlatList type={5} />
+      </>
+    );
   } else {
-    // Redirect to a default route or show an error message
-    return <Redirect to="/notfound" />;
+    return <Redirect to="/404" />;
   }
 };
 

@@ -28,7 +28,7 @@ router.get("/", getAllProperties);
 router.get("/lastsixprop", getLastSixProperties);
 router.get("/lastsixventeprop", getLastSixVenteProperties);
 router.get("/lastsixlocationprop", getLastSixLocationProperties);
-router.get("/singleproperty/:id", getPropertyDetails);
+router.get("/singleproperty/:propIdName", getPropertyDetails);
 router.get("/vente", getVenteProperties);
 router.get("/location", getLocationProperties);
 router.get("/:category/categorytype/:propertyType", getPropertyCategoryType);

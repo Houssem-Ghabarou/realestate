@@ -19,7 +19,7 @@ const FlatList = ({ type }) => {
   const [loading, setloading] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   // Extract the id from the path, assuming it's a route like "/detailbiens/:id"
-  const match = currentPath.match(/\/detailbiens\/(.+)/);
+  const match = currentPath.match(/\/bien\/details\/(.+)/);
   const isDetailBiensRoute = match !== null;
   const { isSearching, searchResults } = useContext(SearchResultContext);
 

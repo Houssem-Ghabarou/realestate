@@ -8,19 +8,19 @@ export const CurrencyProvider = ({ children }) => {
     localStorage.getItem("currency") || "TND"
   );
 
-  // Update the currency state and localStorage
-  const updateCurrency = (newCurrency) => {
-    setCurrency(newCurrency);
-    localStorage.setItem("currency", newCurrency);
-  };
-
   // Memoize the context value
   const contextValue = useMemo(() => {
+    // Update the currency state and localStorage
+    const updateCurrency = (newCurrency) => {
+      setCurrency(newCurrency);
+      localStorage.setItem("currency", newCurrency);
+    };
+
     return {
       currency,
       updateCurrency,
     };
-  }, [currency, updateCurrency]);
+  }, [currency]);
 
   // useEffect to initialize the state from localStorage on component mount
   useEffect(() => {

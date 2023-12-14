@@ -17,7 +17,7 @@ const Footer = () => {
     window.scrollTo(0, 0);
   };
   return (
-    <section className="footer">
+    <footer className="footer">
       <div className="container">
         <div className="row">
           <div className="col-lg-3 col-md-6">
@@ -27,15 +27,30 @@ const Footer = () => {
               {t("footer.def")}
             </span>
             <div className="footer-social">
-              <div className="footer-social-item">
-                <FaFacebook />
-              </div>
-              <div className="footer-social-item">
+              <a
+                className="footer-links"
+                href="https://www.facebook.com/villapromo/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="footer-social-item">
+                  <FaFacebook />
+                </div>
+              </a>
+
+              {/* <div className="footer-social-item">
                 <FaInstagramSquare />
-              </div>
-              <div className="footer-social-item">
-                <FaWhatsappSquare />
-              </div>
+              </div> */}
+              <a
+                className="footer-links"
+                href="https://wa.me/21620532181"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="footer-social-item">
+                  <FaWhatsappSquare />
+                </div>
+              </a>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
@@ -75,7 +90,7 @@ const Footer = () => {
             </div>
             <div>
               <p className="footer-title">{t("categories.location")}</p>
-              <ul className="footer-ul">
+              <ul className="footer-ul" onClick={returnTop}>
                 <li>
                   <Link to="/location/villa">{t("search.villa")}</Link>
                 </li>
@@ -138,7 +153,7 @@ const Footer = () => {
                     </div>*/}
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 

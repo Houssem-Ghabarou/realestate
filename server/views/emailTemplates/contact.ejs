@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Nouvelle demande de contact</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
 
-        h1 {
-            color: #1a1a1a;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+      h1 {
+        color: #1a1a1a;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
 
-        .contact-info {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 5px;
-        }
+      .contact-info {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+      }
 
-        .contact-info p {
-            margin-bottom: 10px;
-        }
+      .contact-info p {
+        margin-bottom: 10px;
+      }
 
-        .contact-label {
-            font-weight: bold;
-            color: #333;
-        }
+      .contact-label {
+        font-weight: bold;
+        color: #333;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Nouvelle demande de contact</h1>
     <div class="contact-info">
-        <p><span class="contact-label">Nom et prénom:</span>
-            <%= namesurname %>
-        </p>
-        <p><span class="contact-label">Téléphone:</span>
-            <%= phone %>
-        </p>
-        <p><span class="contact-label">Email:</span>
-            <%= email %>
-        </p>
-        <p><span class="contact-label">Description:</span>
-            <%= description %>
-        </p>
+      <p>
+        <span class="contact-label">Nom et prénom:</span>
+        <%= namesurname %>
+      </p>
+      <p>
+        <span class="contact-label">Téléphone:</span>
+        <%= phone %>
+      </p>
+      <p>
+        <span class="contact-label">Email:</span>
+        <%= email %>
+      </p>
+      <p>
+        <span class="contact-label">Description:</span>
+        <%= description %>
+      </p>
     </div>
-</body>
-
+  </body>
 </html>

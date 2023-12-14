@@ -1,15 +1,36 @@
+import { useState } from "react";
 import { IoMail, IoLocationSharp } from "react-icons/io5";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { useTranslation } from "react-i18next";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import useProgressBar from "./useProgressBar";
+import ContactButton from "./ContactButton";
+import { Helmet } from "react-helmet";
+import { contactMetadata } from "../data/metadata";
+const Contact = ({ setProgress }) => {
+  const [namesurname, setNameSurname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const emailData = {
+    namesurname: namesurname,
+    email: email,
+    phone: phone,
+    description: message,
+  };
 
-const Contact = () => {
+  useProgressBar(setProgress);
   const { t } = useTranslation();
   const position = [36.40741860580118, 10.610816201938514];
 
   return (
     <section className="contact">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{contactMetadata?.title}</title>
+        <link rel="canonical" href={contactMetadata?.canonicalLink} />
+      </Helmet>
       <div className="page-content">
         <div className="container contact-us">
           <div className="row">
@@ -51,15 +72,31 @@ const Contact = () => {
               <div className="row mt-5">
                 <div className="col-lg-6">
                   <label>{t("namesurname")}</label>
-                  <input type="text" className="inp-contact" />
+                  <input
+                    type="text"
+                    className="inp-contact"
+                    value={namesurname}
+                    onChange={(e) => setNameSurname(e.target.value)}
+                  />
                 </div>
                 <div className="col-lg-6">
                   <label>{t("phone")}</label>
-                  <input type="text" className="inp-contact" />
+                  <input
+                    type="text"
+                    className="inp-contact"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
                 </div>
+
                 <div className="col-lg-12">
-                  <label>{t("subject")}</label>
-                  <input type="text" className="inp-contact" />
+                  <label>{t("email")}</label>
+                  <input
+                    type="email"
+                    className="inp-contact"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
                 <div className="col-lg-12">
                   <label>{t("messageContact")}</label>
@@ -67,10 +104,13 @@ const Contact = () => {
                     type="text"
                     className="ta-contact"
                     rows="4"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="col-lg-12">
-                  <button className="btn-contact">{t("sendMessage")}</button>
+                  {/* <button className="btn-search ">{t("sendMessage")}</button> */}
+                  <ContactButton emailData={emailData} />
                 </div>
               </div>
             </div>

@@ -6,7 +6,10 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import ContactDetails from "./ContactDetails";
 import FlatList from "./FlatList";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import {
+  capitalizeFirstLetter,
+  capitalizeEachWord,
+} from "../utils/capitalizeFirstLetter";
 import { IoLocationSharp } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import ref from "../assets/ref.svg";
@@ -14,9 +17,13 @@ import bathroom from "../assets/bathroom.svg";
 import bedroom from "../assets/bedroom.svg";
 import surface from "../assets/surface.svg";
 import garage from "../assets/garage.svg";
+import furniture from "../assets/furniture.svg";
 import { FaCheck } from "react-icons/fa";
-
-const FlatDetail = () => {
+import PriceChanger from "./PriceChanger";
+import useProgressBar from "./useProgressBar";
+import { Helmet } from "react-helmet";
+const FlatDetail = ({ setProgress }) => {
+  useProgressBar(setProgress);
   const { t } = useTranslation();
 
   const { state } = useLocation();
@@ -25,27 +32,27 @@ const FlatDetail = () => {
     propertyDetailsFromProps
   );
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const { id } = useParams();
+  const { propIdName } = useParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    const getPropDetails = async (propertyId) => {
+    const getPropDetails = async (propIdName) => {
       try {
-        let data = await proeprtyService.getPropertyDetails(propertyId);
+        let data = await proeprtyService.getPropertyDetails(propIdName);
         setPropertyDetails(data);
       } catch (error) {
         console.error("Error fetching property details:", error);
       }
     };
 
-    getPropDetails(id);
-  }, [id]);
+    getPropDetails(propIdName);
+  }, [propIdName]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setImagesLoaded(true);
-    }, 200);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, []);
@@ -75,6 +82,18 @@ const FlatDetail = () => {
   const style = { color: "#DAA520" };
   return (
     <div className="flat-detail">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {`${capitalizeEachWord(
+            propertyDetails?.name
+          )} - PromoVilla - Hammamet - Tunisie - Immobilier`}
+        </title>
+        <link
+          rel="canonical"
+          href={`${process.env.REACT_APP_URL}bien/details/${propIdName}`}
+        />
+      </Helmet>
       <div className="container mb-5">
         <div className="row">
           {propertyDetails ? (
@@ -92,7 +111,7 @@ const FlatDetail = () => {
                   </div>
                   <div>
                     <span className="fd-price">
-                      {propertyDetails?.price} TND
+                      <PriceChanger propertyPrice={propertyDetails?.price} />
                     </span>
                   </div>
                 </div>
@@ -111,9 +130,10 @@ const FlatDetail = () => {
                     flickThreshold={0.5}
                     slideDuration={0}
                     items={imageUrls}
-                    showNav={false}
-                    showFullscreenButton={false}
+                    showNav={true}
+                    showFullscreenButton={true}
                     showPlayButton={false}
+                    originalAlt={`immobilier-${propertyDetails?.name}`}
                   />
                 )}
                 <div className="row">
@@ -136,6 +156,23 @@ const FlatDetail = () => {
                             )}
                           </div>
                         ))}
+                        <div className="details-container">
+                          {propertyDetails?.ammeublement && (
+                            <>
+                              <div className="image-container">
+                                <img src={furniture} alt="ammeublement" />
+                              </div>
+                              <div>
+                                <h6>{t("ammeublement")}</h6>
+                                <span>
+                                  {t(
+                                    `ammeubl.${propertyDetails?.ammeublement}`
+                                  ) || "N/A"}
+                                </span>
+                              </div>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="fd-item">
@@ -147,9 +184,9 @@ const FlatDetail = () => {
                       <div className="row">
                         {propertyDetails?.characteristics?.map(
                           (characteristic) => (
-                            <div className="col-lg-4">
+                            <div className="col-lg-4" key={characteristic}>
                               <FaCheck style={style} />
-                              <span>{characteristic}</span>
+                              <span>{t(`features.${characteristic}`)}</span>
                             </div>
                           )
                         )}
@@ -159,7 +196,7 @@ const FlatDetail = () => {
                 </div>
               </div>
               <div className="col-lg-4">
-                <ContactDetails />
+                <ContactDetails propertyId={propertyDetails?._id} />
                 {/* Add any other content for the right column here */}
               </div>
             </>
