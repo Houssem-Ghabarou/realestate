@@ -59,11 +59,11 @@ const FlatDetail = ({ setProgress }) => {
 
   const backendBaseUrl = process.env.REACT_APP_SERVER_KEY;
   const imageFilenames = propertyDetails?.images
-    ? propertyDetails.images.split(",")
+    ? propertyDetails?.images?.split(",")
     : [];
   const imageUrls = imageFilenames.map((filename) => ({
-    original: `${backendBaseUrl}/${filename.replace(/\\/g, "/")}`,
-    thumbnail: `${backendBaseUrl}/${filename.replace(/\\/g, "/")}`,
+    original: `${backendBaseUrl}/${filename?.replace(/\\/g, "/")}`,
+    thumbnail: `${backendBaseUrl}/${filename?.replace(/\\/g, "/")}`,
   }));
 
   const propertyDetailsData = [

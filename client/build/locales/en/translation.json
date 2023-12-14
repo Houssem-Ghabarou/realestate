@@ -96,10 +96,10 @@
 "localisation":"Location",
 "ammeublement":"Furnishing",
 "ammeubl":{
-    "Meublé":"Furnished",
-    "Non meublé":"Unfurnished",
-    "Partiellement meublé":"Partially Furnished",
-    "-":"-"
+    "meublé":"Furnished",
+    "non meublé":"Unfurnished",
+    "partiellement meublé":"Partially Furnished",
+     "":"-"
 },
     "chambreMin":"Minimum Bedrooms",
    "salledebainsMin":"Minimum Bathrooms",
@@ -115,7 +115,8 @@
     "Cuisine ouverte": "Open Kitchen",
     "Vue sur la mer": "Sea View",
     "Vue sur la montagne": "Mountain View"
-  }
+  },
+  "emailSent":"Email sent! 🚀 We'll get back to you within 24 hours. Thanks! 😊"
 
 
 }
