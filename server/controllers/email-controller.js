@@ -4,23 +4,37 @@ const ValidateMessage = require("../validation/validateMessage");
 const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
+const { google } = require("googleapis");
+
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.OAUTH_CLIENTID,
+  process.env.OAUTH_CLIENT_SECRET,
+  "https://developers.google.com/oauthplayground" // The redirect URL used during the auth process
+);
+
+oAuth2Client.setCredentials({
+  refresh_token: process.env.OAUTH_REFRESH_TOKEN,
+});
 
 const sendEmail = async (req, res) => {
   const { property, namesurname, phone, email, description } = req.body;
   const { errors, isValid } = ValidateMessage(req.body);
+  const accessToken = await oAuth2Client.getAccessToken();
 
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       type: "OAuth2",
       user: process.env.MAIL_USERNAME,
-      pass: process.env.MAIL_PASS,
       clientId: process.env.OAUTH_CLIENTID,
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+      accessToken: accessToken.token, // assuming that the resolved accessToken object has a `token` property
     },
+    // tls: {
+    //   rejectUnauthorized: false, // Only use this for self-signed certificates
+    // },
   });
-
   try {
     if (!isValid) {
       return res.status(400).json(errors);
@@ -29,6 +43,7 @@ const sendEmail = async (req, res) => {
     let template;
     let subject;
     let imagesData; // An array to hold the transformed image data
+    let propertyLink;
     if (property) {
       // Load property-related template
       const prop = await realEstateProp.findById(property);
@@ -41,14 +56,13 @@ const sendEmail = async (req, res) => {
       // Ensure that imagePaths is an array before using map
       imagesData = Array.isArray(imagePaths)
         ? imagePaths.map((imagePath) => ({
-            url: `http://localhost:${
-              process.env.PORT_SERVER
-            }/${imagePath.trim()}`, // Replace YOUR_PORT with the port number your server is running on
-            alt: "Image Alt Text", // Replace with appropriate alt text for the images
+            url: `${process.env.SERVER_URL}/${imagePath.trim()}`, // Replace YOUR_PORT with the port number your server is running on
+            alt: "immobilier promovilla", // Replace with appropriate alt text for the images
           }))
         : [];
+      const propIdName = prop?.propIdName;
 
-      console.log(imagesData, "imagesssssssssssss");
+      propertyLink = `${process.env.CLIENT_URL}/bien/details/${propIdName}`;
 
       template = await ejs.renderFile(
         path.join(__dirname, "../views/emailTemplates/property.ejs"),
@@ -58,6 +72,7 @@ const sendEmail = async (req, res) => {
           phone,
           email,
           description,
+          propertyLink,
           images: imagesData,
         }
       );

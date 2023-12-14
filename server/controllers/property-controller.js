@@ -44,16 +44,32 @@ const addProperty = async (req, res) => {
 
   const lowerName = name.toLowerCase();
   const locationLower = location.toLowerCase();
+
+  function generateNumberIdentifier() {
+    const timestamp = new Date().getTime(); // Get current timestamp
+    return timestamp.toString().slice(-5); // Extract last 5 digits as a string
+  }
+
+  const numberIdentifier = generateNumberIdentifier();
+  function generatePropIdName(lowerName, uniqueIdentifier) {
+    const formattedName = lowerName.replace(/\s+/g, "-"); // Replace spaces with hyphens
+    const propIdName = `${uniqueIdentifier}-${formattedName}`;
+    return propIdName;
+  }
+  const propIdName = generatePropIdName(lowerName, numberIdentifier);
+
   try {
     const newProp = new realEstateProp({
       category,
       type,
+      propIdName,
       price,
       name: lowerName,
       location: locationLower,
       description,
       chambres,
       sallesDeBains,
+      ammeublement,
       surface,
       parking,
       characteristics,
@@ -224,9 +240,9 @@ const getLastSixProperties = async (req, res) => {
 };
 
 const getPropertyDetails = async (req, res) => {
-  const propId = req.params.id;
+  const propIdName = req.params.propIdName;
   try {
-    const property = await realEstateProp.findById(propId);
+    const property = await realEstateProp.findOne({ propIdName: propIdName });
     return res.status(200).json(property);
   } catch (err) {
     console.log(err);

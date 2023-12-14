@@ -8,7 +8,7 @@ import { LuArrowRightCircle } from "react-icons/lu";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { IoLocationSharp } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
-
+import PriceChanger from "./PriceChanger";
 const FlatItem = ({ property }) => {
   const { t } = useTranslation();
 
@@ -17,14 +17,13 @@ const FlatItem = ({ property }) => {
   const imageUrl = `${backendBaseUrl}/${image?.replace(/\\/g, "/")}`;
 
   const name = capitalizeFirstLetter(property?.name);
-  const category = capitalizeFirstLetter(property?.category);
   const type = capitalizeFirstLetter(t(`type.${property?.type}`));
   return (
     <div className="text-center col-lg-4 col-12 col-md-6 ">
       <div className="item">
         <Link
           to={{
-            pathname: `/detailbiens/${property?._id}`,
+            pathname: `/bien/details/${property?.propIdName}`,
             state: { propertyData: property },
           }}
           className="item-title"
@@ -43,8 +42,11 @@ const FlatItem = ({ property }) => {
                 className={`best-estate-state ${
                   property?.category === "location" ? "bg-green" : "bg-red"
                 }`}
+                // className="best-estate-state"
               >
-                {category === "location" ? t("forRent") : t("forSale")}
+                {property?.category === "location"
+                  ? t("forRent")
+                  : t("forSale")}
               </div>
             </div>
           </div>
@@ -53,7 +55,7 @@ const FlatItem = ({ property }) => {
         <div className="item-description">
           <div className="d-flex justify-content-between ">
             <span className="item-title">{name}</span>
-            <span className="item-price">{property.price} TND </span>
+            <PriceChanger propertyPrice={property?.price} />
           </div>
           <div className="d-flex item-location">
             <div style={{ marginRight: "0.3rem" }}>
@@ -82,14 +84,14 @@ const FlatItem = ({ property }) => {
             )}
             <Link
               to={{
-                pathname: `/detailbiens/${property._id}`,
+                pathname: `/bien/details/${property?.propIdName}`,
                 state: { propertyData: property },
               }}
               className="item-title"
             >
               {/* <button className="btn btn-detail">View</button> */}
               <LuArrowRightCircle
-                style={{ color: "#DAA520", height: "23px", width: "23px" }}
+                style={{ color: "#4c4c4d", height: "23px", width: "23px" }}
               />
             </Link>
           </div>
@@ -104,7 +106,8 @@ FlatItem.propTypes = {
   property: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.array.isRequired,
+    propIdName: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
     reference: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     location: PropTypes.string.isRequired,

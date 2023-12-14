@@ -99,10 +99,10 @@
   "localisation":"Localisation",
   "ammeublement":"Ammeublement",
   "ammeubl":{
-    "Meublé":"Meublé",
-    "Non meublé":"Non Meublé",
-    "Partiellement meublé":"Partiellement Meublé",
-    "-":"-"
+    "meublé":"Meublé",
+    "non meublé":"Non Meublé",
+    "partiellement meublé":"Partiellement Meublé",
+     "":"-"
 },
     "chambreMin":"Chambre Min",
     "salledebainsMin":"Salle de bains Min",
@@ -118,7 +118,10 @@
     "Cuisine ouverte": "Cuisine ouverte",
     "Vue sur la mer": "Vue sur la mer",
     "Vue sur la montagne": "Vue sur la montagne"
-  }
+  },
+  "emailSent":"Email envoyé! 🚀 Nous vous répondrons dans les 24 heures. Merci ! 😊"
+
+
 
 
 }

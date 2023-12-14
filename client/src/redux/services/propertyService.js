@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_KEY;
+const EMAIL_URL = process.env.REACT_APP_EMAIL_URL;
 
 const getLastSixProperties = async () => {
   try {
@@ -43,9 +44,9 @@ const getAlllocation = async () => {
   }
 };
 
-const getPropertyDetails = async (propId) => {
+const getPropertyDetails = async (propIdName) => {
   try {
-    const response = await axios.get(API_URL + "singleproperty/" + propId);
+    const response = await axios.get(API_URL + "singleproperty/" + propIdName);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -107,6 +108,17 @@ const searchProperty = async (searchData) => {
   }
 };
 
+const sendEmail = async (emailData) => {
+  try {
+    console.log(EMAIL_URL);
+    const response = await axios.post(EMAIL_URL, emailData);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 const proeprtyService = {
   getLastSixProperties,
   getAllvente,
@@ -117,6 +129,7 @@ const proeprtyService = {
   getPropByCategoryType,
   searchProperty,
   getLocalisation,
+  sendEmail,
 };
 
 export default proeprtyService;

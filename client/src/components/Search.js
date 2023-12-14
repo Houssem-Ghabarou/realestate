@@ -7,7 +7,7 @@ import { options } from "../data/propertyType";
 import { ammeublementOptions } from "../data/ameublementData";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import { features } from "../data/features";
+import { features, applicableFeatures } from "../data/features";
 import { singleStyle } from "./stylesForSingleSelect";
 import { styles } from "./stylesForMultipleSelect";
 import {
@@ -16,7 +16,7 @@ import {
 } from "../data/categoryOptions";
 const { searchProperty, getLocalisation } = proeprtyService;
 
-const Search = ({ type }) => {
+const Search = ({ type, setProgress }) => {
   const { t } = useTranslation();
 
   const [localisation, setLocalisation] = useState(["Locations"]);
@@ -58,6 +58,7 @@ const Search = ({ type }) => {
   };
 
   const propType = propertyType?.map((type) => type?.value);
+
   const locationFormated = location?.map((loc) => loc.value);
   const categoryFormated = category?.value;
   const ammeublementFormated = ammeublement?.value;
@@ -116,19 +117,26 @@ const Search = ({ type }) => {
 
   //search properties
   const searchProp = async (e) => {
+    setProgress(40);
+    setTimeout(() => {
+      setProgress(100);
+    }, 400);
     e.preventDefault();
-    console.log(searchData);
     const data = await searchProperty(searchData);
     updateSearchResults(data);
-    window.scrollTo(0, window.innerHeight * 0.5);
+    if (filterOpen && window.innerWidth < 768) {
+      window.scrollTo(0, window.innerHeight * 1.5);
+    } else {
+      window.scrollTo(0, window.innerHeight * 0.5);
+    }
   };
 
   // Format option label
-  const formatOptionLabel = ({ label }) => {
+  const formatOptionLabel = ({ value }) => {
     if (filterOpen) {
-      return t(`ammeubl.${label}`);
+      return t(`ammeubl.${value}`);
     }
-    return label;
+    return value;
   };
   const formatOptionTypeLabel = ({ value }) => {
     return t(`type.${value}`);
@@ -137,6 +145,9 @@ const Search = ({ type }) => {
     return t(`categories.${value}`);
   };
 
+  const isAnyTypeApplicable =
+    propType.some((type) => applicableFeatures.includes(type)) ||
+    propType?.length === 0;
   return (
     <div className={` ${type === 0 ? "search-no-home" : ""}`}>
       <div
@@ -256,7 +267,7 @@ const Search = ({ type }) => {
               </div>
             )}
 
-            {filterOpen && (
+            {filterOpen && isAnyTypeApplicable && (
               <div
                 className={`search-area-child ${
                   focusedMinChambre ? "focused" : ""
@@ -277,7 +288,7 @@ const Search = ({ type }) => {
                 />
               </div>
             )}
-            {filterOpen && (
+            {filterOpen && isAnyTypeApplicable && (
               <div
                 className={`search-area-child ${
                   focusedMinBathroom ? "focused" : ""
@@ -299,7 +310,7 @@ const Search = ({ type }) => {
               </div>
             )}
 
-            {filterOpen && (
+            {filterOpen && isAnyTypeApplicable && (
               <div className="search-area-child">
                 <Select
                   styles={singleStyle}
@@ -311,7 +322,7 @@ const Search = ({ type }) => {
                 />
               </div>
             )}
-            {filterOpen && (
+            {filterOpen && isAnyTypeApplicable && (
               <ul className="unstyled centered">
                 {features?.map((feature, index) => (
                   <li key={index}>

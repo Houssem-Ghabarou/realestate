@@ -1,8 +1,12 @@
 import FlatList from "./FlatList";
 import React, { useContext, useEffect } from "react";
 import { SearchResultContext } from "../context/SearchContext";
+import useProgressBar from "./useProgressBar";
+import { Helmet } from "react-helmet";
+import { homeMetadata } from "../data/metadata";
 
-const Home = () => {
+const Home = ({ setProgress }) => {
+  useProgressBar(setProgress);
   const { isSearching, finishedSearch } = useContext(SearchResultContext);
   useEffect(() => {
     finishedSearch();
@@ -14,6 +18,11 @@ const Home = () => {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{homeMetadata?.title}</title>
+        <link rel="canonical" href={homeMetadata?.canonicalLink} />
+      </Helmet>
       {isSearching ? (
         <FlatList type={6} />
       ) : (
