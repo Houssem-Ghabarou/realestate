@@ -94,7 +94,7 @@
 "forSale":"À Vendre",
 "forRent":"À Louer",
 "propNotFound":"Ce bien n'existe pas",
-  "pageNotFound":"Oups ! Page non trouvée.",
+  "pageNotFound":"404: Oups ! Page non trouvée.",
   "noProperties":"Aucune propriété  disponible actuellement. Revenez plus tard ou explorez d'autres annonces.",
   "localisation":"Localisation",
   "ammeublement":"Ammeublement",
@@ -119,10 +119,15 @@
     "Vue sur la mer": "Vue sur la mer",
     "Vue sur la montagne": "Vue sur la montagne"
   },
-  "emailSent":"Email envoyé! 🚀 Nous vous répondrons dans les 24 heures. Merci ! 😊"
+  "emailSent":"Message envoyé! 🚀 Nous vous répondrons dans les 24 heures. Merci ! 😊",
 
+  "acceuil":"PromoVilla - Hammamet - Tunisie - Vente - Location - Immobilier",
+  "vente":"Vente - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "locationRoute":"Location - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "about":"À propos - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "contact":"Contact - PromoVilla - Hammamet - Tunisie - Immobilier",
 
-
+  "promovillaForRoutes":"- PromoVilla - Hammamet - Tunisie - Immobilier"
 
 }
 

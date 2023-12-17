@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.fb980bce.css",
-    "main.js": "/static/js/main.a9130ee2.js",
+    "main.css": "/static/css/main.f6903825.css",
+    "main.js": "/static/js/main.30b71926.js",
     "static/js/585.87d28754.chunk.js": "/static/js/585.87d28754.chunk.js",
     "static/js/454.89627bd2.chunk.js": "/static/js/454.89627bd2.chunk.js",
     "static/media/house2.jpg": "/static/media/house2.392e4ee66e9fb54a84fd.jpg",
@@ -11,19 +11,19 @@
     "static/media/promovilla.png": "/static/media/promovilla.49535a63ae10876d2a29.png",
     "static/media/bedroom.svg": "/static/media/bedroom.8267d170395a5454c83398b14f42186f.svg",
     "static/media/bathroom.svg": "/static/media/bathroom.bedff9a90a24827f5c089ad018559137.svg",
+    "index.html": "/index.html",
     "static/media/garage.svg": "/static/media/garage.79f7ae80f6bb7e4e1f8939deed73411b.svg",
     "static/media/surface.svg": "/static/media/surface.00f25c4e1ca2867e8c9981494025816a.svg",
-    "index.html": "/index.html",
     "static/media/furniture.svg": "/static/media/furniture.2da55df42f84638fdcff7acba5821846.svg",
     "static/media/ref.svg": "/static/media/ref.bc18e4f174299e3ee337c544098ee217.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.fb980bce.css.map": "/static/css/main.fb980bce.css.map",
-    "main.a9130ee2.js.map": "/static/js/main.a9130ee2.js.map",
+    "main.f6903825.css.map": "/static/css/main.f6903825.css.map",
+    "main.30b71926.js.map": "/static/js/main.30b71926.js.map",
     "585.87d28754.chunk.js.map": "/static/js/585.87d28754.chunk.js.map",
     "454.89627bd2.chunk.js.map": "/static/js/454.89627bd2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb980bce.css",
-    "static/js/main.a9130ee2.js"
+    "static/css/main.f6903825.css",
+    "static/js/main.30b71926.js"
   ]
 }
