@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, lazy } from "react";
 import { Link } from "react-router-dom";
-import promovilla from "../assets/promovilla.png";
+import promovilla from "../assets/promovillaNew.png";
 import { useTranslation } from "react-i18next";
 import { SearchResultContext } from "../context/SearchContext";
 import LanguageCurrencySelector from "./LanguageCurrencySelector";
