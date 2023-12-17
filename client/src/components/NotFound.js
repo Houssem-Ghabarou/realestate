@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
+import { Helmet } from "react-helmet-async";
 const NotFound = () => {
   const { t } = useTranslation();
 
@@ -13,6 +13,10 @@ const NotFound = () => {
         alignItems: "center",
       }}
     >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{t("pageNotFound")}</title>
+      </Helmet>
       <h2 className="title">{t("pageNotFound")}</h2>
     </div>
   );

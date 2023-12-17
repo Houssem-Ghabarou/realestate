@@ -2,9 +2,10 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import ClipLoader from "react-spinners/ClipLoader";
+
 //eslint-disable-next-line
 import i18n from "./i18n"; //lazm menha
-import ClipLoader from "react-spinners/ClipLoader";
 
 const loading = (
   <div className="loader">

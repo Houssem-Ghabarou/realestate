@@ -206,6 +206,7 @@ const Search = ({ type, setProgress }) => {
             </div>
             <div className="search-area-child">
               <Select
+                isSearchable={false}
                 styles={styles}
                 isMulti
                 formatOptionLabel={formatOptionTypeLabel}
@@ -218,6 +219,7 @@ const Search = ({ type, setProgress }) => {
             </div>
             <div className="search-area-child">
               <Select
+                isSearchable={false}
                 styles={styles}
                 value={location}
                 onChange={handleLocationChange}
@@ -313,6 +315,7 @@ const Search = ({ type, setProgress }) => {
             {filterOpen && isAnyTypeApplicable && (
               <div className="search-area-child">
                 <Select
+                  isSearchable={false}
                   styles={singleStyle}
                   formatOptionLabel={formatOptionLabel}
                   value={ammeublement}

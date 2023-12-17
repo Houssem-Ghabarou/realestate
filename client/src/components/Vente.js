@@ -2,9 +2,11 @@ import React, { useEffect, useContext } from "react";
 import FlatList from "./FlatList";
 import { SearchResultContext } from "../context/SearchContext";
 import useProgressBar from "./useProgressBar";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { venteMetadata } from "../data/metadata";
+import { useTranslation } from "react-i18next";
 const Vente = ({ setProgress }) => {
+  const { t } = useTranslation();
   useProgressBar(setProgress);
 
   const { finishedSearch } = useContext(SearchResultContext);
@@ -19,7 +21,7 @@ const Vente = ({ setProgress }) => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{venteMetadata?.title}</title>
+        <title>{t(venteMetadata?.value)}</title>
         <link rel="canonical" href={venteMetadata?.canonicalLink} />
       </Helmet>
       <FlatList type={1} />;

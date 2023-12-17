@@ -4,12 +4,12 @@ import house2 from "../assets/house2.jpg";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom/";
 import useProgressBar from "./useProgressBar";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { aboutMetadata } from "../data/metadata";
-const About = ({ setProgress }) => {
-  useProgressBar(setProgress);
 
+const About = ({ setProgress }) => {
   const { t } = useTranslation();
+  useProgressBar(setProgress);
 
   const style = {
     color: "#e1ab24",
@@ -19,7 +19,7 @@ const About = ({ setProgress }) => {
     <section className="about">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{aboutMetadata?.title}</title>
+        <title>{t(aboutMetadata?.value)}</title>
         <link rel="canonical" href={aboutMetadata?.canonicalLink} />
       </Helmet>
       <div className="page-content">
@@ -32,7 +32,7 @@ const About = ({ setProgress }) => {
                 className="about-us"
               />
             </div>
-            <div className="col-lg-6">
+            <article className="col-lg-6">
               <div className="about-item">
                 <div
                   className="title"
@@ -71,7 +71,7 @@ const About = ({ setProgress }) => {
                   <button className="btn-search m-2">Contactez nous</button>
                 </Link>
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </div>
