@@ -36,10 +36,7 @@ const Header = ({ type, setProgress }) => {
             : "navbar navbar-expand-lg navbar-light header"
         }
       >
-        <div
-          className={!isMobile ? "container-fluid" : "container-mobile"}
-          style={{ margin: 0, paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
-        >
+        <div className={!isMobile ? "container-fluid" : "container-mobile"}>
           <Link className="navbar-brand" to="/">
             <div
               className="d-flex align-items-center"

@@ -2,7 +2,7 @@
 
 import React from "react";
 import ReactFlagsSelect from "react-flags-select";
-
+import { useTranslation } from "react-i18next";
 const LanguageCurrencySelector = ({
   setProgress,
   type,
@@ -11,6 +11,7 @@ const LanguageCurrencySelector = ({
   selectedCurrency,
   onChangeCurrency,
 }) => {
+  const { i18n } = useTranslation();
   const onChangeLanguageEffect = (selectedLanguage) => {
     setProgress(40);
     setTimeout(() => {
@@ -26,6 +27,15 @@ const LanguageCurrencySelector = ({
     }, 400);
     onChangeCurrency(selectedCurrency);
   };
+
+  let selectedLang;
+  if (i18n.language === "ar" || i18n.language.includes("ar")) {
+    selectedLang = "SA";
+  } else if (i18n.language === "en" || i18n.language.includes("en")) {
+    selectedLang = "US";
+  } else if (i18n.language === "fr" || i18n.language.includes("fr")) {
+    selectedLang = "FR";
+  }
   return (
     <div
       style={{ display: "flex", gap: type === "mobile" ? "0.5rem" : undefined }}
@@ -34,7 +44,7 @@ const LanguageCurrencySelector = ({
         <div className={type === "mobile" ? "nav-item-mobile" : "nav-item"}>
           <ReactFlagsSelect
             countries={["FR", "US", "SA"]}
-            selected={selectedLanguage}
+            selected={selectedLang}
             className={type === "mobile" ? "menu-flags-mobile" : "menu-flags"}
             onSelect={(selectedLanguage) =>
               onChangeLanguageEffect(selectedLanguage)

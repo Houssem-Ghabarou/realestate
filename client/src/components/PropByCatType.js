@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import FlatList from "./FlatList";
 import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
-import { Helmet } from "react-helmet";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 const PropByCatType = ({ match, setProgress, progress }) => {
+  const { t } = useTranslation();
   const category = match?.params?.category;
   const proptype = match?.params?.proptype;
 
@@ -38,14 +39,15 @@ const PropByCatType = ({ match, setProgress, progress }) => {
     };
   }, [match]);
 
+  const translatedCate = t(`categories.${category}`);
+  const translatedType = t(`type.${proptype}`);
+  const PromoVillaForRotues = t("promovillaForRoutes");
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
     return (
       <>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>{`${capitalizeFirstLetter(category)} - ${capitalizeFirstLetter(
-            proptype
-          )} - PromoVilla - Hammamet - Tunisie - Immobilier`}</title>
+          <title>{`${translatedCate} - ${translatedType} ${PromoVillaForRotues}`}</title>
           <link
             rel="canonical"
             href={`${process.env.REACT_APP_URL}${category}/${proptype}`}

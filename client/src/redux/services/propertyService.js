@@ -110,11 +110,9 @@ const searchProperty = async (searchData) => {
 
 const sendEmail = async (emailData) => {
   try {
-    console.log(EMAIL_URL);
     const response = await axios.post(EMAIL_URL, emailData);
     return response.data;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 };

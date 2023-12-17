@@ -24,12 +24,11 @@ const ContactDetails = ({ propertyId }) => {
     >
       <h4>{t("contactezNous")}</h4>
 
-      <div className="d-flex mb-1">
+      <div className="d-flex  align-items-center mb-1">
         <img
           src={promovilla}
-          alt="promovilla Logo"
-          width="120px"
-          style={{ marginRight: "0.5rem" }}
+          className="promovilla-contact-details"
+          alt="promovilla Immobilier Logo"
         />
         <div>
           <h4 style={{ color: "#DAA520" }}>Promo Villa</h4>
@@ -68,25 +67,24 @@ const ContactDetails = ({ propertyId }) => {
         <div className="contact">
           <input
             className="inp-contact"
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={t("email")}
-            required
-          />
-        </div>
-
-        <div className="contact">
-          <input
-            className="inp-contact"
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             id="phone"
             name="phone"
             placeholder={t("phone")}
+            required
+          />
+        </div>
+        <div className="contact">
+          <input
+            className="inp-contact"
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t("email")}
             required
           />
         </div>

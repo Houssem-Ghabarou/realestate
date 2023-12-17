@@ -26,8 +26,8 @@ const ContactButton = ({ emailData }) => {
       setError(
         error?.response?.data?.allFields ||
           error?.response?.data?.namesurname ||
-          error?.response?.data?.email ||
           error?.response?.data?.phone ||
+          error?.response?.data?.email ||
           error?.response?.data?.description
       );
     } finally {
@@ -46,6 +46,12 @@ const ContactButton = ({ emailData }) => {
     setSuccess(false);
   }, [success, t]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    setError(null);
+  }, [error]);
   const buttonState = () => {
     return loading ? (
       <ClipLoader
@@ -56,21 +62,12 @@ const ContactButton = ({ emailData }) => {
         data-testid="loader"
       />
     ) : (
-      <button
-        className="btn-search"
-        onClick={handleContact}
-        disabled={loading || success}
-      >
+      <button className="btn-search" onClick={handleContact}>
         {t("contactezNous")}
       </button>
     );
   };
-  return (
-    <>
-      {buttonState()}
-      {error && <p> {error}</p>}
-    </>
-  );
+  return <>{buttonState()}</>;
 };
 
 export default ContactButton;

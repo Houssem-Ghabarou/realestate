@@ -15,9 +15,9 @@ module.exports = function validateMessage(message) {
     : "";
 
   if (
-    validator.isEmpty(message.namesurname) &&
-    validator.isEmpty(message.email) &&
-    validator.isEmpty(message.phone) &&
+    validator.isEmpty(message.namesurname) ||
+    validator.isEmpty(message.email) ||
+    validator.isEmpty(message.phone) ||
     validator.isEmpty(message.description)
   ) {
     errors.allFields = "Tous les champs sont nécessaires.";
@@ -37,12 +37,13 @@ module.exports = function validateMessage(message) {
   // Validation for Phone Number
   if (validator.isEmpty(message.phone)) {
     errors.phone = "Le numéro de téléphone est nécessaire.";
-  } else if (
-    !validator.isNumeric(message.phone) ||
-    message.phone.length !== 8
-  ) {
-    errors.phone = "Le numéro de téléphone doit comporter 8 chiffres.";
   }
+  // else if (
+  //   !validator.isNumeric(message.phone) ||
+  //   message.phone.length !== 8
+  // ) {
+  //   errors.phone = "Le numéro de téléphone doit comporter 8 chiffres.";
+  // }
 
   // Validation for Description
   if (validator.isEmpty(message.description)) {

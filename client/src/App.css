@@ -535,10 +535,16 @@ body {
 
 .promovilla {
   width: 100px;
-  height: 100%;
+  height: auto;
   margin-bottom: 10px;
 }
 
+.promovilla-contact-details {
+  height: 100px;
+  /* width: 100%; */
+  /* max-height: 135px; */
+  margin-right: 0.2rem;
+}
 
 .footer-ul li a {
   list-style: none;
@@ -1018,26 +1024,36 @@ section {
 
 
 
+
   .search-area {
     justify-content: center;
-    /* flex-wrap: wrap; */
+    flex-direction: column;
+    align-items: normal;
   }
 
   .find-search {
     top: 350px !important;
   }
 
-  .search-area {
-    flex-direction: column;
-    align-items: normal;
-  }
+
+
+
 }
 
 @media (max-width:990px) {
+  .promovilla {
+    width: 80px;
+    height: auto;
+  }
+
   .sbs-area-inp {
     display: block;
     margin-bottom: 10px;
 
+  }
+
+  .fd-price {
+    font-size: 30px !important;
   }
 
   .title {
@@ -1062,6 +1078,10 @@ section {
 
   .contact-item {
     margin-bottom: 0.3rem;
+  }
+
+  .search-area {
+    min-width: 90vw;
   }
 
 }
@@ -1347,9 +1367,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
-  padding: 20px 20px 0px 20px;
-
-
+  padding: 0px 20px 0px 20px
 }
 
 .parent-sub-menu {
@@ -1940,6 +1958,7 @@ section {
   justify-content: space-between;
   flex-direction: row-reverse;
   width: 100%;
+  padding-left: 1rem;
 }
 
 

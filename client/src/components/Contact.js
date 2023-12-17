@@ -6,7 +6,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import useProgressBar from "./useProgressBar";
 import ContactButton from "./ContactButton";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { contactMetadata } from "../data/metadata";
 const Contact = ({ setProgress }) => {
   const [namesurname, setNameSurname] = useState("");
@@ -28,7 +28,7 @@ const Contact = ({ setProgress }) => {
     <section className="contact">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{contactMetadata?.title}</title>
+        <title>{t(contactMetadata?.value)}</title>
         <link rel="canonical" href={contactMetadata?.canonicalLink} />
       </Helmet>
       <div className="page-content">
