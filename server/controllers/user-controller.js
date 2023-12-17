@@ -43,7 +43,7 @@ const Login = async (req, res) => {
               errors.password = "Incorrect password";
               res.status(404).json(errors);
             } else {
-              var token = jwt.sign(
+              let token = jwt.sign(
                 {
                   id: user._id,
                   username: user.username,
