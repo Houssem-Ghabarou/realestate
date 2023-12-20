@@ -1,12 +1,12 @@
 {
-    "header":{
-        "home":"Home",
-        "rent":"For rent",
-        "sale":"For sale",
-        "about":"Our agency",
-        "contact":"Contact"
-    },
-    "search": {
+  "header": {
+    "home": "Home",
+    "rent": "For rent",
+    "sale": "For sale",
+    "about": "Our agency",
+    "contact": "Contact"
+  },
+  "search": {
     "name": "Promo Villa Real Estate",
     "quote": "Find Your Perfect Property",
     "acheter": "For Sale",
@@ -27,19 +27,18 @@
     "bureau": "Offices",
     "immeuble": "Buildings",
     "commercial": "Commercial"
-},
-"flatlist": {
+  },
+  "flatlist": {
     "recement": "Recently Added Properties",
     "recementVente": "Recently Added Properties for Sale",
     "recementLocation": "Recently Added Properties for Rent",
     "bienEnVente": "Properties Available for Sale",
     "bienEnLocation": "Properties Available for Rent",
     "resultatRecherche": "Search Results"
-},
-  "footer":{
-    "def":"Promo Villa, your exclusive real estate ally in Hammamet. Nestled along Kuwait Avenue, our agency is dedicated to the purchase, sale, and rental of exceptional properties, from prestigious villas to modern commercial spaces. Whether you are an individual or a professional, discover a tailor-made real estate experience. Explore Hammamet with Promo Villa - where each property tells a unique story, and each transaction becomes an exciting reality."
-    }
-    ,
+  },
+  "footer": {
+    "def": "Promo Villa, your exclusive real estate ally in Hammamet. Nestled along Kuwait Avenue, our agency is dedicated to the purchase, sale, and rental of exceptional properties, from prestigious villas to modern commercial spaces. Whether you are an individual or a professional, discover a tailor-made real estate experience. Explore Hammamet with Promo Villa - where each property tells a unique story, and each transaction becomes an exciting reality."
+  },
   "type": {
     "maison": "Houses",
     "villa": "Villas",
@@ -58,16 +57,16 @@
   "message": "Properties Available for {{category}}, {{proptype}}:",
 
   "location": "Avenue Kuwait, Nabeul, Hammamet",
-   "address": "Address",
-    "phone": "Phone",
-    "email": "Email",
-    "namesurname": "Name and Surname",
-    "subject": "Subject",
-    "messageContact": "Message",
-    "sendMessage": "Send",
-    "numTel1":"+216 20 532 181",
-"numTel2":"+216 22 307 549",
-"aboutUs": {
+  "address": "Address",
+  "phone": "Phone",
+  "email": "Email",
+  "namesurname": "Name and Surname",
+  "subject": "Subject",
+  "messageContact": "Message",
+  "sendMessage": "Send",
+  "numTel1": "+216 20 532 181",
+  "numTel2": "+216 22 307 549",
+  "aboutUs": {
     "experience": "Seasoned professionals with extensive knowledge of the local real estate market.",
     "clientFocus": "Client-focused approach with personalized service tailored to each client.",
     "propertyPortfolio": "Diverse property portfolio, offering a wide range of exclusive properties.",
@@ -86,24 +85,24 @@
   "description": "Description",
   "caractéristiques": "Features",
   "contactezNous": "Contact Us",
-  "menu":"Menu",
-  "m²":"m²",
-  "forSale":"For Sale",
-  "forRent":"For Rent",
-  "propNotFound":"This property does not exist.",
-  "pageNotFound":"404: Oops! Page not found.",
-  "noProperties":"No properties available at the moment. Check back later or explore other listings.",
-"localisation":"Location",
-"ammeublement":"Furnishing",
-"ammeubl":{
-    "meublé":"Furnished",
-    "non meublé":"Unfurnished",
-    "partiellement meublé":"Partially Furnished",
-     "":"-"
-},
-    "chambreMin":"Minimum Bedrooms",
-   "salledebainsMin":"Minimum Bathrooms",
-   "features": {
+  "menu": "Menu",
+  "m²": "m²",
+  "forSale": "For Sale",
+  "forRent": "For Rent",
+  "propNotFound": "This property does not exist.",
+  "pageNotFound": "404: Oops! Page not found.",
+  "noProperties": "No properties available at the moment. Check back later or explore other listings.",
+  "localisation": "Location",
+  "ammeublement": "Furnishing",
+  "ammeubl": {
+    "meublé": "Furnished",
+    "non meublé": "Unfurnished",
+    "partiellement meublé": "Partially Furnished",
+    "": "-"
+  },
+  "chambreMin": "Minimum Bedrooms",
+  "salledebainsMin": "Minimum Bathrooms",
+  "features": {
     "Balcon/Terrasse": "Balcony/Terrace",
     "Stationnement": "Parking",
     "Piscine": "Swimming Pool",
@@ -116,16 +115,11 @@
     "Vue sur la mer": "Sea View",
     "Vue sur la montagne": "Mountain View"
   },
-  "emailSent":"Message sent! 🚀 We'll get back to you within 24 hours. Thanks! 😊",
+  "emailSent": "Message sent! 🚀 We'll get back to you within 24 hours. Thanks! 😊",
   "acceuil": "PromoVilla - Hammamet - Tunisia - Sale - Rent - Real Estate",
-"vente": "Sale - PromoVilla - Hammamet - Tunisia - Real Estate",
-"locationRoute": "Rent - PromoVilla - Hammamet - Tunisia - Real Estate",
-"about": "About - PromoVilla - Hammamet - Tunisia - Real Estate",
-"contact": "Contact - PromoVilla - Hammamet - Tunisia - Real Estate",
-  "promovillaForRoutes":"- PromoVilla - Hammamet - Tunisia - Real Estate"
-
-
-
-
+  "vente": "Sale - PromoVilla - Hammamet - Tunisia - Real Estate",
+  "locationRoute": "Rent - PromoVilla - Hammamet - Tunisia - Real Estate",
+  "about": "About - PromoVilla - Hammamet - Tunisia - Real Estate",
+  "contact": "Contact - PromoVilla - Hammamet - Tunisia - Real Estate",
+  "promovillaForRoutes": "- PromoVilla - Hammamet - Tunisia - Real Estate"
 }
-

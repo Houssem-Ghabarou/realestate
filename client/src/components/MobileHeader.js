@@ -32,11 +32,11 @@ const MobileHeader = ({ type, setProgress }) => {
 
   return (
     <aside>
-      {!showOverlay && <FiMenu className="menu-icon" onClick={toggleOverlay} />}
+      {!showOverlay && <FiMenu className='menu-icon' onClick={toggleOverlay} />}
       {showOverlay && (
-        <div className="overlay">
-          <div className="order">
-            <div className="mobile-language-close">
+        <div className='overlay'>
+          <div className='order'>
+            <div className='mobile-language-close'>
               <LanguageCurrencySelector
                 setProgress={setProgress}
                 type={type}
@@ -54,34 +54,33 @@ const MobileHeader = ({ type, setProgress }) => {
               />
             </div>
 
-            <ul className="links">
+            <ul className='links'>
               <li>
-                <Link to="/" onClick={handleMenuItemClick}>
+                <Link to='/' onClick={handleMenuItemClick}>
                   {t("header.home")}
                 </Link>
               </li>
               <>
-                <div className="parent-sub-menu">
+                <div className='parent-sub-menu'>
                   <li>
-                    <Link to="/vente" onClick={handleMenuItemClick}>
+                    <Link to='/vente' onClick={handleMenuItemClick}>
                       {t("header.sale")}
                     </Link>
                   </li>
                   <FiChevronDown
-                    className="parent-sub-menu-icon"
+                    className='parent-sub-menu-icon'
                     onClick={handleSubMenuClick}
                   />
                 </div>
 
                 {showSubMenu && (
-                  <ul className="sub-menu">
+                  <ul className='sub-menu'>
                     {typeOptionsSale.map((type) => (
                       <li key={type}>
                         <Link
                           to={`/vente/${type}`}
                           onClick={handleMenuItemClick}
                         >
-                          {" "}
                           {t(`type.${type}`)}
                         </Link>
                       </li>
@@ -90,20 +89,20 @@ const MobileHeader = ({ type, setProgress }) => {
                 )}
               </>
               <>
-                <div className="parent-sub-menu">
+                <div className='parent-sub-menu'>
                   <li>
-                    <Link to="/location" onClick={handleMenuItemClick}>
+                    <Link to='/location' onClick={handleMenuItemClick}>
                       {t("header.rent")}
                     </Link>
                   </li>
                   <FiChevronDown
-                    className="parent-sub-menu-icon"
+                    className='parent-sub-menu-icon'
                     onClick={handleSubMenuClickRent}
                   />
                 </div>
 
                 {showSubMenuRent && (
-                  <ul className="sub-menu">
+                  <ul className='sub-menu'>
                     {typeOptionsRent.map((type) => (
                       <li key={type}>
                         <Link
@@ -119,7 +118,7 @@ const MobileHeader = ({ type, setProgress }) => {
                 )}
               </>
               <li>
-                <Link to="/contact" onClick={handleMenuItemClick}>
+                <Link to='/contact' onClick={handleMenuItemClick}>
                   {t("contactezNous")}
                 </Link>
               </li>

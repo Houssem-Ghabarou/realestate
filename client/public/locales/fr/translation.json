@@ -1,12 +1,12 @@
 {
-"header":{
-        "home":"Acceuil",
-        "rent":"Louer",
-        "sale":"Vente",
-        "about":"Notre agence",
-        "contact":"Contact"
-    },
-    "search": {
+  "header": {
+    "home": "Acceuil",
+    "rent": "Louer",
+    "sale": "Vente",
+    "about": "Notre agence",
+    "contact": "Contact"
+  },
+  "search": {
     "name": "Promo Villa Immobilier",
     "quote": "Recherchez votre propriété idéale",
     "acheter": "À Vendre",
@@ -27,19 +27,18 @@
     "bureau": "Bureaux",
     "immeuble": "Immeubles",
     "commercial": "Commercial"
-},
-"flatlist": {
+  },
+  "flatlist": {
     "recement": "Biens récemment mis en ligne",
     "recementVente": "Biens récemment mis en vente",
     "recementLocation": "Biens récemment mis en location",
     "bienEnVente": "Biens en vente",
     "bienEnLocation": "Biens en location",
     "resultatRecherche": "Résultats de la recherche"
-}
-,
-"footer":{
-    "def":"Promo Villa, votre allié immobilier exclusif à Hammamet. Nichée le long de l'Avenue du Koweït, notre agence se dédie à l'achat, la vente et la location de biens d'exception, de villas de prestige à des espaces commerciaux modernes. Que vous soyez particulier ou professionnel, découvrez une expérience immobilière sur mesure. Explorez Hammamet avec Promo Villa - où chaque propriété raconte une histoire unique et chaque transaction devient une réalité excitante."
-    },
+  },
+  "footer": {
+    "def": "Promo Villa, votre allié immobilier exclusif à Hammamet. Nichée le long de l'Avenue du Koweït, notre agence se dédie à l'achat, la vente et la location de biens d'exception, de villas de prestige à des espaces commerciaux modernes. Que vous soyez particulier ou professionnel, découvrez une expérience immobilière sur mesure. Explorez Hammamet avec Promo Villa - où chaque propriété raconte une histoire unique et chaque transaction devient une réalité excitante."
+  },
 
   "type": {
     "maison": "Maisons",
@@ -52,22 +51,21 @@
     "commercial": "Commercial"
   },
   "categories": {
-    
     "categories": "Catégories",
     "vente": "Vente",
     "location": "Location"
   },
   "message": "Propriétés disponibles pour {{category}}, {{proptype}} :",
-  "location":"avenue kuweit Nabeul, Hammamet",
-  "address":"Address",
-  "phone":"Téléphone",
-"email":"Email",
-"namesurname":"Nom et Prénom",
-"subject":"Sujet",
-"messageContact":"Message",
-"sendMessage":"Envoyer",
-"numTel1":"+216 20 532 181",
-"numTel2":"+216 22 307 549",
+  "location": "avenue kuweit Nabeul, Hammamet",
+  "address": "Address",
+  "phone": "Téléphone",
+  "email": "Email",
+  "namesurname": "Nom et Prénom",
+  "subject": "Sujet",
+  "messageContact": "Message",
+  "sendMessage": "Envoyer",
+  "numTel1": "+216 20 532 181",
+  "numTel2": "+216 22 307 549",
 
   "aboutUs": {
     "experience": "Professionnels expérimentés avec une connaissance approfondie du marché immobilier local.",
@@ -75,38 +73,37 @@
     "propertyPortfolio": "Portefeuille immobilier diversifié, offrant une large gamme de propriétés exclusives.",
     "transparencyEthics": "Transactions transparentes, honnêtes et respectueuses des normes éthiques.",
     "innovationTech": "Utilisation de techniques marketing innovantes et de la technologie pour une expérience immobilière moderne."
-  
-},
-"propertiesDetails":{
-  "details":"Détails de la propriété",
-  "reference":"Référence",
-  "type":"Type",
-  "surface":"Surface m²",
-  "chambre":"Chambres",
-  "salledebains":"Salles de bains",
-  "parking":"Parking"
-},
-"description":"Description",
-"caractéristiques":"Caractéristiques",
-"contactezNous":"Contactez Nous",
-"menu":"Menu",
-  "m²":"m²",
-"forSale":"À Vendre",
-"forRent":"À Louer",
-"propNotFound":"Ce bien n'existe pas",
-  "pageNotFound":"404: Oups ! Page non trouvée.",
-  "noProperties":"Aucune propriété  disponible actuellement. Revenez plus tard ou explorez d'autres annonces.",
-  "localisation":"Localisation",
-  "ammeublement":"Ammeublement",
-  "ammeubl":{
-    "meublé":"Meublé",
-    "non meublé":"Non Meublé",
-    "partiellement meublé":"Partiellement Meublé",
-     "":"-"
-},
-    "chambreMin":"Chambre Min",
-    "salledebainsMin":"Salle de bains Min",
-     "features": {
+  },
+  "propertiesDetails": {
+    "details": "Détails de la propriété",
+    "reference": "Référence",
+    "type": "Type",
+    "surface": "Surface m²",
+    "chambre": "Chambres",
+    "salledebains": "Salles de bains",
+    "parking": "Parking"
+  },
+  "description": "Description",
+  "caractéristiques": "Caractéristiques",
+  "contactezNous": "Contactez Nous",
+  "menu": "Menu",
+  "m²": "m²",
+  "forSale": "À Vendre",
+  "forRent": "À Louer",
+  "propNotFound": "Ce bien n'existe pas",
+  "pageNotFound": "404: Oups ! Page non trouvée.",
+  "noProperties": "Aucune propriété  disponible actuellement. Revenez plus tard ou explorez d'autres annonces.",
+  "localisation": "Localisation",
+  "ammeublement": "Ammeublement",
+  "ammeubl": {
+    "meublé": "Meublé",
+    "non meublé": "Non Meublé",
+    "partiellement meublé": "Partiellement Meublé",
+    "": "-"
+  },
+  "chambreMin": "Chambre Min",
+  "salledebainsMin": "Salle de bains Min",
+  "features": {
     "Balcon/Terrasse": "Balcon/Terrasse",
     "Stationnement": "Stationnement",
     "Piscine": "Piscine",
@@ -119,16 +116,13 @@
     "Vue sur la mer": "Vue sur la mer",
     "Vue sur la montagne": "Vue sur la montagne"
   },
-  "emailSent":"Message envoyé! 🚀 Nous vous répondrons dans les 24 heures. Merci ! 😊",
+  "emailSent": "Message envoyé! 🚀 Nous vous répondrons dans les 24 heures. Merci ! 😊",
 
-  "acceuil":"PromoVilla - Hammamet - Tunisie - Vente - Location - Immobilier",
-  "vente":"Vente - PromoVilla - Hammamet - Tunisie - Immobilier",
-  "locationRoute":"Location - PromoVilla - Hammamet - Tunisie - Immobilier",
-  "about":"À propos - PromoVilla - Hammamet - Tunisie - Immobilier",
-  "contact":"Contact - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "acceuil": "PromoVilla - Hammamet - Tunisie - Vente - Location - Immobilier",
+  "vente": "Vente - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "locationRoute": "Location - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "about": "À propos - PromoVilla - Hammamet - Tunisie - Immobilier",
+  "contact": "Contact - PromoVilla - Hammamet - Tunisie - Immobilier",
 
-  "promovillaForRoutes":"- PromoVilla - Hammamet - Tunisie - Immobilier"
-
+  "promovillaForRoutes": "- PromoVilla - Hammamet - Tunisie - Immobilier"
 }
-
-
