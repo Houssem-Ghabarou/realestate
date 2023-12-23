@@ -35,12 +35,12 @@ const Login = async (req, res) => {
     } else {
       User.findOne({ username: req.body.username }).then((user) => {
         if (!user) {
-          errors.username = "User not found";
+          errors.username = "Utilisateur introuvable";
           res.status(404).json(errors);
         } else {
           bcrypt.compare(req.body.password, user.password).then((isMatch) => {
             if (!isMatch) {
-              errors.password = "Incorrect password";
+              errors.password = "Mot de passe incorrect";
               res.status(404).json(errors);
             } else {
               let token = jwt.sign(

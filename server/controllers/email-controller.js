@@ -19,7 +19,12 @@ oAuth2Client.setCredentials({
 const sendEmail = async (req, res) => {
   const { property, namesurname, phone, email, description } = req.body;
   const { errors, isValid } = ValidateMessage(req.body);
-  const accessToken = await oAuth2Client.getAccessToken();
+  let accessToken;
+  try {
+    accessToken = await oAuth2Client.getAccessToken();
+  } catch (error) {
+    console.error(error);
+  }
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -29,7 +34,7 @@ const sendEmail = async (req, res) => {
       clientId: process.env.OAUTH_CLIENTID,
       clientSecret: process.env.OAUTH_CLIENT_SECRET,
       refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-      accessToken: accessToken.token, // assuming that the resolved accessToken object has a `token` property
+      accessToken: accessToken?.token, // assuming that the resolved accessToken object has a `token` property
     },
     // tls: {
     //   rejectUnauthorized: false, // Only use this for self-signed certificates
@@ -121,7 +126,7 @@ const sendEmail = async (req, res) => {
       return res.status(500).json({ error: "Échec d'envoi de l'email." }); // Failed to send email.
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ error: "Échec d'envoi du message." }); // Message sending failed.
   }
 };

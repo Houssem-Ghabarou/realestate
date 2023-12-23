@@ -17,7 +17,6 @@ export const useProperty = () => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.error(error);
       setError(error?.response?.data);
       setIsLoading(false);
     }

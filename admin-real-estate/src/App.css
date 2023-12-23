@@ -57,9 +57,9 @@ p {
 }
 
 .app {
-  /* display: flex;
-  flex-direction: column; */
-  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* login */
@@ -423,7 +423,11 @@ header img {
 
 
 /* properties-page ,bien-page */
-
+.form-body-add-property {
+  width: 100%;
+  flex: 1;
+  display: flex;
+}
 
 .property-container {
   /* height: calc(100% - 90px); */
@@ -431,6 +435,10 @@ header img {
   margin-bottom: 0.5rem;
   margin-right: 70px;
   margin-left: 70px;
+}
+
+.property-head a {
+  text-decoration: inherit;
 }
 
 .add-property {
@@ -452,6 +460,8 @@ header img {
 .add-property h4 {
   color: var(--third-color)
 }
+
+
 
 
 .property-head {
@@ -537,7 +547,7 @@ header img {
 
 
 .property-main {
-  height: 100%;
+  /* height: 100%; */
   width: 28%;
   padding: 15px;
   border: 1.6px solid #4A6165;
@@ -554,6 +564,7 @@ header img {
   height: auto;
   position: relative;
   z-index: 1;
+  min-height: 250px;
   /* min-height: 150px;
   min-width: 200px; */
 }
@@ -771,5 +782,621 @@ header img {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 80px);
+  flex: 1;
+}
+
+
+
+/* add propert page */
+
+.header h4 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.header span {
+  color: var(--button-bg-color);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.form {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  /* margin-bottom: 0.5rem */
+}
+
+
+.footer {
+  align-self: end;
+  margin-bottom: 33px;
+  margin-right: 33px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.next-btn {
+  cursor: pointer;
+  border-radius: 25px;
+  background: var(--button-bg-color);
+  width: 200px;
+  color: #FAFAFA;
+
+  border: 1px solid rgba(211, 148, 33, 0.60);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 50px;
+  outline: none;
+  opacity: 0.8;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25)
+}
+
+
+.prev-btn {
+  cursor: pointer;
+  border-radius: 25px;
+  background: #FAFAFA;
+
+  width: 200px;
+  color: var(--button-bg-color);
+  border: 1px solid var(--button-bg-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 50px;
+  outline: none;
+
+  opacity: 0.8;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25)
+}
+
+
+@media (max-width:1000px) {
+  .footer {
+    align-self: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    flex-direction: column-reverse;
+  }
+}
+
+
+/* step 1  */
+
+.step1 {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+  flex: 1;
+  flex-direction: column;
+  padding: 22px 50px 10px 50px;
+  gap: 1rem;
+
+}
+
+@media (max-width: 600px) {
+  .step1 {
+    padding: 20px 20px 20px 20px;
+  }
+}
+
+.step1-children {
+  /* flex: 1; */
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.required-chambre-salles-de-bain {
+  justify-content: space-evenly !important;
+}
+
+/* .step2-children {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+} */
+
+.step1 h5 {
+  color: var(--application-text-color);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input-radio-order {
+  /* width: 30%; */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.radio-order {
+  display: flex;
+  flex-direction: column;
+  gap: 11px
+}
+
+
+.radio-order input[type="radio"] {
+  display: none;
+  /* Hide the default radio button */
+}
+
+.radio-order input[type="radio"]+label {
+  position: relative;
+  padding-left: 30px;
+  /* Create space for custom radio button */
+  cursor: pointer;
+}
+
+.radio-order input[type="radio"]+label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(211, 148, 33, 0.60);
+  /* Change the border color */
+  border-radius: 50%;
+  /* Create a round radio button */
+  box-sizing: border-box;
+  /* Include border in the element's size */
+}
+
+.radio-order input[type="radio"]:checked+label:before {
+  background-color: rgba(211, 148, 33, 0.60);
+  /* Change the background color when checked */
+}
+
+.title-input-order {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.title-input-order h5 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+
+.title-input-order hr {
+  background-color: rgba(146, 160, 163, 0.35);
+  height: 1px;
+  width: 100%;
+  min-width: 100px;
+  align-self: end
+}
+
+
+.etoile {
+  color: #F60A0A
+}
+
+.location-select {
+  width: 40%;
+  min-width: 150px;
+  margin-bottom: 3rem;
+}
+
+.progressbar {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.progress-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: var(--button-bg-color) 1px solid;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+  /* Transition effect for background color */
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 5px;
+  background-color: #ddd;
+  position: relative;
+  overflow: hidden;
+  /* Ensures the before content stays within the bar */
+}
+
+.progress-bar:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  /* Default to no fill */
+  background-color: var(--button-bg-color);
+  transition: width 0.3s ease-in-out;
+  /* Transition effect for width of the filled part */
+}
+
+.active-circle {
+  background-color: var(--button-bg-color);
+}
+
+.active-bar::before {
+  width: 100%;
+}
+
+.progressbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.progress-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+  /* Transition effect for background color */
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 5px;
+  background-color: #ddd;
+  position: relative;
+  overflow: hidden;
+  /* Ensures the before content stays within the bar */
+}
+
+.progress-bar:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  /* Default to no fill */
+  background-color: var(--button-bg-color);
+  transition: width 0.3s ease-in-out;
+  /* Transition effect for width of the filled part */
+}
+
+.active-circle {
+  background-color: var(--button-bg-color);
+}
+
+.active-bar::before {
+  width: 100%;
+}
+
+.inactive-bar::before {
+  width: 0%;
+}
+
+
+/* step2 */
+
+
+.input-step2 {
+  width: 292px;
+  height: 60px;
+  border-radius: 25px;
+  border: 1px solid rgba(110, 104, 104, 0.00);
+  outline: none;
+  background: #FAFAFA;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.input-step2::placeholder,
+.nom-prop::placeholder,
+.description-prop::placeholder {
+  color: var(--placeholder-color);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-right: 0.5rem;
+  text-align: right;
+}
+
+.plus-minus-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.plus-minus-order {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Hide the default number input arrows */
+.plus-minus-input::-webkit-inner-spin-button,
+.plus-minus-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Set some styles to make the input visually appealing */
+.plus-minus-input {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 50px;
+  font-size: 20px;
+  /* Adjust the width as per your design */
+}
+
+.plus-minus-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* checkbox css */
+.unstyled {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.unstyled li {
+  margin: 20px 0;
+}
+
+.styled-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.styled-checkbox+label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #4c4c4d;
+}
+
+.styled-checkbox+label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 28px;
+  height: 28px;
+  box-shadow: rgba(0, 44, 133, 0.1) 0px 5px 10px 0px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.styled-checkbox:hover+label:before {
+  /* background: #4c4c4d; */
+}
+
+.styled-checkbox:focus+label:before {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.styled-checkbox:checked+label:before {
+  /* background: #DAA520; */
+}
+
+.styled-checkbox:disabled+label {
+  color: #b8b8b8;
+  cursor: auto;
+}
+
+.styled-checkbox:disabled+label:before {
+  box-shadow: none;
+  background: #ddd;
+}
+
+.styled-checkbox+label:after {
+  content: '✔';
+  position: absolute;
+  left: 5px;
+  color: #DAA520;
+  font-size: 22px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.styled-checkbox:checked+label:after {
+  opacity: 1;
+}
+
+
+/* step3 */
+.step3 {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 22px 50px 10px 50px;
+}
+
+@media (max-width:1300px) {
+  .step3 {
+    flex-direction: column;
+    padding: 20px 20px 20px 20px;
+  }
+}
+
+.nom-prop {
+  border-radius: 18px;
+  border: 1px solid rgba(110, 104, 104, 0.00);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 456px;
+  height: 70px;
+  outline: none;
+
+}
+
+.description-prop {
+  border-radius: 18px;
+  border: 1px solid rgba(110, 104, 104, 0.00);
+  background: #FAFAFA;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 476px;
+  height: 204px;
+  outline: none;
+
+}
+
+.name-descr {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.image-container {
+  width: 600px;
+  height: 100%;
+  /* Sets the container's height */
+  background-color: #D9D9D9;
+
+  border: 2px dashed #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+@media (max-width:650px) {
+  .image-container {
+    width: 400px;
+  }
+
+  .nom-prop {
+    width: 350px;
+
+  }
+
+  .description-prop {
+    width: 350px;
+
+  }
+}
+
+.image-container.images-present {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  /* Changes cursor to indicate clickable area */
+  display: flex;
+  /* Enables flexbox layout for the label */
+  flex-direction: column;
+  /* Arranges label's children in a column */
+  align-items: center;
+  /* Centers label's children */
+  gap: 10px;
+  /* Adds space between the image and the text */
+}
+
+.input-image {
+  display: none;
+  /* Hides the file input */
+}
+
+p {
+  margin: 0;
+  /* Removes default margin from paragraph */
+  color: #444;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.upload-image-wrapper {
+  display: flex;
+}
+
+.uploaded-image {
+  max-width: 150px;
+  max-height: 150px;
+
+  /* And respective max-height for consistency */
+  margin: 5px;
+  /* Adds a margin around each image */
+  object-fit: cover;
+  /* Adjusts the size of the photo to fill the thumbnail, cropping it as needed */
+}
+
+.add-images-already-uploaded {
+  height: 120px;
+  width: 150px;
+}
+
+
+
+.input-step2,
+.nom-prop,
+.description-prop {
+  font-size: 18px;
+  font-weight: 400;
 }

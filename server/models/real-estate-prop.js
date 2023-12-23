@@ -13,7 +13,7 @@ const realEstatePropertySchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["vente", "location", "locationsais"],
+    enum: ["vente", "location", "locationVacances"],
     required: true,
   },
   // status: {
@@ -23,7 +23,7 @@ const realEstatePropertySchema = new mongoose.Schema({
   // },
   ammeublement: {
     type: String,
-    enum: ["meublé", "non meublé", "partiellement meublé"],
+    enum: ["meuble", "nonMeuble", "partiellementMeuble"],
   },
 
   type: {
@@ -33,7 +33,7 @@ const realEstatePropertySchema = new mongoose.Schema({
       "villa",
       "appartement",
       "terrain",
-      "local",
+      // "local",
       "immeuble",
       "commercial",
       "bureau",
@@ -79,15 +79,15 @@ const realEstatePropertySchema = new mongoose.Schema({
   },
   chambres: {
     type: Number,
-    required: function () {
-      return !["terrain", "commercial", "bureau", "local"].includes(this.type);
-    },
+    // required: function () {
+    //   return !["terrain", "commercial", "bureau", "local"].includes(this.type);
+    // },
   },
   sallesDeBains: {
     type: Number,
-    required: function () {
-      return !["terrain", "commercial", "bureau", "local"].includes(this.type);
-    },
+    // required: function () {
+    //   return !["terrain", "commercial", "bureau", "local"].includes(this.type);
+    // },
   },
   surface: {
     type: Number,

@@ -2,7 +2,6 @@ const realEstateProp = require("../models/real-estate-prop");
 const sharp = require("sharp");
 
 const addProperty = async (req, res) => {
-  // Extract data from the request body
   const {
     category,
     type,
@@ -57,6 +56,9 @@ const addProperty = async (req, res) => {
     return propIdName;
   }
   const propIdName = generatePropIdName(lowerName, numberIdentifier);
+  const characteristicsArray = characteristics
+    ?.split(",")
+    ?.map((item) => item?.trim());
 
   try {
     const newProp = new realEstateProp({
@@ -72,11 +74,14 @@ const addProperty = async (req, res) => {
       ammeublement,
       surface,
       parking,
-      characteristics,
+      characteristics: characteristicsArray,
     });
-
+    if (req.fileTypeError) {
+      // Handle file type error
+      return res.status(400).json({ imageError: req.fileTypeError });
+    }
     // Check if images are provided
-    if (req?.files?.length === 0 || !req?.files) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "Images are necessary" });
     } else {
       // Process and store image paths
@@ -99,7 +104,12 @@ const addProperty = async (req, res) => {
       newProp.images = path;
     }
 
-    if (type === "terrain") {
+    if (
+      type === "terrain" ||
+      type === "immeuble" ||
+      type === "bureau" ||
+      type === "commercial"
+    ) {
       newProp.chambres = null;
       newProp.sallesDeBains = null;
       newProp.parking = null;

@@ -4,6 +4,8 @@ import searchIcon from "../assets/search.svg";
 import Select from "react-select";
 import { options } from "../data/propertyType";
 import { styles } from "../styles/selectStyles";
+import { Link } from "react-router-dom";
+
 const PropertyHead = () => {
   const [search, setSearch] = useState("");
   const [propertyType, setPropertyType] = useState(null);
@@ -13,10 +15,13 @@ const PropertyHead = () => {
   };
   return (
     <div className='property-head'>
-      <div className='add-property'>
-        <img src={addProp} alt='ajouter-bien' />
-        <h4>Ajouter un bien</h4>
-      </div>
+      <Link to='/ajouter-un-bien'>
+        <div className='add-property'>
+          <img src={addProp} alt='ajouter-bien' />
+          <h4>Ajouter un bien</h4>
+        </div>
+      </Link>
+
       <div className='search-box'>
         <img src={searchIcon} alt='search-icon' className='search-icon' />
         <input

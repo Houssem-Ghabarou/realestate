@@ -95,9 +95,9 @@
   "localisation": "Location",
   "ammeublement": "Furnishing",
   "ammeubl": {
-    "meublé": "Furnished",
-    "non meublé": "Unfurnished",
-    "partiellement meublé": "Partially Furnished",
+    "meuble": "Furnished",
+    "nonMeuble": "Unfurnished",
+    "partiellementMeuble": "Partially Furnished",
     "": "-"
   },
   "chambreMin": "Minimum Bedrooms",

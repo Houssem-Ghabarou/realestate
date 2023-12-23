@@ -96,9 +96,9 @@
   "localisation": "Localisation",
   "ammeublement": "Ammeublement",
   "ammeubl": {
-    "meublé": "Meublé",
-    "non meublé": "Non Meublé",
-    "partiellement meublé": "Partiellement Meublé",
+    "meuble": "Meuble",
+    "nonMeuble": "Non Meublé",
+    "partiellementMeuble": "Partiellement Meublé",
     "": "-"
   },
   "chambreMin": "Chambre Min",

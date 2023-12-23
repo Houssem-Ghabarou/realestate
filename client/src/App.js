@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { lazy, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { SearchResultProvider } from "./context/SearchContext";
 import { CurrencyProvider } from "./context/currencyContext";
@@ -10,8 +10,8 @@ import Footer from "./components/Footer";
 import Banner from "./components/Banner";
 import Search from "./components/Search";
 import Home from "./components/Home";
-import Contact from "./components/Contact";
-import About from "./components/About";
+// import Contact from "./components/Contact";
+// import About from "./components/About";
 import Vente from "./components/Vente";
 import Location from "./components/Location";
 import FlatDetail from "./components/FlatDetail";
@@ -20,6 +20,9 @@ import NotFound from "./components/NotFound";
 import WhatsApp from "./components/WhatsApp";
 import { Toaster } from "react-hot-toast";
 import { HelmetProvider } from "react-helmet-async";
+
+const Contact = lazy(() => import("./components/Contact"));
+const About = lazy(() => import("./components/About"));
 function App() {
   const [progress, setProgress] = useState(0);
 
@@ -29,7 +32,7 @@ function App() {
         <HelmetProvider>
           <Router>
             <Toaster
-              position="top-right"
+              position='top-right'
               reverseOrder={false}
               toastOptions={{
                 // Define default options
@@ -50,13 +53,13 @@ function App() {
               }}
             />
             <LoadingBar
-              color="#DAA520"
+              color='#DAA520'
               progress={progress}
               onLoaderFinished={() => setProgress(0)}
               height={4}
               waitingTime={300}
             />
-            <div className="App">
+            <div className='App'>
               <WhatsApp />
               <Route
                 path={[
@@ -73,7 +76,7 @@ function App() {
               />
 
               <Route
-                path="/"
+                path='/'
                 exact
                 render={(props) => (
                   <Banner {...props} setProgress={setProgress} />
@@ -90,7 +93,7 @@ function App() {
 
               <Switch>
                 <Route
-                  path="/"
+                  path='/'
                   exact
                   render={(props) => (
                     <Home {...props} setProgress={setProgress} />
@@ -98,42 +101,42 @@ function App() {
                 ></Route>
                 <Route
                   exact
-                  path="/contact"
+                  path='/contact'
                   render={(props) => (
                     <Contact {...props} setProgress={setProgress} />
                   )}
                 ></Route>
                 <Route
                   exact
-                  path="/about"
+                  path='/about'
                   render={(props) => (
                     <About {...props} setProgress={setProgress} />
                   )}
                 ></Route>
                 <Route
                   exact
-                  path="/vente"
+                  path='/vente'
                   render={(props) => (
                     <Vente {...props} setProgress={setProgress} />
                   )}
                 />
                 <Route
                   exact
-                  path="/location"
+                  path='/location'
                   render={(props) => (
                     <Location {...props} setProgress={setProgress} />
                   )}
                 />
                 <Route
                   exact
-                  path="/bien/details/:propIdName"
+                  path='/bien/details/:propIdName'
                   render={(props) => (
                     <FlatDetail {...props} setProgress={setProgress} />
                   )}
                 />
                 <Route
                   exact
-                  path="/:category/:proptype"
+                  path='/:category/:proptype'
                   render={(props) => (
                     <PropByCatType
                       {...props}
@@ -143,9 +146,9 @@ function App() {
                   )}
                 />
 
-                <Route path="/404" component={NotFound}></Route>
+                <Route path='/404' component={NotFound}></Route>
                 <Route>
-                  <Redirect to="/404" />
+                  <Redirect to='/404' />
                 </Route>
               </Switch>
 

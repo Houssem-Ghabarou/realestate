@@ -11,26 +11,42 @@ import Properties from "./pages/Properties";
 import Dashboard from "./pages/Dashboard";
 import Messages from "./pages/Messages";
 import Agents from "./pages/Agents";
+import AddProperty from "./pages/AddProperty";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const { user, isSuccess } = useAuthContext();
-  const userState = {
-    user,
-    isSuccess,
-  };
   const location = useLocation();
   const showNavBar = location.pathname !== "/login"; // Hide NavBar on Login page
 
   return (
     <div className='app'>
-      <Toaster position='top-center' reverseOrder={false} />
-      {showNavBar && <NavBar />}
+      <Toaster
+        position='top-center'
+        reverseOrder={false}
+        toastOptions={{
+          // Define default options
+          // className: "",
+          // duration: 5000,
+          style: {
+            background: "#4c4c4d",
+            color: "#fff",
+          },
 
+          success: {
+            duration: 6000,
+            theme: {
+              primary: "rgba(211, 148, 33, 0.78)",
+              // secondary: "black",
+            },
+          },
+        }}
+      />
+      {showNavBar && <NavBar />}
       <Routes>
         <Route
           path='/login'
           element={
-            <ForceRedirect user={userState}>
+            <ForceRedirect>
               <Login />
             </ForceRedirect>
           }
@@ -39,7 +55,7 @@ function App() {
         <Route
           path='/'
           element={
-            <PrivateRouter user={userState}>
+            <PrivateRouter>
               <Properties />
             </PrivateRouter>
           }
@@ -47,7 +63,7 @@ function App() {
         <Route
           path='/dashboard'
           element={
-            <PrivateRouter user={userState}>
+            <PrivateRouter>
               <Dashboard />
             </PrivateRouter>
           }
@@ -55,7 +71,7 @@ function App() {
         <Route
           path='/messages'
           element={
-            <PrivateRouter user={userState}>
+            <PrivateRouter>
               <Messages />
             </PrivateRouter>
           }
@@ -63,11 +79,20 @@ function App() {
         <Route
           path='/agents'
           element={
-            <PrivateRouter user={userState}>
+            <PrivateRouter>
               <Agents />
             </PrivateRouter>
           }
         />
+        <Route
+          path='/ajouter-un-bien'
+          element={
+            <PrivateRouter>
+              <AddProperty />
+            </PrivateRouter>
+          }
+        />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
   );

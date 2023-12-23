@@ -97,9 +97,9 @@
   "localisation": "الموقع",
   "ammeublement": "الأثاث",
   "ammeubl": {
-    "meublé": "مفروش",
-    "non meublé": "غير مفروش",
-    "partiellement meublé": "مفروش جزئيًا",
+    "meuble": "مفروش",
+    "nonMeuble": "غير مفروش",
+    "partiellementMeuble": "مفروش جزئيًا",
     "": "-"
   },
   "chambreMin": "عدد غرف النوم الأدنى",
