@@ -6,12 +6,17 @@ import { useLogout } from "../hooks/useLogout";
 import MobileHeader from "./MobileHeader";
 import { routesLinks } from "../data/routesLinks";
 import logoutIcon from "../assets/logout.svg";
+import { useNavigate } from "react-router-dom";
 const NavBar = () => {
+  const navigate = useNavigate();
   const { logout } = useLogout();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const ref = useRef(null); // Ref for the container
   const [isMobile, setIsMobile] = useState(false);
 
+  const navigateHome = () => {
+    navigate("/");
+  };
   const checkWindowWidth = () => {
     setIsMobile(window.innerWidth <= 768);
   };
@@ -41,9 +46,9 @@ const NavBar = () => {
   return (
     <header>
       {!isMobile ? (
-        <img src={promovilla} alt='promovilla-logo' />
+        <img src={promovilla} alt='promovilla-logo' onClick={navigateHome} />
       ) : (
-        <MobileHeader />
+        <MobileHeader navigateHome={navigateHome} />
       )}
       {!isMobile && (
         <nav className='header-middle'>

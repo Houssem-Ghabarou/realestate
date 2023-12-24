@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import promovilla from "../assets/promovillaNew.png";
 import { IoMdClose } from "react-icons/io";
 
-const MobileHeader = () => {
+const MobileHeader = ({ navigateHome }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const toggleOverlay = () => {
     setShowOverlay((prevState) => !prevState);
@@ -21,6 +21,7 @@ const MobileHeader = () => {
               <IoMdClose className='close-menu' onClick={toggleOverlay} />
               ;
               <img
+                onClick={navigateHome}
                 src={promovilla}
                 alt='promovilla-logo'
                 className='promovilla-logo-sidebar'
