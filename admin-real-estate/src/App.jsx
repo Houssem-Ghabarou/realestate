@@ -13,7 +13,8 @@ import Messages from "./pages/Messages";
 import Agents from "./pages/Agents";
 import AddProperty from "./pages/AddProperty";
 import NotFound from "./pages/NotFound";
-
+import MyProfile from "./pages/MyProfile";
+import Settings from "./pages/Settings";
 function App() {
   const location = useLocation();
   const showNavBar = location.pathname !== "/login"; // Hide NavBar on Login page
@@ -85,10 +86,26 @@ function App() {
           }
         />
         <Route
-          path='/ajouter-un-bien'
+          path='/bien'
           element={
             <PrivateRouter>
               <AddProperty />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path='/my-profile'
+          element={
+            <PrivateRouter>
+              <MyProfile />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path='/settings'
+          element={
+            <PrivateRouter>
+              <Settings />
             </PrivateRouter>
           }
         />

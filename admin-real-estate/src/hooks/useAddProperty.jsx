@@ -34,11 +34,10 @@ export const useAddProperty = () => {
         },
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setIsSuccess(true);
       }
     } catch (err) {
-      console.error(err);
       setError(err?.response?.data);
     } finally {
       setIsLoading(false);

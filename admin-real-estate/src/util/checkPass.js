@@ -96,9 +96,14 @@ export const checkPass = (page, formData) => {
           "Veuillez indiquer le nombre de chambres et de salle de bain pour le type de propriété sélectionné.",
       };
     }
-
-    const surfaceInput = formData.surface.trim(); // Remove leading/trailing spaces
-    const prixInput = formData.prix.trim();
+    const surfaceInput =
+      typeof formData?.surface === "string"
+        ? formData.surface.trim()
+        : formData?.surface;
+    const prixInput =
+      typeof formData?.prix === "string"
+        ? formData.prix.trim()
+        : formData?.prix;
 
     if (!/^\d+(\.\d+)?$/.test(surfaceInput) || parseFloat(surfaceInput) <= 0) {
       return {

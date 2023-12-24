@@ -7,7 +7,7 @@ export const typeOptionsRent = [
   "villa",
   "bureau",
   "commercial",
-  "local",
+  // "local",
 ];
 
 ///Header view
@@ -18,7 +18,7 @@ export const typeOptionsSaleHeader = [
   "immeuble",
   "bureau",
   "commercial",
-  "local",
+  // "local",
   "terrain",
 ];
 
@@ -30,5 +30,5 @@ export const typeOptionsRentHeader = [
   "immeuble",
   "bureau",
   "commercial",
-  "local",
+  // "local",
 ];

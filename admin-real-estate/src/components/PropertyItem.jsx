@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import localisation from "../assets/localisation.svg";
 import bed from "../assets/bed.svg";
 import bath from "../assets/bath.svg";
@@ -6,24 +6,77 @@ import garage from "../assets/garage.svg";
 import surface from "../assets/surface.svg";
 import date from "../assets/date.svg";
 import deleteIcon from "../assets/delete.svg";
+import editIcon from "../assets/edit.svg";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { capitalizeFirstLetter } from "../util/capitalizeFirstLetter";
 import { formatDate } from "../util/formatDate";
-
+import { useNavigate } from "react-router-dom";
+import { useDeleteProperty } from "../hooks/useDeleteProperty";
+import toast from "react-hot-toast";
+import ConfirmationModal from "./ConfirmationModal";
 const backendBaseUrl = import.meta.env.VITE_API_KEY;
 
-const PropertyItem = ({ property }) => {
+const PropertyItem = ({ property, setDeleteSucess }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [propertyToDelete, setPropertyToDelete] = useState(null);
+  const {
+    deleteProperty,
+    isSuccessDeleting,
+    errorDeleting,
+    isLoadingDeleting,
+  } = useDeleteProperty();
+  const navigate = useNavigate();
+  const handleEditClick = () => {
+    navigate("/bien", { state: { propertyData: property, isEdit: true } });
+  };
   const image = property?.images?.split(",")[0];
 
   const imageUrl = `${backendBaseUrl}/${image?.replace(/\\/g, "/")}`;
+
+  const handleDeleteClick = (propertyId) => {
+    setShowDeleteModal(true);
+    setPropertyToDelete(propertyId);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (propertyToDelete) {
+      deleteProperty(property?._id);
+      setShowDeleteModal(false);
+      setPropertyToDelete(null);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccessDeleting) {
+      toast.success("La propriété a été supprimée avec succès");
+      setDeleteSucess(true);
+    }
+    if (errorDeleting) {
+      toast.error(errorDeleting);
+    }
+  }, [isSuccessDeleting, errorDeleting]);
   return (
     <div key={property?._id} className='property-main'>
-      <button className='delete-property'>
+      {showDeleteModal && (
+        <ConfirmationModal
+          message='Êtes-vous sûr de vouloir supprimer cette propriété ?'
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setShowDeleteModal(false)}
+        />
+      )}
+      <button
+        className='delete-property'
+        onClick={() => handleDeleteClick(property?._id)}
+      >
         <img src={deleteIcon} alt='delete-button' />
       </button>
+      <button className='edit-property' onClick={handleEditClick}>
+        <img src={editIcon} alt='edit-button' />
+      </button>
+
       <div className='image-prop-container'>
         <img src={imageUrl} alt='property' className='property-image' />
-
+        <div className='reference-property'>{property?.reference}</div>
         <button className='go-button background-container-go-button'>
           <IoArrowForwardCircleOutline className='go-button-icon' />
         </button>

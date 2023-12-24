@@ -50,27 +50,51 @@ const Step1 = ({ formData, setFormData }) => {
       });
     }
   }, [formData.propertyType, typesRequiringAmeublement, setFormData]);
+  useEffect(() => {
+    if (
+      formData.category === "location" &&
+      formData.propertyType === "terrain"
+    ) {
+      setFormData({
+        ...formData,
+        propertyType: "",
+      });
+    }
+  }, [formData.propertyType, formData.category, setFormData]);
   return (
     <div className='step1'>
       <div className='step1-children'>
         <div className='input-radio-order'>
           <TitleInfoProp title={"Catégory"} />
           <div className='radio-order'>
-            {categoryInputs.map((inp) => (
-              <div key={inp.value}>
-                <input
-                  onChange={(event) =>
-                    setFormData({ ...formData, category: event.target.value })
-                  }
-                  type='radio'
-                  id={inp.id}
-                  name={inp.name}
-                  value={inp.value}
-                  checked={formData.category === inp.value}
-                />
-                <label htmlFor={inp.value}>{inp.labelName}</label>
-              </div>
-            ))}
+            {categoryInputs.map((inp) => {
+              if (
+                !(
+                  inp.value === "location" &&
+                  formData.propertyType === "terrain"
+                )
+              ) {
+                return (
+                  <div key={inp.value}>
+                    <input
+                      onChange={(event) =>
+                        setFormData({
+                          ...formData,
+                          category: event.target.value,
+                        })
+                      }
+                      type='radio'
+                      id={inp.id}
+                      name={inp.name}
+                      value={inp.value}
+                      checked={formData.category === inp.value}
+                    />
+                    <label htmlFor={inp.value}>{inp.labelName}</label>
+                  </div>
+                );
+              }
+              return null;
+            })}
           </div>
         </div>
         <div className='input-radio-order'>

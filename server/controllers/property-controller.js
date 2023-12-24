@@ -32,7 +32,7 @@ const addProperty = async (req, res) => {
   }
 
   // Validate specific fields for certain types
-  if (["maison", "villa", "appartement", "immeuble"].includes(type)) {
+  if (["maison", "villa", "appartement"].includes(type)) {
     if (!chambres || !sallesDeBains || !ammeublement) {
       return res.status(400).json({
         message:
@@ -147,6 +147,10 @@ const editProperty = async (req, res) => {
   const propertyId = req.params.id; // Assuming the property ID is provided as a URL parameter
 
   try {
+    if (req.fileTypeError) {
+      // Handle file type error
+      return res.status(400).json({ imageError: req.fileTypeError });
+    }
     // Find the property by ID
     const property = await realEstateProp.findById(propertyId);
 
@@ -181,7 +185,12 @@ const editProperty = async (req, res) => {
     if (sallesDeBains) property.sallesDeBains = sallesDeBains;
     if (surface) property.surface = surface;
     if (parking) property.parking = parking;
-    if (characteristics) property.characteristics = characteristics;
+    if (characteristics) {
+      const characteristicsArray = characteristics
+        ?.split(",")
+        ?.map((item) => item?.trim());
+      property.characteristics = characteristicsArray;
+    }
     // Check if images are provided
     if (req.files.length !== 0) {
       let path = "";
@@ -331,7 +340,7 @@ const searchProperty = async (req, res) => {
     if (propertyRef) {
       // Use $or operator to check for either reference or name
       conditions.$or = [
-        { reference: propertyRef },
+        { reference: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
         { name: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
         // The 'i' flag in the regex makes the match case-insensitive
       ];
@@ -370,9 +379,29 @@ const searchProperty = async (req, res) => {
       conditions.characteristics = { $in: selectedFeatures };
     }
 
-    console.log(conditions, "conditions");
-
     const properties = await realEstateProp.find(conditions);
+    res.status(200).json(properties);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get properties." });
+  }
+};
+
+const searchByRefName = async (req, res) => {
+  const { propertyRef } = req.query;
+
+  try {
+    const conditions = {};
+    if (propertyRef) {
+      conditions.$or = [
+        { reference: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
+        { name: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
+      ];
+    }
+    const properties = await realEstateProp.find(conditions);
+    if (!properties) {
+      return res.status(404).json({ message: "Aucun résultat trouvé." });
+    }
     res.status(200).json(properties);
   } catch (err) {
     console.error(err);
@@ -409,4 +438,5 @@ module.exports = {
   getPropertyCategoryType,
   searchProperty,
   getLocation,
+  searchByRefName,
 };

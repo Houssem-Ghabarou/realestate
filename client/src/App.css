@@ -304,7 +304,7 @@ body {
   flex-direction: column;
   box-sizing: border-box;
   /* word-break: break-all; */
-  background: linear-gradient(rgba(0, 44, 133, 0.5) 0%, transparent 100%);
+  background: linear-gradient(rgba(0, 44, 133, 0.3) 0%, transparent 100%);
   /* overflow: hidden; */
 }
 

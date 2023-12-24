@@ -198,8 +198,13 @@ p {
     height: 100%
   }
 
+  .promovilla-login {
+    height: 60px;
+    width: 60px;
+  }
 
 
+  .go-button-icon {}
 
 
 
@@ -235,6 +240,20 @@ p {
 
 
 /* header */
+
+.logout-button {
+  margin-top: 9px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: "nowrap";
+}
+
+.logout-button button {
+  background: transparent;
+  border: none
+}
 
 header {
   width: 100vw;
@@ -297,7 +316,7 @@ header img {
   background: var(--standard-fff-color);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
-  z-index: 1;
+  z-index: 200;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -319,7 +338,8 @@ header img {
   transform: translateY(0);
 } */
 
-.dropdown a {
+.dropdown a,
+h5 {
   text-decoration: none;
   color: inherit;
   font-size: 14px;
@@ -490,7 +510,7 @@ header img {
 }
 
 .property-head input {
-  width: 250px;
+  width: 300px;
   height: 40px;
   font-size: 18px;
   color: var(--input-search-placeholder-color);
@@ -565,8 +585,8 @@ header img {
   position: relative;
   z-index: 1;
   min-height: 250px;
-  /* min-height: 150px;
-  min-width: 200px; */
+  max-height: 255px;
+  min-width: 320px;
 }
 
 .background-container-go-button {
@@ -586,7 +606,8 @@ header img {
 
 .image-prop-container {
   position: relative;
-  display: inline-block
+  display: inline-block;
+  width: 100%
 }
 
 
@@ -730,24 +751,57 @@ header img {
   z-index: 99;
 }
 
+.edit-property {
+  opacity: 0.9;
+  cursor: pointer;
+  position: absolute;
+  top: -50px;
+  left: -30px;
+  background-color: rgba(74, 97, 101, 0.671);
+  border-radius: 50%;
+  width: 73.401px;
+  height: 80px;
+  border: none;
+  transform: scale(1);
+  transition: transform 0.3s, color 0.3s, opacity 0.3s ease;
+  z-index: 99;
+}
+
+.edit-property img {
+  position: absolute;
+  bottom: 0;
+  top: 65%;
+  right: 24%;
+  width: 18px;
+  height: 22px;
+  margin: 0;
+
+}
+
 .delete-property img {
   position: absolute;
   bottom: 0;
   top: 65%;
   left: 24%;
-  /* Reduce the size by 5px */
   width: 18px;
   height: 22px;
   margin: 0;
 }
 
+.edit-property:hover {
+  opacity: 1;
+  transform: scale(1.2);
+  background-color: rgba(74, 97, 101, 0.671);
+  /* box-shadow: 0 0 0 5px var(--third-color), 0 0 0 10px var(--input-search-placeholder-color); */
 
-.delete-property:hover {
+}
+
+/* .delete-property:hover {
   opacity: 1;
   transform: scale(1.2);
   background-color: #B67D7D;
   box-shadow: 0 0 0 5px #DAA6A6, 0 0 0 10px #EFD2D2;
-}
+} */
 
 .go-button {
 
@@ -782,6 +836,7 @@ header img {
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-height: calc(100vh - 200px);
   flex: 1;
 }
 
@@ -1127,7 +1182,6 @@ header img {
   width: 292px;
   height: 60px;
   border-radius: 25px;
-  border: 1px solid rgba(110, 104, 104, 0.00);
   outline: none;
   background: #FAFAFA;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
@@ -1341,6 +1395,9 @@ header img {
 
 .image-container.images-present {
   justify-content: flex-start;
+  /* white-space: nowrap; */
+  gap: 1rem;
+  justify-content: center;
   align-items: flex-start;
 }
 
@@ -1376,6 +1433,23 @@ p {
   display: flex;
 }
 
+.image-and-delete-container {
+  position: relative;
+  display: inline-block;
+  /* or 'block' depending on layout, makes container fit content */
+}
+
+.delete-image {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  /* Adjust icon to move outside the image */
+}
+
 .uploaded-image {
   max-width: 150px;
   max-height: 150px;
@@ -1399,4 +1473,150 @@ p {
 .description-prop {
   font-size: 18px;
   font-weight: 400;
+  border: 1px solid var(--third-color);
+}
+
+/* //pagination */
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  /* margin-bottom: 2.5rem; */
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.pagination .page-num {
+  padding: 8px 15px;
+  /* background-color: #DAA520; */
+  background-color: #4c4c4d;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+  text-decoration: #fff;
+  color: #fff
+}
+
+.pagination .active {
+  background-color: #253156 !important;
+  color: #fff;
+
+  /* Change the text color */
+}
+
+.active-link {
+  background-color: #DAA520 !important;
+}
+
+
+/* /no prop */
+.no-property {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
+}
+
+.coming-soon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 140px);
+}
+
+
+/* /confirmation modal */
+.confirmation-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000;
+}
+
+.confirmation-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-btn,
+.cancel-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
+  background: var(--button-bg-color);
+  /* Softer golden color in RGB */
+  /* border: 0; */
+  border-width: 2px;
+  color: #4c4c4d;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: var(--button-bg-color);
+  padding: 12px 25px;
+  min-width: 130px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-btn:hover,
+.cancel-btn:hover {
+  background-color: white;
+  color: var(--button-bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.confirmation-buttons {
+  display: flex;
+  gap: 1rem
+}
+
+.reference-property {
+  font-size: 14px;
+  /* Slightly smaller font for subtlety */
+  position: absolute;
+  /* Keeps the reference within the card */
+  bottom: 10px;
+  /* More balanced spacing from the bottom */
+  left: 10px;
+  /* Aligns the text slightly more inward */
+  color: #435a6f;
+  /* A softer, deep blue hue for better readability */
+  background-color: rgba(255, 255, 255, 0.8);
+  /* A translucent white background */
+  padding: 0.3rem 0.5rem;
+  /* Comfortable padding around the text */
+  border: 1px solid #d1d9e6;
+  /* Adds a subtle border */
+  border-radius: 4px;
+  /* Rounded corners for a modern look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Soft shadow for depth */
+  text-align: center;
+  /* Centers text within the element */
+  text-transform: uppercase;
+  /* Capitalizes the reference for distinction */
+  letter-spacing: 0.05em;
+  /* A little spacing for legibility */
+  font-weight: 600;
+  /* Slightly bolder font to stand out */
+  z-index: 99;
+}
+
+.reference-property:hover {
+  cursor: initial;
 }

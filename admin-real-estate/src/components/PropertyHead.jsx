@@ -6,16 +6,20 @@ import { options } from "../data/propertyType";
 import { styles } from "../styles/selectStyles";
 import { Link } from "react-router-dom";
 
-const PropertyHead = () => {
+const PropertyHead = ({ searchProperties }) => {
   const [search, setSearch] = useState("");
   const [propertyType, setPropertyType] = useState(null);
 
   const handlePropertyChange = (selectedOption) => {
     setPropertyType(selectedOption);
   };
+
+  const searchPropertiesHandler = () => {
+    searchProperties(search);
+  };
   return (
     <div className='property-head'>
-      <Link to='/ajouter-un-bien'>
+      <Link to='/bien'>
         <div className='add-property'>
           <img src={addProp} alt='ajouter-bien' />
           <h4>Ajouter un bien</h4>
@@ -26,14 +30,19 @@ const PropertyHead = () => {
         <img src={searchIcon} alt='search-icon' className='search-icon' />
         <input
           type='text'
-          placeholder='Rechercher un bien'
+          placeholder='Recherche  Nom/Référence'
           value={search}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchPropertiesHandler(); // Call search when Enter key is pressed
+            }
+          }}
           onChange={(e) => {
             setSearch(e.target.value);
           }}
         />
       </div>
-      <Select
+      {/* <Select
         isSearchable={false}
         styles={styles}
         isMulti
@@ -43,7 +52,7 @@ const PropertyHead = () => {
         onChange={handlePropertyChange}
         options={options}
         placeholder={"Type de bien"}
-      />
+      /> */}
     </div>
   );
 };

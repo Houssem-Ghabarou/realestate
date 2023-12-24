@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import TitleInfoProp from "./TitleInfoProp";
 import addImages from "../assets/addImages.svg";
-
+import deleteImage from "../assets/deleteImage.svg";
 const Step3 = ({ formData, setFormData }) => {
+  const [dragging, setDragging] = useState(false);
+
+  const handleFileDrop = (event) => {
+    const newFiles = event.dataTransfer.files;
+
+    const filePreviews = Array.from(newFiles).map((file) =>
+      URL.createObjectURL(file)
+    );
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      uploads: newFiles,
+      uploadedImages: [...prevFormData.uploadedImages, ...filePreviews],
+    }));
+  };
+
   const handleFileUpload = (event) => {
-    // Access the files from the input
     const newFiles = event.target.files;
 
     // Convert files into Blob URLs for preview
@@ -12,25 +27,22 @@ const Step3 = ({ formData, setFormData }) => {
       URL.createObjectURL(file)
     );
 
-    // Update state with new files, assuming formData.uploads keeps the File objects
     setFormData((prevFormData) => ({
       ...prevFormData,
-      uploads: newFiles, // Store the File objects
-      uploadedImages: [...prevFormData.uploadedImages, ...filePreviews], // Store Blob URLs for rendering previews
+      uploads: newFiles,
+      uploadedImages: [...prevFormData.uploadedImages, ...filePreviews],
     }));
   };
 
-  const removeImage = (index) => {
-    // Create a copy of the uploaded images array
+  const handleRemoveImage = (index) => {
     const updatedImages = [...formData.uploadedImages];
-
-    // Remove the specified image at the given index
+    const uploads = [...formData.uploads];
+    uploads.splice(index, 1);
     updatedImages.splice(index, 1);
-
-    // Update state with the new array of images
     setFormData((prevFormData) => ({
       ...prevFormData,
       uploadedImages: updatedImages,
+      uploads: uploads,
     }));
   };
 
@@ -40,15 +52,37 @@ const Step3 = ({ formData, setFormData }) => {
         className={`image-container ${
           formData?.uploadedImages?.length > 0 ? "images-present" : ""
         }`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragging(true);
+        }}
+        onDragEnter={() => setDragging(true)}
+        onDragLeave={() => setDragging(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragging(false);
+          handleFileDrop(e);
+        }}
+        style={{
+          border: dragging ? "2px dashed #1890ff" : "2px dashed #d9d9d9",
+        }}
       >
         <>
           {formData?.uploadedImages?.map((imageSrc, index) => (
             <div key={index} className='upload-image-wrapper'>
-              <img
-                src={imageSrc}
-                alt={`Uploaded content ${index + 1}`}
-                className='uploaded-image'
-              />
+              <div className='image-and-delete-container'>
+                <img
+                  onClick={handleRemoveImage}
+                  src={deleteImage}
+                  alt='delete-image'
+                  className='delete-image'
+                />
+                <img
+                  src={imageSrc}
+                  alt={`Uploaded content ${index + 1}`}
+                  className='uploaded-image'
+                />
+              </div>
             </div>
           ))}
 

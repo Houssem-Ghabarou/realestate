@@ -5,6 +5,7 @@ import profileIcon from "../assets/profile.png";
 import { useLogout } from "../hooks/useLogout";
 import MobileHeader from "./MobileHeader";
 import { routesLinks } from "../data/routesLinks";
+import logoutIcon from "../assets/logout.svg";
 const NavBar = () => {
   const { logout } = useLogout();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -67,9 +68,15 @@ const NavBar = () => {
           <div className='dropdown'>
             <Link to='/my-profile'>Mon Profile</Link>
             <Link to='/settings'>Paramètres</Link>
-            <button onClick={logout} style={{ whiteSpace: "nowrap" }}>
-              Déconnecter
-            </button>
+            <div>
+              <hr />
+
+              <div className='logout-button' onClick={logout}>
+                <img src={logoutIcon} alt='logout' className='logout-icon' />
+
+                <h5>Déconnecter</h5>
+              </div>
+            </div>
           </div>
         )}
       </div>
