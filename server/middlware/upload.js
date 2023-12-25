@@ -24,10 +24,13 @@ var upload = multer({
     if (allowedMimeTypes.includes(file.mimetype)) {
       callback(null, true);
     } else {
-      console.log("Only images (JPEG, PNG, HEIF, HEIC) are supported.");
-      return callback(new Error("Unsupported image type"));
+      req.fileTypeError =
+        "Les images doivent être de type png, jpg, jpeg, heif ou heic";
+      callback(null, false);
     }
   },
 });
+
+module.exports = upload;
 
 module.exports = upload;

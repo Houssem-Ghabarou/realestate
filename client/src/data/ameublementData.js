@@ -4,15 +4,15 @@ export const ammeublementOptions = [
     label: "-",
   },
   {
-    value: "meublé",
+    value: "meuble",
     label: "Meublé",
   },
   {
-    value: "non meublé",
+    value: "nonMeuble",
     label: "Non meublé",
   },
   {
-    value: "partiellement meublé",
+    value: "partiellementMeuble",
     label: "Partiellement meublé",
   },
 ];

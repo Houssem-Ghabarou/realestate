@@ -70,13 +70,13 @@ const FlatDetail = ({ setProgress }) => {
   if (loading) {
     // While loading, render a spinner or any loading indicator you prefer.
     return (
-      <div className="loader">
+      <div className='loader'>
         <ClipLoader
           color={"#333"}
           loading={!imagesLoaded}
           size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
+          aria-label='Loading Spinner'
+          data-testid='loader'
         />
       </div>
     );
@@ -105,47 +105,47 @@ const FlatDetail = ({ setProgress }) => {
 
   const style = { color: "#DAA520" };
   return (
-    <div className="flat-detail">
+    <div className='flat-detail'>
       <Helmet>
-        <meta charSet="utf-8" />
+        <meta charSet='utf-8' />
         <title>
           {`${capitalizeEachWord(
             propertyDetails?.name
           )} - PromoVilla - Hammamet - Tunisie - Immobilier`}
         </title>
         <link
-          rel="canonical"
+          rel='canonical'
           href={`${process.env.REACT_APP_URL}bien/details/${propIdName}`}
         />
       </Helmet>
-      <div className="container mb-5">
-        <div className="row">
+      <div className='container mb-5'>
+        <div className='row'>
           <>
-            <div className="col-lg-8">
-              <div className="fd-top flat-detail-content">
+            <div className='col-lg-8'>
+              <div className='fd-top flat-detail-content'>
                 <div>
-                  <h3 className="flat-detail-title">
+                  <h3 className='flat-detail-title'>
                     {capitalizeFirstLetter(propertyDetails?.name)}
                   </h3>
-                  <p className="fd-address">
+                  <p className='fd-address'>
                     <IoLocationSharp />
                     {capitalizeFirstLetter(propertyDetails?.location)}
                   </p>
                 </div>
                 <div>
-                  <span className="fd-price">
+                  <span className='fd-price'>
                     <PriceChanger propertyPrice={propertyDetails?.price} />
                   </span>
                 </div>
               </div>
               {!imagesLoaded ? (
-                <div className="loader">
+                <div className='loader'>
                   <ClipLoader
                     color={"#333"}
                     loading={!imagesLoaded}
                     size={100}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
+                    aria-label='Loading Spinner'
+                    data-testid='loader'
                   />
                 </div>
               ) : (
@@ -159,31 +159,33 @@ const FlatDetail = ({ setProgress }) => {
                   originalAlt={`immobilier-${propertyDetails?.name}`}
                 />
               )}
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="fd-item fd-property-detail">
+              <div className='row'>
+                <div className='col-lg-12'>
+                  <div className='fd-item fd-property-detail'>
                     <h4>{t("propertiesDetails.details")}</h4>
-                    <div className="details-architecture">
-                      {propertyDetailsData.map(({ key, label, icon }) => (
-                        <div className="details-container" key={key}>
-                          {propertyDetails?.[key] && (
-                            <>
-                              <div className="image-container">
-                                <img src={icon} alt={key} />
-                              </div>
-                              <div>
-                                <h6>{label}</h6>
-                                <span>{propertyDetails[key] || "N/A"}</span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      ))}
-                      <div className="details-container">
+                    <div className='details-architecture'>
+                      {propertyDetailsData.map(
+                        ({ key, label, icon }) =>
+                          (propertyDetails[key] ||
+                            propertyDetails[key]?.length > 0) && (
+                            <div className='details-container' key={key}>
+                              <>
+                                <div className='image-container'>
+                                  <img src={icon} alt={key} />
+                                </div>
+                                <div>
+                                  <h6>{label}</h6>
+                                  <span>{propertyDetails[key] || "N/A"}</span>
+                                </div>
+                              </>
+                            </div>
+                          )
+                      )}
+                      <div className='details-container'>
                         {propertyDetails?.ammeublement && (
                           <>
-                            <div className="image-container">
-                              <img src={furniture} alt="ammeublement" />
+                            <div className='image-container'>
+                              <img src={furniture} alt='ammeublement' />
                             </div>
                             <div>
                               <h6>{t("ammeublement")}</h6>
@@ -198,16 +200,16 @@ const FlatDetail = ({ setProgress }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="fd-item">
+                  <div className='fd-item'>
                     <h4>{t("description")}</h4>
                     <p>{propertyDetails?.description}</p>
                   </div>
-                  <div className="fd-item fd-features">
+                  <div className='fd-item fd-features'>
                     <h4>{t("caractéristiques")}</h4>
-                    <div className="row">
+                    <div className='row'>
                       {propertyDetails?.characteristics?.map(
                         (characteristic) => (
-                          <div className="col-lg-4" key={characteristic}>
+                          <div className='col-lg-4' key={characteristic}>
                             <FaCheck style={style} />
                             <span>{t(`features.${characteristic}`)}</span>
                           </div>
@@ -218,7 +220,7 @@ const FlatDetail = ({ setProgress }) => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className='col-lg-4'>
               <ContactDetails propertyId={propertyDetails?._id} />
               {/* Add any other content for the right column here */}
             </div>

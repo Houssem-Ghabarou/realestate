@@ -9,9 +9,9 @@ const Register = async (req, res) => {
     if (!isValid) {
       res.status(404).json(errors);
     } else {
-      User.findOne({ email: req.body.email }).then(async (exist) => {
+      User.findOne({ username: req.body.username }).then(async (exist) => {
         if (exist) {
-          errors.email = "user exist";
+          errors.username = "user exist";
           res.status(404).json(errors);
         } else {
           const hash = bcrypt.hashSync(req.body.password, 10); //hashed password
@@ -33,29 +33,29 @@ const Login = async (req, res) => {
     if (!isValid) {
       res.status(404).json(errors);
     } else {
-      User.findOne({ email: req.body.email }).then((user) => {
+      User.findOne({ username: req.body.username }).then((user) => {
         if (!user) {
-          errors.email = "User not found";
+          errors.username = "Utilisateur introuvable";
           res.status(404).json(errors);
         } else {
           bcrypt.compare(req.body.password, user.password).then((isMatch) => {
             if (!isMatch) {
-              errors.password = "Incorrect password";
+              errors.password = "Mot de passe incorrect";
               res.status(404).json(errors);
             } else {
               let token = jwt.sign(
                 {
-                  id: user._id,
-                  username: user.username,
-                  email: user.email,
-                  role: user.role,
+                  id: user?._id,
+                  username: user?.username,
+                  role: user?.role,
                 },
                 process.env.PRIVATE_KEY,
-                { expiresIn: "30d" }
+                { expiresIn: "1y" }
               );
               res.status(200).json({
                 message: "success",
                 token: "Bearer " + token,
+                username: user?.username,
               });
             }
           });

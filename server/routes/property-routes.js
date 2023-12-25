@@ -15,6 +15,7 @@ const {
   getPropertyCategoryType,
   searchProperty,
   getLocation,
+  searchByRefName,
 } = require("../controllers/property-controller");
 const passport = require("../middlware/passport");
 const upload = require("../middlware/upload");
@@ -36,5 +37,6 @@ router.get("/searchproperty", searchProperty);
 router.put("/:id", upload.array("images[]"), jwtAdmin, editProperty);
 router.delete("/:id", jwtAdmin, deleteProperty);
 router.get("/localisation", getLocation);
+router.get("/searchbyrefname", searchByRefName);
 
 module.exports = router;

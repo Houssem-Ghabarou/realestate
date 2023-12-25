@@ -160,10 +160,10 @@ const Search = ({ type, setProgress }) => {
             : {}
         }
       >
-        <div className="col-lg-6 mx-auto">
-          <div className="banner-area text-center pt-4 pb-4">
+        <div className='col-lg-6 mx-auto'>
+          <div className='banner-area text-center pt-4 pb-4'>
             {type !== 0 && (
-              <h2 className="mt-2 mb-4 banner-title">
+              <h2 className='mt-2 mb-4 banner-title'>
                 <strong style={{ marginBottom: "2rem" }}>
                   {t("search.name")}
                 </strong>
@@ -176,9 +176,9 @@ const Search = ({ type, setProgress }) => {
             )}
           </div>
         </div>
-        <form onSubmit={searchProp} className="form-search">
-          <div className="search-area">
-            <div className="search-area-child">
+        <form onSubmit={searchProp} className='form-search'>
+          <div className='search-area'>
+            <div className='search-area-child'>
               <Select
                 styles={singleStyle}
                 formatOptionLabel={formatOptionCategoryLabel}
@@ -195,8 +195,8 @@ const Search = ({ type, setProgress }) => {
               }`}
             >
               <input
-                type="text"
-                className="inp-search search-area-child"
+                type='text'
+                className='inp-search search-area-child'
                 placeholder={t("search.reference")}
                 value={propertyRef}
                 onChange={(e) => setPropertyRef(e.target.value)}
@@ -204,7 +204,7 @@ const Search = ({ type, setProgress }) => {
                 onBlur={() => setFocusedPropertyRef(false)}
               />
             </div>
-            <div className="search-area-child">
+            <div className='search-area-child'>
               <Select
                 isSearchable={false}
                 styles={styles}
@@ -217,7 +217,7 @@ const Search = ({ type, setProgress }) => {
                 placeholder={t("search.typedebien")}
               />
             </div>
-            <div className="search-area-child">
+            <div className='search-area-child'>
               <Select
                 isSearchable={false}
                 styles={styles}
@@ -234,9 +234,9 @@ const Search = ({ type, setProgress }) => {
               }`}
             >
               <input
-                className="inp-search search-area-child"
+                className='inp-search search-area-child'
                 placeholder={t("search.prixMax")}
-                type="number"
+                type='number'
                 value={maxPrice || ""} // Ensure that the value is not null
                 onChange={(e) =>
                   setMaxPrice(
@@ -254,9 +254,9 @@ const Search = ({ type, setProgress }) => {
                 }`}
               >
                 <input
-                  className="inp-search search-area-child"
+                  className='inp-search search-area-child'
                   placeholder={t("search.surfaceMin")}
-                  type="number"
+                  type='number'
                   value={minSurface || ""}
                   onChange={(e) =>
                     setMinSurface(
@@ -276,9 +276,9 @@ const Search = ({ type, setProgress }) => {
                 }`}
               >
                 <input
-                  className="inp-search search-area-child"
+                  className='inp-search search-area-child'
                   placeholder={t("chambreMin")}
-                  type="number"
+                  type='number'
                   value={minChambre || ""}
                   onChange={(e) =>
                     setMinChambre(
@@ -297,9 +297,9 @@ const Search = ({ type, setProgress }) => {
                 }`}
               >
                 <input
-                  className="inp-search search-area-child"
+                  className='inp-search search-area-child'
                   placeholder={t("salledebainsMin")}
-                  type="number"
+                  type='number'
                   value={minBathroom || ""}
                   onChange={(e) =>
                     setMinBathroom(
@@ -313,7 +313,7 @@ const Search = ({ type, setProgress }) => {
             )}
 
             {filterOpen && isAnyTypeApplicable && (
-              <div className="search-area-child">
+              <div className='search-area-child'>
                 <Select
                   isSearchable={false}
                   styles={singleStyle}
@@ -326,13 +326,13 @@ const Search = ({ type, setProgress }) => {
               </div>
             )}
             {filterOpen && isAnyTypeApplicable && (
-              <ul className="unstyled centered">
+              <ul className='unstyled centered'>
                 {features?.map((feature, index) => (
                   <li key={index}>
                     <input
-                      className="styled-checkbox"
+                      className='styled-checkbox'
                       id={`styled-checkbox-${index}`}
-                      type="checkbox"
+                      type='checkbox'
                       value={feature}
                       checked={selectedFeatures.includes(feature)}
                       onChange={() => handleCheckboxChange(feature)}
@@ -347,20 +347,20 @@ const Search = ({ type, setProgress }) => {
 
             {!filterOpen && (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <div className="filter-icon" onClick={changeFilter}>
+                <div className='filter-icon' onClick={changeFilter}>
                   <FaPlus />
                 </div>
-                <button className="btn-search m-2" type="submit">
+                <button className='btn-search m-2' type='submit'>
                   {t("search.trouver")}
                 </button>
               </div>
             )}
             {filterOpen && (
               <div style={{ display: "flex", alignItems: "center" }}>
-                <div className="filter-icon" onClick={changeFilter}>
+                <div className='filter-icon' onClick={changeFilter}>
                   <FaMinus />
                 </div>
-                <button className="btn-search m-2" type="submit">
+                <button className='btn-search m-2' type='submit'>
                   {t("search.trouver")}
                 </button>
               </div>

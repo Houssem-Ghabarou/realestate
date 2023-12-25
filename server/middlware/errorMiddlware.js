@@ -1,6 +1,7 @@
 // errorMiddleware.js
 
 function errorHandler(err, req, res, next) {
+  console.log(err);
   if (err.message === "Unsupported image type") {
     // Send a 400 Bad Request response for unsupported image type
     return res.status(400).json({ error: "Unsupported image type." });
@@ -13,8 +14,5 @@ function errorHandler(err, req, res, next) {
 }
 
 module.exports = errorHandler;
-
-
-
 
 // nesta3mla baad routes lkol ..

@@ -34,7 +34,7 @@ app.use("/property", propertyRoutes);
 app.use("/email", messageRoutes);
 
 //error middlwares
-app.use(errorHandler);
+// app.use(errorHandler);
 
 //server
 const server = http.createServer(app);

@@ -199,9 +199,8 @@ body {
 .search-no-home {
   min-height: 250px;
   width: 100%;
-  background: rgb(29 34 43 / 40%);
-  background-image: url('./assets/backgroundvilla.jpg');
-  /* Replace with your actual image path */
+  background-image: linear-gradient(rgba(0, 44, 133, 0.3), transparent), url('./assets/backgrounds/bg4.jpg');
+  /* Linear gradient applied on top of the image */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -305,7 +304,7 @@ body {
   flex-direction: column;
   box-sizing: border-box;
   /* word-break: break-all; */
-  background: linear-gradient(rgba(0, 44, 133, 0.2) 0%, transparent 100%);
+  background: linear-gradient(rgba(0, 44, 133, 0.3) 0%, transparent 100%);
   /* overflow: hidden; */
 }
 
