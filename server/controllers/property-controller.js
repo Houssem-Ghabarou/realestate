@@ -338,10 +338,19 @@ const searchProperty = async (req, res) => {
     }
 
     if (propertyRef) {
+      // Escape special regex characters and digits to ensure they are treated as literals
+      const escapedPropertyRef = propertyRef.replace(
+        /[-\/\\^$*+?.()[\]{}]/g,
+        "\\$&"
+      );
       // Use $or operator to check for either reference or name
       conditions.$or = [
-        { reference: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
-        { name: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
+        {
+          reference: {
+            $regex: new RegExp(escapedPropertyRef.toLowerCase(), "i"),
+          },
+        },
+        { name: { $regex: new RegExp(escapedPropertyRef.toLowerCase(), "i") } },
         // The 'i' flag in the regex makes the match case-insensitive
       ];
     }
@@ -379,7 +388,9 @@ const searchProperty = async (req, res) => {
       conditions.characteristics = { $in: selectedFeatures };
     }
 
-    const properties = await realEstateProp.find(conditions);
+    const properties = await realEstateProp
+      .find(conditions)
+      .sort({ timestamp: -1 });
     res.status(200).json(properties);
   } catch (err) {
     console.error(err);
@@ -393,12 +404,29 @@ const searchByRefName = async (req, res) => {
   try {
     const conditions = {};
     if (propertyRef) {
+      // Escape special regex characters and digits to ensure they are treated as literals
+      const escapedPropertyRef = propertyRef.replace(
+        /[-\/\\^$*+?.()[\]{}]/g,
+        "\\$&"
+      );
+      // Use $or operator to check for either reference or name
       conditions.$or = [
-        { reference: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
-        { name: { $regex: new RegExp(propertyRef.toLowerCase(), "i") } },
+        {
+          reference: {
+            $regex: new RegExp(escapedPropertyRef.toLowerCase(), "i"),
+          },
+        },
+        {
+          name: {
+            $regex: new RegExp(escapedPropertyRef.toLowerCase(), "i"),
+          },
+        },
+        // The 'i' flag in the regex makes the match case-insensitive
       ];
     }
-    const properties = await realEstateProp.find(conditions);
+    const properties = await realEstateProp
+      .find(conditions)
+      .sort({ timestamp: -1 });
     if (!properties) {
       return res.status(404).json({ message: "Aucun résultat trouvé." });
     }
