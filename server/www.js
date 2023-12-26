@@ -12,9 +12,7 @@ const { connectToMongoDB } = require("./services/mongodb");
 const userRoutes = require("./routes/user-routes");
 const propertyRoutes = require("./routes/property-routes");
 const messageRoutes = require("./routes/email-routes");
-const corsOptions = {
-  origin: [process.env.CLIENT_URL, process.env.ADMIN_URL], // Replace with the URL of your front-end application
-};
+
 
 // Connections
 connectToMongoDB();
@@ -26,7 +24,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(passport.initialize());
 app.use("/uploads", express.static("uploads"));
 
