@@ -8,12 +8,12 @@ import ClipLoader from "react-spinners/ClipLoader";
 import i18n from "./i18n"; //lazm menha
 
 const loading = (
-  <div className="loader">
+  <div className='loader'>
     <ClipLoader
       color={"#333"}
       size={100}
-      aria-label="Loading Spinner"
-      data-testid="loader"
+      aria-label='Loading Spinner'
+      data-testid='loader'
     />
   </div>
 );

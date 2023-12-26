@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeleteProperty } from "../hooks/useDeleteProperty";
 import toast from "react-hot-toast";
 import ConfirmationModal from "./ConfirmationModal";
-const backendBaseUrl = import.meta.env.VITE_API_KEY;
+const backendBaseUrl = import.meta.env.VITE_API_KEY_IMAGE_SERVER;
 
 const PropertyItem = ({ property, setDeleteSucess }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
