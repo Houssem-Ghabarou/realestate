@@ -5,6 +5,7 @@ import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import bg4 from "../assets/backgrounds/bg4.jpg";
 const PropByCatType = ({ match, setProgress, progress }) => {
   const { t } = useTranslation();
   const category = match?.params?.category;
@@ -46,18 +47,22 @@ const PropByCatType = ({ match, setProgress, progress }) => {
     return (
       <>
         <Helmet>
-          <meta charSet="utf-8" />
           <title>{`${translatedCate} - ${translatedType} ${PromoVillaForRotues}`}</title>
           <link
-            rel="canonical"
+            rel='canonical'
             href={`${process.env.REACT_APP_URL}${category}/${proptype}`}
           />
+          <meta
+            property='og:description'
+            content={`Découvrez nos biens mis en ${translatedCate}, notamment des ${translatedType}, à Hammamet, Nabeul, Tunisie.`}
+          />
+          <meta property='og:image' content={bg4} />
         </Helmet>
         <FlatList type={5} />
       </>
     );
   } else {
-    return <Redirect to="/404" />;
+    return <Redirect to='/404' />;
   }
 };
 

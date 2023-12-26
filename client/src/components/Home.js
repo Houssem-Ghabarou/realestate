@@ -20,9 +20,8 @@ const Home = ({ setProgress }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>{t(homeMetadata?.value)}</title>
-        <link rel="canonical" href={homeMetadata?.canonicalLink} />
+        <link rel='canonical' href={homeMetadata?.canonicalLink} />
       </Helmet>
       {isSearching ? (
         <FlatList type={6} />

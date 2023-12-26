@@ -107,12 +107,18 @@ const FlatDetail = ({ setProgress }) => {
   return (
     <div className='flat-detail'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>
-          {`${capitalizeEachWord(
+          {` ${capitalizeEachWord(
+            propertyDetails?.category
+          )}- ${capitalizeEachWord(
             propertyDetails?.name
           )} - PromoVilla - Hammamet - Tunisie - Immobilier`}
         </title>
+        <meta
+          property='og:description'
+          content={`${propertyDetails?.description}`}
+        />
+        <meta property='og:image' content={`${imageUrls?.[0]?.original}`} />
         <link
           rel='canonical'
           href={`${process.env.REACT_APP_URL}bien/details/${propIdName}`}

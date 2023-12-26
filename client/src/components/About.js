@@ -19,9 +19,12 @@ const About = ({ setProgress }) => {
   return (
     <section className='about'>
       <Helmet>
-        <meta charSet='utf-8' />
         <title>{t(aboutMetadata?.value)}</title>
         <link rel='canonical' href={aboutMetadata?.canonicalLink} />
+        <meta
+          property='og:description'
+          content='Promo Villa: Votre partenaire immobilier de choix à Hammamet pour l’acquisition, la vente et la location de villas de luxe et d’espaces commerciaux. Services sur mesure, propriétés uniques, transactions palpitantes.'
+        />
       </Helmet>
       <div className='page-content'>
         <div className='container'>

@@ -20,9 +20,14 @@ const Vente = ({ setProgress }) => {
   return (
     <>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>{t(venteMetadata?.value)}</title>
-        <link rel="canonical" href={venteMetadata?.canonicalLink} />
+        <meta
+          property='og:description'
+          content={`${venteMetadata?.description}`}
+        />
+        <meta property='og:image' content={`${venteMetadata?.image}`} />
+
+        <link rel='canonical' href={venteMetadata?.canonicalLink} />
       </Helmet>
       <FlatList type={1} />;
     </>

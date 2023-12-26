@@ -20,9 +20,14 @@ const Location = ({ setProgress }) => {
   return (
     <>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>{t(locationMetadata?.value)}</title>
-        <link rel="canonical" href={locationMetadata?.canonicalLink} />
+        <meta
+          property='og:description'
+          content={`${locationMetadata?.description}`}
+        />
+        <meta property='og:image' content={`${locationMetadata?.image}`} />
+
+        <link rel='canonical' href={locationMetadata?.canonicalLink} />
       </Helmet>
       <FlatList type={2} />
     </>

@@ -25,90 +25,93 @@ const Contact = ({ setProgress }) => {
   const position = [36.40741860580118, 10.610816201938514];
 
   return (
-    <section className="contact">
+    <section className='contact'>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>{t(contactMetadata?.value)}</title>
-        <link rel="canonical" href={contactMetadata?.canonicalLink} />
+        <link rel='canonical' href={contactMetadata?.canonicalLink} />
+        <meta
+          property='og:description'
+          content='Contactez-nous dès maintenant pour toute question ou demande. Notre équipe est là pour vous aider. N’hésitez pas à nous contacter pour des renseignements supplémentaires ou pour planifier une rencontre.'
+        />
       </Helmet>
-      <div className="page-content">
-        <div className="container contact-us">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="row">
-                <div className="col-lg-4">
-                  <div className="contact-item">
+      <div className='page-content'>
+        <div className='container contact-us'>
+          <div className='row'>
+            <div className='col-lg-12'>
+              <div className='row'>
+                <div className='col-lg-4'>
+                  <div className='contact-item'>
                     <IoMail />
                     <h5>{t("email")}</h5>
                     <h6>
-                      <a href="mailto:promovilla@gmail.com">
+                      <a href='mailto:promovilla@gmail.com'>
                         agence.promovilla@gmail.com
                       </a>
                     </h6>
                   </div>
                 </div>
-                <div className="col-lg-4">
-                  <div className="contact-item" style={{ cursor: "pointer" }}>
+                <div className='col-lg-4'>
+                  <div className='contact-item' style={{ cursor: "pointer" }}>
                     <IoLocationSharp />
                     <h5>{t("address")}</h5>
                     <h6> {t("location")}</h6>
                   </div>
                 </div>
-                <div className="col-lg-4">
-                  <div className="contact-item">
+                <div className='col-lg-4'>
+                  <div className='contact-item'>
                     <FaPhoneFlip />
                     <h5>{t("phone")}</h5>
                     <h6>
-                      <a href="tel:+21620532181">{t("numTel1")}</a>
+                      <a href='tel:+21620532181'>{t("numTel1")}</a>
                     </h6>
                     <h6>
-                      <a href="tel:+21622307549">{t("numTel2")}</a>
+                      <a href='tel:+21622307549'>{t("numTel2")}</a>
                     </h6>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-12">
-              <div className="row mt-5">
-                <div className="col-lg-6">
+            <div className='col-lg-12'>
+              <div className='row mt-5'>
+                <div className='col-lg-6'>
                   <label>{t("namesurname")}</label>
                   <input
-                    type="text"
-                    className="inp-contact"
+                    type='text'
+                    className='inp-contact'
                     value={namesurname}
                     onChange={(e) => setNameSurname(e.target.value)}
                   />
                 </div>
-                <div className="col-lg-6">
+                <div className='col-lg-6'>
                   <label>{t("phone")}</label>
                   <input
-                    type="text"
-                    className="inp-contact"
+                    type='text'
+                    className='inp-contact'
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
 
-                <div className="col-lg-12">
+                <div className='col-lg-12'>
                   <label>{t("email")}</label>
                   <input
-                    type="email"
-                    className="inp-contact"
+                    type='email'
+                    className='inp-contact'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="col-lg-12">
+                <div className='col-lg-12'>
                   <label>{t("messageContact")}</label>
                   <textarea
-                    type="text"
-                    className="ta-contact"
-                    rows="4"
+                    type='text'
+                    className='ta-contact'
+                    rows='4'
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
-                <div className="col-lg-12">
+                <div className='col-lg-12'>
                   {/* <button className="btn-search ">{t("sendMessage")}</button> */}
                   <ContactButton emailData={emailData} />
                 </div>
@@ -118,7 +121,7 @@ const Contact = ({ setProgress }) => {
           <MapContainer center={position} zoom={50} scrollWheelZoom={false}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
             <Marker position={position}>
               <Popup>{t("search.name")} </Popup>
