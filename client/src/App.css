@@ -199,7 +199,7 @@ body {
 .search-no-home {
   min-height: 250px;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 44, 133, 0.3), transparent), url('./assets/backgrounds/bg4.jpg');
+  background-image: linear-gradient(rgba(0, 44, 133, 0.2), transparent), url('./assets/backgrounds/bg7.jpg');
   /* Linear gradient applied on top of the image */
   background-size: cover;
   background-repeat: no-repeat;

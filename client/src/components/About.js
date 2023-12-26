@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import promvilla from "../assets/promovillaNew.png";
 
-import house2 from "../assets/backgrounds/bg4.jpg";
+import house2 from "../assets/backgrounds/bg7.jpg";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom/";
 import useProgressBar from "./useProgressBar";

@@ -5,7 +5,7 @@ import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import bg4 from "../assets/backgrounds/bg4.jpg";
+import bg7 from "../assets/backgrounds/bg7.jpg";
 const PropByCatType = ({ match, setProgress, progress }) => {
   const { t } = useTranslation();
   const category = match?.params?.category;
@@ -56,7 +56,7 @@ const PropByCatType = ({ match, setProgress, progress }) => {
             property='og:description'
             content={`Découvrez nos biens mis en ${translatedCate}, notamment des ${translatedType}, à Hammamet, Nabeul, Tunisie.`}
           />
-          <meta property='og:image' content={bg4} />
+          <meta property='og:image' content={bg7} />
         </Helmet>
         <FlatList type={5} />
       </>

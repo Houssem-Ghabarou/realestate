@@ -1,4 +1,4 @@
-import backgroundVilla from "../assets/backgrounds/bg4.jpg";
+import backgroundVilla from "../assets/backgrounds/bg7.jpg";
 import Search from "./Search";
 import Header from "./Header";
 const Banner = ({ setProgress }) => {
