@@ -10,7 +10,7 @@ import { filterFormData } from "../util/filterFormatData";
 import toast from "react-hot-toast";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const apiUrl = import.meta.env.VITE_API_KEY; // Ensure this points to your server's URL
+const apiUrl = import.meta.env.VITE_API_KEY_IMAGE_SERVER; // Ensure this points to your server's URL
 
 const AddProperty = () => {
   const navigate = useNavigate();
