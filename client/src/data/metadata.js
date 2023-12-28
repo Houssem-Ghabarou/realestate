@@ -29,5 +29,5 @@ export const aboutMetadata = {
 
 export const contactMetadata = {
   value: "contact",
-  canonicalLink: `${URL}/contact`,
+  canonicalLink: `${URL}contact`,
 };

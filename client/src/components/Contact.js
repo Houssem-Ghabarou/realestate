@@ -8,6 +8,7 @@ import useProgressBar from "./useProgressBar";
 import ContactButton from "./ContactButton";
 import { Helmet } from "react-helmet-async";
 import { contactMetadata } from "../data/metadata";
+import bg7 from "../assets/backgrounds/bg7.jpg";
 const Contact = ({ setProgress }) => {
   const [namesurname, setNameSurname] = useState("");
   const [phone, setPhone] = useState("");
@@ -28,7 +29,14 @@ const Contact = ({ setProgress }) => {
     <section className='contact'>
       <Helmet>
         <title>{t(contactMetadata?.value)}</title>
+        <meta property='og:title' content={t(contactMetadata?.value)} />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:url'
+          content='https://immobilierpromovilla.tn/contact'
+        />
         <link rel='canonical' href={contactMetadata?.canonicalLink} />
+        <meta property='og:image' content={bg7} />
         <meta
           property='og:description'
           content='Contactez-nous dès maintenant pour toute question ou demande. Notre équipe est là pour vous aider. N’hésitez pas à nous contacter pour des renseignements supplémentaires ou pour planifier une rencontre.'
