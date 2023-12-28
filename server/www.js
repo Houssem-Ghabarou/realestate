@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const http = require("http");
 const passport = require("passport");
-const prerender = require("prerender-node");
+
 
 const { connectToMongoDB } = require("./services/mongodb");
 
@@ -21,7 +21,7 @@ connectToMongoDB();
 const app = express();
 
 // middlewares
-app.use(prerender);
+
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -29,7 +29,9 @@ app.use(cors());
 app.use(passport.initialize());
 app.use("/uploads", express.static("uploads"));
 
-prerender.set("prerenderToken", process.env.PRERENDER_TOKEN);
+app.use(
+  require("prerender-node").set("prerenderToken", "tljYnt6bZHLsojtZoBpi")
+);
 
 //routes
 app.use("/api/admin", userRoutes);
