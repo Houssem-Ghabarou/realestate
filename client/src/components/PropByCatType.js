@@ -38,7 +38,7 @@ const PropByCatType = ({ match, setProgress, progress }) => {
     return () => {
       finishedSearch();
     };
-  }, [match]);
+  }, []);
 
   const translatedCate = t(`categories.${category}`);
   const translatedType = t(`type.${proptype}`);
