@@ -12,26 +12,26 @@ export const venteMetadata = {
   value: "vente",
   canonicalLink: `${URL}/vente`,
   description: "venteDescription",
-  image: `${URL}${bg7}`,
+  image: { bg7 },
 };
 
 export const locationMetadata = {
   value: "locationRoute",
   canonicalLink: `${URL}/location`,
   description: "locationDescription",
-  image: `${URL}${bg7}`,
+  image: { bg7 },
 };
 
 export const aboutMetadata = {
   value: "about",
   canonicalLink: `${URL}/about`,
-  image: `${URL}${bg7}`,
+  image: { bg7 },
   description: "aboutDescription",
 };
 
 export const contactMetadata = {
   value: "contact",
   canonicalLink: `${URL}/contact`,
-  image: `${URL}${bg7}`,
+  image: { bg7 },
   description: "contactDescription",
 };
