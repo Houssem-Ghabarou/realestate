@@ -14,10 +14,10 @@ const NotFound = () => {
       }}
     >
       <Helmet>
-        <meta charSet="utf-8" />
+        <meta charSet='utf-8' />
         <title>{t("pageNotFound")}</title>
       </Helmet>
-      <h2 className="title">{t("pageNotFound")}</h2>
+      <h1 className='title'>{t("pageNotFound")}</h1>
     </div>
   );
 };

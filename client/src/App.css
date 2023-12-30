@@ -1526,6 +1526,7 @@ section {
 .img-highlights {
   margin-right: 0.2rem;
   height: 22px;
+  width: 22px;
 }
 
 .property-details {
@@ -2032,4 +2033,8 @@ section {
 
 .footer-links:hover {
   color: #DAA520
+}
+
+.quote {
+  font-size: 25px;
 }

@@ -163,17 +163,13 @@ const Search = ({ type, setProgress }) => {
         <div className='col-lg-6 mx-auto'>
           <div className='banner-area text-center pt-4 pb-4'>
             {type !== 0 && (
-              <h2 className='mt-2 mb-4 banner-title'>
+              <h1 className='mt-2 mb-4 banner-title'>
                 <strong style={{ marginBottom: "2rem" }}>
                   {t("search.name")}
                 </strong>
-              </h2>
+              </h1>
             )}
-            {type !== 0 && (
-              <div>
-                <h5>{t("search.quote")}</h5>
-              </div>
-            )}
+            {type !== 0 && <h2 className='quote'>{t("search.quote")}</h2>}
           </div>
         </div>
         <form onSubmit={searchProp} className='form-search'>

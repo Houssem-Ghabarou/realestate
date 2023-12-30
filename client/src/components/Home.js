@@ -2,9 +2,9 @@ import FlatList from "./FlatList";
 import React, { useContext, useEffect } from "react";
 import { SearchResultContext } from "../context/SearchContext";
 import useProgressBar from "./useProgressBar";
-import { Helmet } from "react-helmet-async";
 import { homeMetadata } from "../data/metadata";
 import { useTranslation } from "react-i18next";
+import HelmetSeo from "./HelmetSeo";
 const Home = ({ setProgress }) => {
   const { t } = useTranslation();
   useProgressBar(setProgress);
@@ -19,10 +19,13 @@ const Home = ({ setProgress }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <title>{t(homeMetadata?.value)}</title>
-        <link rel='canonical' href={homeMetadata?.canonicalLink} />
-      </Helmet>
+      <HelmetSeo
+        title={t(homeMetadata?.value)}
+        url={homeMetadata?.canonicalLink}
+        description={t(homeMetadata?.description)}
+        image={homeMetadata?.image}
+      />
+
       {isSearching ? (
         <FlatList type={6} />
       ) : (

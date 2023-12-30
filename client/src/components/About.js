@@ -1,13 +1,11 @@
 import { useTranslation } from "react-i18next";
 import promvilla from "../assets/promovillaNew.png";
-
 import house2 from "../assets/backgrounds/bg7.jpg";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom/";
 import useProgressBar from "./useProgressBar";
-import { Helmet } from "react-helmet-async";
 import { aboutMetadata } from "../data/metadata";
-
+import HelmetSeo from "./HelmetSeo";
 const About = ({ setProgress }) => {
   const { t } = useTranslation();
   useProgressBar(setProgress);
@@ -18,14 +16,12 @@ const About = ({ setProgress }) => {
 
   return (
     <section className='about'>
-      <Helmet>
-        <title>{t(aboutMetadata?.value)}</title>
-        <link rel='canonical' href={aboutMetadata?.canonicalLink} />
-        <meta
-          property='og:description'
-          content='Promo Villa: Votre partenaire immobilier de choix à Hammamet pour l’acquisition, la vente et la location de villas de luxe et d’espaces commerciaux. Services sur mesure, propriétés uniques, transactions palpitantes.'
-        />
-      </Helmet>
+      <HelmetSeo
+        title={t(aboutMetadata?.value)}
+        url={aboutMetadata?.canonicalLink}
+        description={t(aboutMetadata?.description)}
+        image={aboutMetadata?.image}
+      />
       <div className='page-content'>
         <div className='container'>
           <div className='row'>
@@ -47,7 +43,7 @@ const About = ({ setProgress }) => {
                     alt='promo-villa-hammamet-immobilier'
                     className='promo-villa'
                   />
-                  {t("search.name")}
+                  <h1>{t("search.name")}</h1>
                 </div>
                 <div className='about-text'>{t("footer.def")}</div>
                 <div className='about-features'>

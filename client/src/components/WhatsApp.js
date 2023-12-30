@@ -1,23 +1,15 @@
-import React from "react";
 const WhatsApp = () => {
   return (
     <>
-      {/* <a
-        style={{ bottom: "80px" }}
-        href="https://wa.me/21620532181"
-        className="whatsapp_float"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i className="bi bi-messenger messenger-icon"></i>
-      </a> */}
       <a
-        href="https://wa.me/21620532181"
-        className="whatsapp_float"
-        target="_blank"
-        rel="noopener noreferrer"
+        href='https://wa.me/21620532181'
+        className='whatsapp_float'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Contact us on WhatsApp'
       >
-        <i className="bi bi-whatsapp whatsapp-icon"></i>
+        <span className='visually-hidden'>Contact us on WhatsApp</span>
+        <i className='bi bi-whatsapp whatsapp-icon' aria-hidden='true' />
       </a>
     </>
   );

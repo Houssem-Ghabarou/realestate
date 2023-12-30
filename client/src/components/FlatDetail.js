@@ -22,6 +22,7 @@ import { FaCheck } from "react-icons/fa";
 import PriceChanger from "./PriceChanger";
 import useProgressBar from "./useProgressBar";
 import { Helmet } from "react-helmet-async";
+import HelmetSeo from "./HelmetSeo";
 const FlatDetail = ({ setProgress }) => {
   useProgressBar(setProgress);
   const { t } = useTranslation();
@@ -104,26 +105,19 @@ const FlatDetail = ({ setProgress }) => {
   ];
 
   const style = { color: "#DAA520" };
+
+  const translatedCate = t(`categories.${propertyDetails?.category}`);
   return (
     <div className='flat-detail'>
-      <Helmet>
-        <title>
-          {` ${capitalizeEachWord(
-            propertyDetails?.category
-          )}- ${capitalizeEachWord(
-            propertyDetails?.name
-          )} - PromoVilla - Hammamet - Tunisie - Immobilier`}
-        </title>
-        <meta
-          property='og:description'
-          content={`${propertyDetails?.description}`}
-        />
-        <meta property='og:image' content={`${imageUrls?.[0]?.original}`} />
-        <link
-          rel='canonical'
-          href={`${process.env.REACT_APP_URL}bien/details/${propIdName}`}
-        />
-      </Helmet>
+      <HelmetSeo
+        title={`${translatedCate} - ${capitalizeEachWord(
+          propertyDetails?.name
+        )} - ${t("flatDetail")}`}
+        url={`${process.env.REACT_APP_WEBSITE_URL}/bien/details/${propIdName}`}
+        description={`${propertyDetails?.description}`}
+        image={`${imageUrls?.[0]?.original}`}
+      />
+
       <div className='container mb-5'>
         <div className='row'>
           <>

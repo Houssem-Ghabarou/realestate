@@ -2,11 +2,7 @@ import React from "react";
 import promovilla from "../assets/promovillaNew.png";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import {
-  FaWhatsappSquare,
-  FaInstagramSquare,
-  FaFacebook,
-} from "react-icons/fa";
+import { FaWhatsappSquare, FaFacebook } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import { GrUserManager, GrSchedule } from "react-icons/gr";
 import { FaPhoneFlip } from "react-icons/fa6";

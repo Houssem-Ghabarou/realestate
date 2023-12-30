@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import FlatList from "./FlatList";
 import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
-import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import bg7 from "../assets/backgrounds/bg7.jpg";
-const PropByCatType = ({ match, setProgress, progress }) => {
+import HelmetSeo from "./HelmetSeo";
+const PropByCatType = ({ match, setProgress }) => {
   const { t } = useTranslation();
   const category = match?.params?.category;
   const proptype = match?.params?.proptype;
@@ -17,6 +17,7 @@ const PropByCatType = ({ match, setProgress, progress }) => {
     setTimeout(() => {
       setProgress(100);
     }, 400);
+    // eslint-disable-next-line
   }, [category, proptype]);
 
   const validCategories = ["vente", "location"];
@@ -25,7 +26,6 @@ const PropByCatType = ({ match, setProgress, progress }) => {
     "villa",
     "appartement",
     "terrain",
-    "local",
     "bureau",
     "immeuble",
     "commercial",
@@ -46,18 +46,13 @@ const PropByCatType = ({ match, setProgress, progress }) => {
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
     return (
       <>
-        <Helmet>
-          <title>{`${translatedCate} - ${translatedType} ${PromoVillaForRotues}`}</title>
-          <link
-            rel='canonical'
-            href={`${process.env.REACT_APP_URL}${category}/${proptype}`}
-          />
-          <meta
-            property='og:description'
-            content={`Découvrez nos biens mis en ${translatedCate}, notamment des ${translatedType}, à Hammamet, Nabeul, Tunisie.`}
-          />
-          <meta property='og:image' content={bg7} />
-        </Helmet>
+        <HelmetSeo
+          title={`${translatedCate} - ${translatedType} ${PromoVillaForRotues}`}
+          url={`${process.env.REACT_APP_WEBSITE_URL}/${category}/${proptype}`}
+          description={`Découvrez nos biens mis en ${translatedCate}, notamment des ${translatedType}, à Hammamet, Nabeul, Tunisie.`}
+          image={bg7}
+        />
+
         <FlatList type={5} />
       </>
     );
