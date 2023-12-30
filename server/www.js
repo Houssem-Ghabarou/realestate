@@ -33,8 +33,6 @@ app.use(
   require("prerender-node").set("prerenderToken", "tljYnt6bZHLsojtZoBpi")
 );
 
-
-
 app.use("/sitemap.xml", sitemapRoutes);
 //routes
 app.use("/api/admin", userRoutes);
@@ -46,18 +44,18 @@ const server = http.createServer(app);
 
 // Listen both http & https ports
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(
-  {
-    key: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/privkey.pem"),
-    cert: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/fullchain.pem"),
-  },
-  app
-);
+// const httpsServer = https.createServer(
+//   {
+//     key: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/privkey.pem"),
+//     cert: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/fullchain.pem"),
+//   },
+//   app
+// );
 
-httpServer.listen(process.env.PORT_SERVER_HTTP, () => {
+httpServer.listen(3005, () => {
   console.log(`HTTP Server running on port ${process.env.PORT_SERVER_HTTP}`);
 });
 
-httpsServer.listen(process.env.PORT_SERVER, () => {
-  console.log(`HTTPS Server running on port ${process.env.PORT_SERVER}`);
-});
+// httpsServer.listen(process.env.PORT_SERVER, () => {
+//   console.log(`HTTPS Server running on port ${process.env.PORT_SERVER}`);
+// });

@@ -22,8 +22,9 @@ const HelmetSeo = ({ title, url, description, image }) => {
       <meta name='twitter:card' content={image} />
       <meta name='twitter:image:width' content={imageWidth} />
       <meta name='twitter:image:height' content={imageHeight} />
-
+      <meta name='image' property='og:image' content={image} />
       <meta property='og:description' content={description} />
+      <meta name='author' content='promovillaimmobilier' />
     </Helmet>
   );
 };

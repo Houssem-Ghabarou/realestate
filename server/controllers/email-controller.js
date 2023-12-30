@@ -19,28 +19,42 @@ oAuth2Client.setCredentials({
 const sendEmail = async (req, res) => {
   const { property, namesurname, phone, email, description } = req.body;
   const { errors, isValid } = ValidateMessage(req.body);
-  let accessToken;
-  try {
-    accessToken = await oAuth2Client.getAccessToken();
-  } catch (error) {
-    console.error(error);
-  }
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      type: "OAuth2",
-      user: process.env.MAIL_USERNAME,
-      clientId: process.env.OAUTH_CLIENTID,
-      clientSecret: process.env.OAUTH_CLIENT_SECRET,
-      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-      accessToken: accessToken?.token, // assuming that the resolved accessToken object has a `token` property
-    },
-    // tls: {
-    //   rejectUnauthorized: false, // Only use this for self-signed certificates
-    // },
-  });
   try {
+    let accessToken;
+
+    accessToken = await oAuth2Client.getAccessToken();
+    console.log(accessToken, "aceeees");
+    const now = Date.now();
+    if (accessToken.expiry_date < now + 30000) {
+      // The token is about to expire in the next 30 seconds
+      console.log("Access token is about to expire. Refreshing...");
+
+      // Refresh the token using the refresh token
+      const newTokens = await oAuth2Client.refreshToken(
+        oAuth2Client.credentials.refresh_token
+      );
+
+      // Update the OAuth2 client with the new tokens
+      oAuth2Client.setCredentials(newTokens);
+
+      // Obtain the refreshed access token
+      accessToken = await oAuth2Client.getAccessToken();
+    }
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: process.env.MAIL_USERNAME,
+        clientId: process.env.OAUTH_CLIENTID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+        accessToken: accessToken?.token, // assuming that the resolved accessToken object has a `token` property
+      },
+      // tls: {
+      //   rejectUnauthorized: false, // Only use this for self-signed certificates
+      // },
+    });
     if (!isValid) {
       return res.status(400).json(errors);
     }
