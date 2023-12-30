@@ -4,7 +4,7 @@ import FlatList from "./FlatList";
 import { SearchResultContext } from "../context/SearchContext";
 import { Redirect } from "react-router-dom/";
 import { useTranslation } from "react-i18next";
-import bg7 from "../assets/backgrounds/bg7.jpg";
+import bg7 from "../assets/ogimage.png";
 import HelmetSeo from "./HelmetSeo";
 const PropByCatType = ({ match, setProgress }) => {
   const { t } = useTranslation();
