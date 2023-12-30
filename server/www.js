@@ -47,14 +47,14 @@ const server = http.createServer(app);
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   {
-    key: fs.readFileSync("/etc/letsencrypt/live/my_api_url/privkey.pem"),
-    cert: fs.readFileSync("/etc/letsencrypt/live/my_api_url/fullchain.pem"),
+    key: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/privkey.pem"),
+    cert: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/fullchain.pem"),
   },
   app
 );
 
 httpServer.listen(process.env.PORT_SERVER_HTTP, () => {
-  console.log(`HTTP Server running on port ${process.env.PORT_SERVER}`);
+  console.log(`HTTP Server running on port ${process.env.PORT_SERVER_HTTP}`);
 });
 
 httpsServer.listen(process.env.PORT_SERVER, () => {
