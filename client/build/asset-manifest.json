@@ -1,32 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.b0e2f334.css",
-    "main.js": "/static/js/main.317c2715.js",
-    "static/js/201.54c04e78.chunk.js": "/static/js/201.54c04e78.chunk.js",
-    "static/js/956.ab0eaada.chunk.js": "/static/js/956.ab0eaada.chunk.js",
+    "main.css": "/static/css/main.d9b855a8.css",
+    "main.js": "/static/js/main.afbfaa97.js",
+    "static/js/201.45830be0.chunk.js": "/static/js/201.45830be0.chunk.js",
+    "static/js/956.f5dacb3b.chunk.js": "/static/js/956.f5dacb3b.chunk.js",
     "static/js/585.b9d4abfa.chunk.js": "/static/js/585.b9d4abfa.chunk.js",
     "static/js/139.7e9e08b9.chunk.js": "/static/js/139.7e9e08b9.chunk.js",
     "static/js/454.89627bd2.chunk.js": "/static/js/454.89627bd2.chunk.js",
+    "static/media/ogimage.png": "/static/media/ogimage.a43cded32d8a8c6631c2.png",
     "static/media/bg7.jpg": "/static/media/bg7.2bcac33cf86cc28290cf.jpg",
     "static/media/promovillaNew.png": "/static/media/promovillaNew.84d5931f1b6e0466860e.png",
-    "index.html": "/index.html",
     "static/media/bedroom.svg": "/static/media/bedroom.8267d170395a5454c83398b14f42186f.svg",
     "static/media/bathroom.svg": "/static/media/bathroom.bedff9a90a24827f5c089ad018559137.svg",
+    "index.html": "/index.html",
     "static/media/garage.svg": "/static/media/garage.79f7ae80f6bb7e4e1f8939deed73411b.svg",
     "static/media/surface.svg": "/static/media/surface.00f25c4e1ca2867e8c9981494025816a.svg",
     "static/media/furniture.svg": "/static/media/furniture.e7f3080d77440d48554d2ccd941cf20a.svg",
     "static/media/ref.svg": "/static/media/ref.bc18e4f174299e3ee337c544098ee217.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.b0e2f334.css.map": "/static/css/main.b0e2f334.css.map",
-    "main.317c2715.js.map": "/static/js/main.317c2715.js.map",
-    "201.54c04e78.chunk.js.map": "/static/js/201.54c04e78.chunk.js.map",
-    "956.ab0eaada.chunk.js.map": "/static/js/956.ab0eaada.chunk.js.map",
+    "main.d9b855a8.css.map": "/static/css/main.d9b855a8.css.map",
+    "main.afbfaa97.js.map": "/static/js/main.afbfaa97.js.map",
+    "201.45830be0.chunk.js.map": "/static/js/201.45830be0.chunk.js.map",
+    "956.f5dacb3b.chunk.js.map": "/static/js/956.f5dacb3b.chunk.js.map",
     "585.b9d4abfa.chunk.js.map": "/static/js/585.b9d4abfa.chunk.js.map",
     "139.7e9e08b9.chunk.js.map": "/static/js/139.7e9e08b9.chunk.js.map",
     "454.89627bd2.chunk.js.map": "/static/js/454.89627bd2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b0e2f334.css",
-    "static/js/main.317c2715.js"
+    "static/css/main.d9b855a8.css",
+    "static/js/main.afbfaa97.js"
   ]
 }

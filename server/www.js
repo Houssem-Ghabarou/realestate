@@ -29,10 +29,11 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 app.use("/uploads", express.static("uploads"));
-
 app.use(
   require("prerender-node").set("prerenderToken", "tljYnt6bZHLsojtZoBpi")
 );
+
+
 
 app.use("/sitemap.xml", sitemapRoutes);
 //routes
