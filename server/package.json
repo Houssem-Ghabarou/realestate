@@ -11,6 +11,7 @@
     "googleapis": "^129.0.0",
     "heic-convert": "^1.2.4",
     "http": "*",
+    "https": "^1.0.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.2",
     "mongoose-currency": "^0.2.0",
@@ -26,6 +27,7 @@
     "sharp": "^0.32.4",
     "sharp-multer": "^0.3.0",
     "shortid": "^2.2.16",
+    "sitemap": "^7.1.1",
     "validator": "^13.11.0"
   },
   "name": "server",
