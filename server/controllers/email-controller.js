@@ -72,6 +72,7 @@ const sendEmail = async (req, res) => {
       // Convert the images string to an array by splitting on commas
       const imagePaths = images ? images.split(",") : [];
 
+     console.log(imagePaths);
       // Ensure that imagePaths is an array before using map
       imagesData = Array.isArray(imagePaths)
         ? imagePaths.map((imagePath) => ({
