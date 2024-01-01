@@ -1467,6 +1467,18 @@ p {
   width: 150px;
 }
 
+.custom-file-upload h1 {
+  position: absolute;
+  margin-top: 1.5rem;
+
+}
+
+
+
+.honeupload {
+  position: absolute !important;
+  margin-top: 3rem !important;
+}
 
 
 .input-step2,

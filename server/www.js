@@ -45,8 +45,12 @@ app.use("/api/email", messageRoutes);
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(
   {
-    key: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/privkey.pem"),
-    cert: fs.readFileSync("/etc/letsencrypt/live/immobilierpromovilla.com-0001/fullchain.pem"),
+    key: fs.readFileSync(
+      "/etc/letsencrypt/live/immobilierpromovilla.com-0001/privkey.pem"
+    ),
+    cert: fs.readFileSync(
+      "/etc/letsencrypt/live/immobilierpromovilla.com-0001/fullchain.pem"
+    ),
   },
   app
 );
@@ -58,4 +62,3 @@ httpServer.listen(process.env.PORT_SERVER_HTTP, () => {
 httpsServer.listen(process.env.PORT_SERVER, () => {
   console.log(`HTTPS Server running on port ${process.env.PORT_SERVER}`);
 });
-

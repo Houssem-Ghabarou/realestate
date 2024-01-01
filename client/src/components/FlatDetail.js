@@ -21,7 +21,6 @@ import furniture from "../assets/furniture.svg";
 import { FaCheck } from "react-icons/fa";
 import PriceChanger from "./PriceChanger";
 import useProgressBar from "./useProgressBar";
-import { Helmet } from "react-helmet-async";
 import HelmetSeo from "./HelmetSeo";
 const FlatDetail = ({ setProgress }) => {
   useProgressBar(setProgress);

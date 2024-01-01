@@ -1,5 +1,6 @@
 const realEstateProp = require("../models/real-estate-prop");
 const sharp = require("sharp");
+const MAX_IMAGES_ALLOWED = 15;
 
 const addProperty = async (req, res) => {
   const {
@@ -51,10 +52,20 @@ const addProperty = async (req, res) => {
 
   const numberIdentifier = generateNumberIdentifier();
   function generatePropIdName(lowerName, uniqueIdentifier) {
-    const formattedName = lowerName.replace(/\s+/g, "-"); // Replace spaces with hyphens
+    // Replace accented characters with their non-accented counterparts
+    const normalizedName = lowerName
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    // Replace spaces with hyphens
+    const formattedName = normalizedName.replace(/\s+/g, "-");
+
+    // Combine with uniqueIdentifier
     const propIdName = `${uniqueIdentifier}-${formattedName}`;
+
     return propIdName;
   }
+
   const propIdName = generatePropIdName(lowerName, numberIdentifier);
   const characteristicsArray = characteristics
     ?.split(",")
@@ -80,6 +91,11 @@ const addProperty = async (req, res) => {
       // Handle file type error
       return res.status(400).json({ imageError: req.fileTypeError });
     }
+    if (req.files.length > MAX_IMAGES_ALLOWED) {
+      return res.status(400).json({
+        imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
+      });
+    }
     // Check if images are provided
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "Images are necessary" });
@@ -92,6 +108,7 @@ const addProperty = async (req, res) => {
         //   .resize(800) // You can adjust the size as needed
         //   .toBuffer();
         const compressedImageBuffer = await sharp(file?.path)
+          .resize(850)
           .jpeg({ quality: 70 }) // You can adjust the quality as needed
           .toBuffer();
 
@@ -146,6 +163,25 @@ const deleteProperty = async (req, res) => {
 const editProperty = async (req, res) => {
   const propertyId = req.params.id; // Assuming the property ID is provided as a URL parameter
 
+  function generateNumberIdentifier() {
+    const timestamp = new Date().getTime(); // Get current timestamp
+    return timestamp.toString().slice(-5); // Extract last 5 digits as a string
+  }
+  function generatePropIdName(lowerName, uniqueIdentifier) {
+    // Replace accented characters with their non-accented counterparts
+    const normalizedName = lowerName
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+    // Replace spaces with hyphens
+    const formattedName = normalizedName.replace(/\s+/g, "-");
+
+    // Combine with uniqueIdentifier
+    const propIdName = `${uniqueIdentifier}-${formattedName}`;
+
+    return propIdName;
+  }
+
   try {
     if (req.fileTypeError) {
       // Handle file type error
@@ -178,7 +214,12 @@ const editProperty = async (req, res) => {
     if (category) property.category = category;
     if (type) property.type = type;
     if (price) property.price = price;
-    if (name) property.name = name;
+    if (name) {
+      property.name = name;
+      const numberIdentifier = generateNumberIdentifier();
+      const propIdName = generatePropIdName(name, numberIdentifier);
+      property.propIdName = propIdName;
+    }
     if (location) property.location = location;
     if (description) property.description = description;
     if (chambres) property.chambres = chambres;
@@ -191,6 +232,13 @@ const editProperty = async (req, res) => {
         ?.map((item) => item?.trim());
       property.characteristics = characteristicsArray;
     }
+
+    if (req.files.length > MAX_IMAGES_ALLOWED) {
+      return res.status(400).json({
+        imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
+      });
+    }
+
     // Check if images are provided
     if (req.files.length !== 0) {
       let path = "";

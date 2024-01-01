@@ -31,6 +31,7 @@ export const useEditProperty = () => {
       const response = await axios.put(
         `${apiUrl}/property/${propId}`,
         formData,
+
         {
           headers: {
             "Content-Type": "multipart/form-data",

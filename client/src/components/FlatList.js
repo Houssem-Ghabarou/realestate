@@ -169,24 +169,24 @@ const FlatList = ({ type }) => {
 
   if (loading) {
     return (
-      <div className="loader">
+      <div className='loader'>
         <ClipLoader
           color={"#333"}
           loading={loading}
           size={100}
-          aria-label="Loading Spinner"
-          data-testid="loader"
+          aria-label='Loading Spinner'
+          data-testid='loader'
         />
       </div>
     );
   }
-  if (dataFetched && properties?.length === 0) {
-    return <NotAvailbale />;
-  }
+  // if (dataFetched && properties?.length === 0) {
+  //   return <NotAvailbale />;
+  // }
 
   return (
-    <section className="section-all-re bakcground-section-color">
-      <div className="container">
+    <section className='section-all-re bakcground-section-color'>
+      <div className='container'>
         {(type === 0 ||
           type === 3 ||
           type === 4 ||
@@ -201,7 +201,7 @@ const FlatList = ({ type }) => {
               type={type}
             />
           )}
-        <div className="row">
+        <div className='row'>
           {visibleProperties?.map((property) => (
             <FlatItem key={property._id} property={property} />
           ))}
@@ -209,19 +209,19 @@ const FlatList = ({ type }) => {
         {type !== 0 && type !== 3 && type !== 4 && properties?.length > 0 && (
           <ReactPaginate
             onClick={scrollTo}
-            breakLabel="..."
-            previousLabel="<"
-            nextLabel=">"
+            breakLabel='...'
+            previousLabel='<'
+            nextLabel='>'
             pageCount={pageCount}
             pageRangeDisplayed={3}
             renderOnZeroPageCount={null}
             onPageChange={({ selected }) => setCurrentPage(selected)}
-            containerClassName="pagination"
-            pageLinkClassName="page-num"
-            previousLinkClassName="page-num"
-            nextLinkClassName="page-num"
-            activeLinkClassName="active-link"
-            activeClassName="active"
+            containerClassName='pagination'
+            pageLinkClassName='page-num'
+            previousLinkClassName='page-num'
+            nextLinkClassName='page-num'
+            activeLinkClassName='active-link'
+            activeClassName='active'
           />
         )}
       </div>

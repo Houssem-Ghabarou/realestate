@@ -1,7 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 
 const HelmetSeo = ({ title, url, description, image }) => {
+  const { i18n } = useTranslation();
+
   const imageWidth = "1200"; // Set the width of your image
   const imageHeight = "630"; // Set the height of your image
 
@@ -19,12 +22,14 @@ const HelmetSeo = ({ title, url, description, image }) => {
       <meta property='og:image:height' content={imageHeight} />
 
       {/* Twitter specific meta tags for image */}
-      <meta name='twitter:card' content={image} />
+      <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:image' content={image} />
       <meta name='twitter:image:width' content={imageWidth} />
       <meta name='twitter:image:height' content={imageHeight} />
       <meta name='image' property='og:image' content={image} />
       <meta property='og:description' content={description} />
       <meta name='author' content='promovillaimmobilier' />
+      <meta property='og:locale' content={i18n?.language || "fr"} />
     </Helmet>
   );
 };

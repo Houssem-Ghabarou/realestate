@@ -36,64 +36,83 @@ router.get("/", async function (req, res) {
 
     // Manually add all the other important URLs
     smStream.write({
+      url: "",
+      lastmod: date,
+      changefreq: "daily",
+      priority: 0.9,
+    });
+    smStream.write({
       url: "/vente",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
       url: "/location",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
-      url: "/vent/maison",
+      url: "/vente/maison",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
       url: "/vente/villa",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
       url: "/vente/appartement",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
       url: "/vente/terrain",
       lastmod: date,
-      changefreq: "monthly",
+      changefreq: "weekly",
       priority: 0.7,
     });
     smStream.write({
+      url: "/vente/commercial",
+      lastmod: date,
+      changefreq: "weekly",
+      priority: 0.7,
+    });
+
+    smStream.write({
       url: "/location/maison",
       lastmod: date,
-      changefreq: "monthly",
-      priority: 0.7,
+      changefreq: "weekly",
+      priority: 0.9,
     });
     smStream.write({
       url: "/location/villa",
       lastmod: date,
-      changefreq: "monthly",
-      priority: 0.7,
+      changefreq: "weekly",
+      priority: 0.9,
     });
     smStream.write({
       url: "/location/appartement",
       lastmod: date,
-      changefreq: "monthly",
-      priority: 0.7,
+      changefreq: "weekly",
+      priority: 0.9,
     });
     smStream.write({
       url: "/location/bureau",
       lastmod: date,
-      changefreq: "monthly",
-      priority: 0.7,
+      changefreq: "weekly",
+      priority: 0.9,
+    });
+    smStream.write({
+      url: "/location/commercial",
+      lastmod: date,
+      changefreq: "weekly",
+      priority: 0.9,
     });
 
     smStream.write({

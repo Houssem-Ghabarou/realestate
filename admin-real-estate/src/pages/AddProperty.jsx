@@ -9,9 +9,9 @@ import AddPrpoertyFooter from "../components/AddPropertyFooter";
 import { filterFormData } from "../util/filterFormatData";
 import toast from "react-hot-toast";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import WaitingImagesLoad from "../components/WaitingImagesLoad";
 const apiUrl = import.meta.env.VITE_API_KEY_IMAGE_SERVER; // Ensure this points to your server's URL
-
+// const MAX_IMAGES_ALLOWED = 15;
 const AddProperty = () => {
   const navigate = useNavigate();
   const { addProperty, isSuccess, error, isLoading } = useAddProperty();
@@ -23,6 +23,7 @@ const AddProperty = () => {
   const { state } = useLocation();
   const isEdit = state?.isEdit;
   const property = state?.propertyData;
+  const [waitingImages, setIsWaitingImages] = useState(isEdit);
   const [formData, setFormData] = useState({
     nom: "",
     category: "",
@@ -41,10 +42,18 @@ const AddProperty = () => {
   });
   const addPropData = filterFormData(formData);
 
+  console.log(addPropData, "addPropData");
   useEffect(() => {
     const fetchImages = async () => {
       if (property && property.images) {
         try {
+          // Clear existing uploads and uploadedImages arrays
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            uploads: [],
+            uploadedImages: [],
+            // ... other properties
+          }));
           // Split the string into an array of paths
           const paths = property.images.split(",");
 
@@ -111,6 +120,13 @@ const AddProperty = () => {
       return <Step3 formData={formData} setFormData={setFormData} />;
     }
   };
+  // useEffect(() => {
+  //   if (formData?.uploadedImages?.length > MAX_IMAGES_ALLOWED) {
+  //     toast.error(
+  //       `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`
+  //     );
+  //   }
+  // }, [formData?.uploadedImages]);
 
   useEffect(() => {
     if (error?.imageError) {
@@ -150,6 +166,20 @@ const AddProperty = () => {
       navigate("/");
     }
   }, [isSuccessEditing, errorEditing, isLoadingEditing]);
+  useEffect(() => {
+    // Check if formData is not empty
+    const isFormDataEmpty =
+      formData.uploadedImages.length === 0 || formData.uploads.length === 0;
+
+    // If it's edit mode and formData is empty, set isLoading to true
+    if (page === 0) {
+      setIsWaitingImages(isEdit && isFormDataEmpty);
+    }
+  }, [isEdit, formData]);
+
+  if (waitingImages) {
+    return <WaitingImagesLoad />;
+  }
   return (
     <div className='form'>
       <div className='header'>

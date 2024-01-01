@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import TitleInfoProp from "./TitleInfoProp";
 import addImages from "../assets/addImages.svg";
 import deleteImage from "../assets/deleteImage.svg";
+
 const Step3 = ({ formData, setFormData }) => {
   const [dragging, setDragging] = useState(false);
 
   const handleFileDrop = (event) => {
+    const draggedItemIndex = event.dataTransfer.getData("text/plain");
+
+    if (draggedItemIndex !== "") {
+      // If the dragged item is an existing image within the app, do nothing
+      return;
+    }
     const newFiles = event.dataTransfer.files;
 
     const filePreviews = Array.from(newFiles).map((file) =>
@@ -14,7 +21,7 @@ const Step3 = ({ formData, setFormData }) => {
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      uploads: newFiles,
+      uploads: [...prevFormData.uploads, ...newFiles],
       uploadedImages: [...prevFormData.uploadedImages, ...filePreviews],
     }));
   };
@@ -29,7 +36,7 @@ const Step3 = ({ formData, setFormData }) => {
 
     setFormData((prevFormData) => ({
       ...prevFormData,
-      uploads: newFiles,
+      uploads: [...prevFormData.uploads, ...newFiles],
       uploadedImages: [...prevFormData.uploadedImages, ...filePreviews],
     }));
   };
@@ -39,6 +46,7 @@ const Step3 = ({ formData, setFormData }) => {
     const uploads = [...formData.uploads];
     uploads.splice(index, 1);
     updatedImages.splice(index, 1);
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       uploadedImages: updatedImages,
@@ -72,7 +80,7 @@ const Step3 = ({ formData, setFormData }) => {
             <div key={index} className='upload-image-wrapper'>
               <div className='image-and-delete-container'>
                 <img
-                  onClick={handleRemoveImage}
+                  onClick={() => handleRemoveImage(index)}
                   src={deleteImage}
                   alt='delete-image'
                   className='delete-image'
@@ -93,6 +101,7 @@ const Step3 = ({ formData, setFormData }) => {
                 alt='Add Images'
                 className='add-images-already-uploaded'
               />
+              <h1>{formData?.uploadedImages.length}</h1>
             </label>
           )}
         </>
@@ -100,9 +109,11 @@ const Step3 = ({ formData, setFormData }) => {
         {formData?.uploadedImages?.length === 0 && (
           <label htmlFor='file-upload' className='custom-file-upload'>
             <img src={addImages} alt='Add Images' className='add-images' />
+            <h1 className='honeupload'>{formData?.uploadedImages.length}</h1>
+
             <p>
               Cliquez ou faites glisser le fichier dans cette zone pour
-              télécharger
+              télécharger MAX(15)
             </p>
           </label>
         )}
