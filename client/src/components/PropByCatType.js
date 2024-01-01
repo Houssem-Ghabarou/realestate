@@ -40,8 +40,10 @@ const PropByCatType = ({ match, setProgress }) => {
     };
   }, []);
 
-  const translatedCate = t(`categories.${category}`);
-  const translatedType = t(`type.${proptype}`);
+  const translatedCate = t("translatedCate"); // Make sure to add "translatedCate" to your locales files
+  const translatedType = t("translatedType"); // Make sure to add "translatedType" to your locales files
+
+  const description = t("descriptionProp", { translatedCate, translatedType });
   const PromoVillaForRotues = t("promovillaForRoutes");
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
     return (
@@ -49,7 +51,7 @@ const PropByCatType = ({ match, setProgress }) => {
         <HelmetSeo
           title={`${translatedCate} - ${translatedType} ${PromoVillaForRotues}`}
           url={`${process.env.REACT_APP_WEBSITE_URL}/${category}/${proptype}`}
-          description={`Découvrez nos biens mis en ${translatedCate}, notamment des ${translatedType}, à Hammamet, Nabeul, Tunisie.`}
+          description={description}
           image={bg7}
         />
 
