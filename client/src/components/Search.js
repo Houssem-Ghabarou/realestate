@@ -70,8 +70,8 @@ const Search = ({ type, setProgress }) => {
     location: locationFormated,
     maxPrice,
     minSurface,
-    minChambre,
-    minBathroom,
+    chambreMin: minChambre,
+    sallesDeBains: minBathroom,
     ammeublement: ammeublementFormated,
     selectedFeatures,
   };
