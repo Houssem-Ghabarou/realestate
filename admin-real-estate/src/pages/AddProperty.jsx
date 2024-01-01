@@ -42,7 +42,6 @@ const AddProperty = () => {
   });
   const addPropData = filterFormData(formData);
 
-  console.log(addPropData, "addPropData");
   useEffect(() => {
     const fetchImages = async () => {
       if (property && property.images) {

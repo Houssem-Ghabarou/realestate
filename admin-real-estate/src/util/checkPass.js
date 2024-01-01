@@ -151,6 +151,13 @@ export const checkPass = (page, formData) => {
         error: "Veuillez renseigner des images.",
       };
     }
+    if (formData.uploadedImages && formData.uploadedImages.length > 15) {
+      return {
+        pass: false,
+        error:
+          "Vous pouvez télécharger un maximum de 15 images. Veuillez supprimer quelques images et réessayer.",
+      };
+    }
     if (!formData.nom) {
       return {
         pass: false,

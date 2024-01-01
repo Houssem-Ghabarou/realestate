@@ -164,6 +164,15 @@ const deleteProperty = async (req, res) => {
 const editProperty = async (req, res) => {
   const propertyId = req.params.id; // Assuming the property ID is provided as a URL parameter
 
+  if (req.fileTypeError) {
+    // Handle file type error
+    return res.status(400).json({ imageError: req.fileTypeError });
+  }
+  if (req.files.length > MAX_IMAGES_ALLOWED) {
+    return res.status(400).json({
+      imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
+    });
+  }
   function generateNumberIdentifier() {
     const timestamp = new Date().getTime(); // Get current timestamp
     return timestamp.toString().slice(-5); // Extract last 5 digits as a string
@@ -184,10 +193,6 @@ const editProperty = async (req, res) => {
   }
 
   try {
-    if (req.fileTypeError) {
-      // Handle file type error
-      return res.status(400).json({ imageError: req.fileTypeError });
-    }
     // Find the property by ID
     const property = await realEstateProp.findById(propertyId);
 
@@ -232,12 +237,6 @@ const editProperty = async (req, res) => {
         ?.split(",")
         ?.map((item) => item?.trim());
       property.characteristics = characteristicsArray;
-    }
-
-    if (req.files.length > MAX_IMAGES_ALLOWED) {
-      return res.status(400).json({
-        imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
-      });
     }
 
     // Check if images are provided
