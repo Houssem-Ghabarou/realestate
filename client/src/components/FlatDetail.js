@@ -22,6 +22,7 @@ import { FaCheck } from "react-icons/fa";
 import PriceChanger from "./PriceChanger";
 import useProgressBar from "./useProgressBar";
 import HelmetSeo from "./HelmetSeo";
+import PropNotFound from "./PropNotFound";
 const FlatDetail = ({ setProgress }) => {
   useProgressBar(setProgress);
   const { t } = useTranslation();
@@ -81,6 +82,7 @@ const FlatDetail = ({ setProgress }) => {
       </div>
     );
   }
+
   const backendBaseUrl = process.env.REACT_APP_SERVER_KEY;
   const imageFilenames = propertyDetails?.images
     ? propertyDetails?.images?.split(",")
@@ -106,6 +108,10 @@ const FlatDetail = ({ setProgress }) => {
   const style = { color: "#DAA520" };
 
   const translatedCate = t(`categories.${propertyDetails?.category}`);
+
+  if (!propertyDetails || !propertyDetails?.length === 0) {
+    return <PropNotFound />;
+  }
   return (
     <div className='flat-detail'>
       <HelmetSeo
@@ -163,10 +169,10 @@ const FlatDetail = ({ setProgress }) => {
                   <div className='fd-item fd-property-detail'>
                     <h4>{t("propertiesDetails.details")}</h4>
                     <div className='details-architecture'>
-                      {propertyDetailsData.map(
+                      {propertyDetailsData?.map(
                         ({ key, label, icon }) =>
-                          (propertyDetails[key] ||
-                            propertyDetails[key]?.length > 0) && (
+                          (propertyDetails?.[key] ||
+                            propertyDetails?.[key]?.length > 0) && (
                             <div className='details-container' key={key}>
                               <>
                                 <div className='image-container'>
