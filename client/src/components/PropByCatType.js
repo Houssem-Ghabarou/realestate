@@ -40,10 +40,11 @@ const PropByCatType = ({ match, setProgress }) => {
     };
   }, []);
 
-  const translatedCate = t("translatedCate"); // Make sure to add "translatedCate" to your locales files
-  const translatedType = t("translatedType"); // Make sure to add "translatedType" to your locales files
+  const translatedCate = t(`categories.${category}`);
+  const translatedType = t(`type.${proptype}`);
 
-  const description = t("descriptionProp", { translatedCate, translatedType });
+  const description = t("description", { translatedCate, translatedType });
+
   const PromoVillaForRotues = t("promovillaForRoutes");
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
     return (
