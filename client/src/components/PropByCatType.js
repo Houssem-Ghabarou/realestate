@@ -43,7 +43,7 @@ const PropByCatType = ({ match, setProgress }) => {
   const translatedCate = t(`categories.${category}`);
   const translatedType = t(`type.${proptype}`);
 
-  const description = t("description", { translatedCate, translatedType });
+  const description = t("descriptionProp", { translatedCate, translatedType });
 
   const PromoVillaForRotues = t("promovillaForRoutes");
   if (validCategories.includes(category) && validPropTypes.includes(proptype)) {
