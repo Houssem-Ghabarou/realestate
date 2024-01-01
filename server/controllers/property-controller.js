@@ -18,6 +18,15 @@ const addProperty = async (req, res) => {
     ammeublement,
   } = req.body;
 
+  if (req.fileTypeError) {
+    // Handle file type error
+    return res.status(400).json({ imageError: req.fileTypeError });
+  }
+  if (req.files.length > MAX_IMAGES_ALLOWED) {
+    return res.status(400).json({
+      imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
+    });
+  }
   if (
     !category ||
     !type ||
@@ -87,15 +96,7 @@ const addProperty = async (req, res) => {
       parking,
       characteristics: characteristicsArray,
     });
-    if (req.fileTypeError) {
-      // Handle file type error
-      return res.status(400).json({ imageError: req.fileTypeError });
-    }
-    if (req.files.length > MAX_IMAGES_ALLOWED) {
-      return res.status(400).json({
-        imageError: `Vous pouvez télécharger un maximum de ${MAX_IMAGES_ALLOWED} images. Veuillez supprimer quelques images et réessayer.`,
-      });
-    }
+
     // Check if images are provided
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "Images are necessary" });
