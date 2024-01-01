@@ -17,7 +17,7 @@ router.get("/", async function (req, res) {
     // Fetching todo records and mapping
     // it the desired URL pattern
     const data = await RealEstate.find(),
-      todos = data.map(({ propIdName }) => `/biens/details/${propIdName}`),
+      todos = data.map(({ propIdName }) => `/bien/details/${propIdName}`),
       // Base url of our site
       smStream = new SitemapStream({
         hostname: "https://immobilierpromovilla.com/",

@@ -130,5 +130,6 @@
   "locationDescription": "Découvrez notre gamme de biens immobiliers disponibles à la location. Des espaces commerciaux aux bureaux et locaux d’activité, trouvez l’emplacement parfait pour votre entreprise. Louez avec confiance et simplicité, et faites de cet espace votre nouveau chez-vous professionnel.",
   "aboutDescription": "Promo Villa: Votre partenaire immobilier de choix à Hammamet pour l’acquisition, la vente et la location de villas de luxe et d’espaces commerciaux. Services sur mesure, propriétés uniques, transactions palpitantes.",
   "contactDescription": "Contactez-nous dès maintenant pour toute question ou demande. Notre équipe est là pour vous aider. N’hésitez pas à nous contacter pour des renseignements supplémentaires ou pour planifier une rencontre.",
-  "flatDetail": "PromoVilla - Hammamet - Tunisie - Immobilier"
+  "flatDetail": "PromoVilla - Hammamet - Tunisie - Immobilier",
+  "descriptionProp": "اكتشف ممتلكاتنا المدرجة في {{translatedCate}}, بما في ذلك {{translatedType}}, في الحمامات، نابل، تونس."
 }
