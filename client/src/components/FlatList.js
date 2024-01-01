@@ -180,9 +180,9 @@ const FlatList = ({ type }) => {
       </div>
     );
   }
-  // if (dataFetched && properties?.length === 0) {
-  //   return <NotAvailbale />;
-  // }
+  if (dataFetched && properties?.length === 0) {
+    return <NotAvailbale />;
+  }
 
   return (
     <section className='section-all-re bakcground-section-color'>

@@ -8,6 +8,21 @@ const HelmetSeo = ({ title, url, description, image }) => {
   const imageWidth = "1200"; // Set the width of your image
   const imageHeight = "630"; // Set the height of your image
 
+  let language;
+  switch (i18n.language) {
+    case "ar":
+      language = "ar-SA";
+      break;
+    case "en":
+      language = "en-US";
+      break;
+    case "fr":
+      language = "fr-FR";
+      break;
+    default:
+      language = "fr-FR";
+      break;
+  }
   return (
     <Helmet>
       <title>{title}</title>
@@ -29,7 +44,7 @@ const HelmetSeo = ({ title, url, description, image }) => {
       <meta name='image' property='og:image' content={image} />
       <meta property='og:description' content={description} />
       <meta name='author' content='promovillaimmobilier' />
-      <meta property='og:locale' content={i18n?.language || "fr"} />
+      <meta property='og:locale' content={language} />
     </Helmet>
   );
 };
