@@ -15,32 +15,14 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({
   refresh_token: process.env.OAUTH_REFRESH_TOKEN,
 });
+console.log("oAuth2Client", oAuth2Client);
+const accessToken = oAuth2Client.getAccessToken();
 
 const sendEmail = async (req, res) => {
   const { property, namesurname, phone, email, description } = req.body;
   const { errors, isValid } = ValidateMessage(req.body);
 
   try {
-    let accessToken;
-
-    accessToken = await oAuth2Client.getAccessToken();
-    console.log(accessToken, "aceeees");
-    const now = Date.now();
-    if (accessToken.expiry_date < now + 30000) {
-      // The token is about to expire in the next 30 seconds
-      console.log("Access token is about to expire. Refreshing...");
-
-      // Refresh the token using the refresh token
-      const newTokens = await oAuth2Client.refreshToken(
-        oAuth2Client.credentials.refresh_token
-      );
-
-      // Update the OAuth2 client with the new tokens
-      oAuth2Client.setCredentials(newTokens);
-
-      // Obtain the refreshed access token
-      accessToken = await oAuth2Client.getAccessToken();
-    }
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -49,7 +31,7 @@ const sendEmail = async (req, res) => {
         clientId: process.env.OAUTH_CLIENTID,
         clientSecret: process.env.OAUTH_CLIENT_SECRET,
         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-        accessToken: accessToken?.token, // assuming that the resolved accessToken object has a `token` property
+        accessToken: accessToken, // assuming that the resolved accessToken object has a `token` property
       },
       // tls: {
       //   rejectUnauthorized: false, // Only use this for self-signed certificates
@@ -72,7 +54,6 @@ const sendEmail = async (req, res) => {
       // Convert the images string to an array by splitting on commas
       const imagePaths = images ? images.split(",") : [];
 
-     console.log(imagePaths);
       // Ensure that imagePaths is an array before using map
       imagesData = Array.isArray(imagePaths)
         ? imagePaths.map((imagePath) => ({
@@ -97,7 +78,7 @@ const sendEmail = async (req, res) => {
         }
       );
 
-      subject = "Nouvelle demande immobilière";
+      subject = "Nouveaux message pour la propriété: " + reference;
     } else {
       // Load contact form template
       template = await ejs.renderFile(
